@@ -21,6 +21,7 @@ def get_contributors_for_file(filename):
     return line_contributors
 
 def get_contributor_for_line(filename, line_number):
+    "Get the email for an author of a specific line of code"
     contributor = subprocess.check_output("git blame -L {},{} --show-email {} "
                                      "| grep -o -p '<.*>' "
                                      "| cut -d '>' -f1"
