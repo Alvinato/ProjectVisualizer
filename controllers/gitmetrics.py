@@ -20,10 +20,13 @@ def get_contributors_for_file(filename):
         line_number = line_number + 1
     return line_contributors
 
-
-
-
+def get_contributor_for_line(filename, line_number):
+    contributor = subprocess.check_output("git blame -L {},{} --show-email {} "
+                                     "| grep -o -p '<.*>' "
+                                     "| cut -d '>' -f1"
+                                     "| cut -d '<' -f2".format(line_number,line_number, filename), shell=True)
+    return contributor
 
 if __name__ == "__main__":
-    contributors = get_contributors_for_file('/Users/jasonpinto/Downloads/web2py/applications/jaat/controllers/appadmin.py')
-    print contributors['1']
+    #contributors = get_contributors_for_file('/Users/jasonpinto/Downloads/web2py/applications/jaat/controllers/appadmin.py')
+    get_contributor_for_line('/Users/jasonpinto/Downloads/web2py/applications/jaat/controllers/appadmin.py', 1)
