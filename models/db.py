@@ -43,6 +43,10 @@ response.generic_patterns = ['*'] if request.is_local else []
 
 from gluon.tools import Auth, Service, PluginManager
 
+## http://stackoverflow.com/questions/11520355/how-to-make-web2py-dev-server-track-file-changes-and-restart-automatically
+from gluon.custom_import import track_changes
+track_changes(True)
+
 auth = Auth(db)
 service = Service()
 plugins = PluginManager()
