@@ -1,3 +1,10 @@
-
+# miscellaneous
 *.bak
+
+# python
 *.pyc
+
+# web2py folders to exclude
+errors/
+sessions/
+databases/
