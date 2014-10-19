@@ -10,11 +10,18 @@
 #########################################################################
 
 from file_struct import Code_Structure
+from code_analyzer_pylint import Pylint_Analyzer
 
 def index():
+    # obtain the file structure of the code base
     code_base_01 = Code_Structure("PlumBum", "C:\Users\Arjun\python_stuff")
     root = code_base_01.get_root()
     code_base_01.print_file_structure(root)
+
+    # give first analyzer the code base information
+    pylint_analyzer = Pylint_Analyzer(code_base_01.get_name(), code_base_01.get_root())
+    print pylint_analyzer.get_name()
+
     return dict(message=T('Hello World'))
 
 
