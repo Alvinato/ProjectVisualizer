@@ -12,7 +12,7 @@
 from file_struct import Code_Structure
 
 def index():
-    code_base_01 = Code_Structure("PlumBum", "root")
+    code_base_01 = Code_Structure("PlumBum", "C:/Users/Arjun/Documents/web2py/applications/welcome")
     print code_base_01.get_name()
     return dict(message=T('Hello World'))
 
