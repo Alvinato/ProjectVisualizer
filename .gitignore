@@ -8,3 +8,6 @@
 errors/
 sessions/
 databases/
+
+# pycharm
+.idea/

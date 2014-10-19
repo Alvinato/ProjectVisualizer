@@ -9,15 +9,11 @@
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
 
-def index():
-    """
-    example action using the internationalization operator T and flash
-    rendered by views/default/index.html or views/generic.html
+from file_struct import Code_Structure
 
-    if you need a simple wiki simply replace the two lines below with:
-    return auth.wiki()
-    """
-    response.flash = T("Welcome to web2py!")
+def index():
+    code_base_01 = Code_Structure("PlumBum", "root")
+    print code_base_01.get_name()
     return dict(message=T('Hello World'))
 
 
