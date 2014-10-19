@@ -14,8 +14,9 @@ class Code_Structure(object):
         self.path = self.create_path(root)
 
     def print_file_structure(self, startpath):
-         """ http://stackoverflow.com/questions/
-             9727673/list-directory-tree-structure-using-python
+         """ print out the code structure
+             http://stackoverflow.com/questions/9727673/
+             list-directory-tree-structure-using-python
          """
          for root, dirs, files in os.walk(startpath):
             level = root.replace(startpath, '').count(os.sep)
@@ -26,9 +27,15 @@ class Code_Structure(object):
                 print('{}{}'.format(subindent, f))
 
     def get_name(self):
+        """ Return the name of the
+            code structure
+        """
         return self.name
 
     def get_root(self):
+        """ Return the path of the
+            code structure
+        """
         return self.root
 
     def create_path(self, path):
@@ -41,5 +48,5 @@ class Code_Structure(object):
             structure.update({file : None})
         for subdir in subdirs:
             new_path = "%s\%s" % (path, subdir)
-            structure.update({subdir : self.create_path_04(new_path)})
+            structure.update({subdir : self.create_path(new_path)})
         return structure
