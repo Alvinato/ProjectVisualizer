@@ -26,11 +26,12 @@ class Code_Structure(object):
             of string python files
         """
         rootdir = self.get_root()
+        print "****Start***"
         for subdir, dirs, files in os.walk(rootdir):
+            print subdir
+            #print dirs
             for file in files:
-                print "**START**"
-                #print file
-                print subdir
+                print file
                 #print dirs
                 #print os.path.join(subdir, file)
         return "path"
