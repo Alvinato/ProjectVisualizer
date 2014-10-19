@@ -20,7 +20,6 @@ def index():
 
     # give first analyzer the code base information
     pylint_analyzer = Pylint_Analyzer(code_base_01.get_name(), code_base_01.get_root())
-    print pylint_analyzer.get_name()
 
     return dict(message=T('Hello World'))
 

@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from gluon import *
+from pylint import epylint as lint
+
+# command line operators to only receive relevant information
+INSTRUCTIONS = '-rn --msg-template="{line}:{C}:{msg}"'
+
+# type of script this command will be using
+PYLINT = 'pylint'
+
+# general warning that may be ignored for our purpose
+IGNORE_WARNING = 'No config file found, using default configuration'
 
 class Pylint_Analyzer(object):
     """ Functions related to pylint analyzer
