@@ -12,8 +12,8 @@
 from file_struct import Code_Structure
 
 def index():
-    code_base_01 = Code_Structure("PlumBum", "C:/Users/Arjun/Documents/web2py/applications/welcome")
-    #print code_base_01.get_name()
+    code_base_01 = Code_Structure("PlumBum", "C:\Users\Arjun\python_stuff")
+    code_base_01.print_file_structure(code_base_01.get_root())
     return dict(message=T('Hello World'))
 
 
