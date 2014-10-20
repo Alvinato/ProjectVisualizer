@@ -2,20 +2,19 @@
 # -*- coding: utf-8 -*-
 
 from gluon import *
-from pylint import epylint as lint
-
-# command line operators to only receive relevant information
-INSTRUCTIONS = '-rn --msg-template="{line}:{C}:{msg}"'
-
-# type of script this command will be using
-PYLINT = 'pylint'
-
-# general warning that may be ignored for our purpose
-IGNORE_WARNING = 'No config file found, using default configuration'
+import subprocess
 
 class Pylint_Analyzer(object):
     """ Functions related to pylint analyzer
     """
+    # command line operators to only receive relevant information
+    INSTRUCTIONS = '-rn --msg-template="{line}:{C}:{msg}"'
+
+    # type of script this command will be using
+    PYLINT = 'pylint'
+
+    # general warning that may be ignored for our purpose
+    IGNORE_WARNING = 'No config file found, using default configuration'
 
     def __init__(self, name, root):
         self.name = name
@@ -37,7 +36,21 @@ class Pylint_Analyzer(object):
         """
         return self.analysis
 
-    def begin_analysis(self, root):
-        """ Obtain the pylint analysis of code base
+    def get_pylint_results():
+        """ brief - Runs pylint on the specified file
+            param path_to_root - the file to run pylint on
+            return - the errors associated with the specified file
         """
-        pass
+        message = ['pylint', '-rn', '--msg-template="{line}:{C}:{symbol}"','C:\Users\Arjun\pease']
+
+        p1 = subprocess.Popen(message, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout_value, stderr_value = p1.communicate()
+
+        list_of_errors = stderr_value.splitlines()
+
+        if (len(list_of_errors) == 1):
+            list_of_arguments = stdout_value.splitlines()
+            analyzer_results = parse_pylint_results(list_of_arguments)
+        else:
+            print list_of_errors
+        return analyzer_results
