@@ -62,7 +62,7 @@ class Pylint_Analyzer(object):
                 name = get_file_name(item)
                 pylint_results.update({name: {}})
             else:
-                line_number, error_type, message = get_line_and_error(item)
+                line_number, error_type, message = get_error_and_message_per_line(item)
                 pylint_results[name].update({line_number : {"category" : error_type, "desc" : message}})
         return pylint_results
 
@@ -70,3 +70,7 @@ class Pylint_Analyzer(object):
         split_by_space = item.split(" ")
         file_name = split_by_space[-1]
         return file_name.replace(".", "/")
+
+    def get_error_and_message_per_line(line):
+        split_by_colon = line.split(":")
+        return split_by_colon[0], split_by_colon[1], split_by_colon[2]
