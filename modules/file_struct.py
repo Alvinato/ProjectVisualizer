@@ -13,11 +13,15 @@ class Code_Structure(object):
         self.root = root
         self.path = self.create_path(root)
 
-    def print_file_structure(self, startpath):
+    def get_path(self):
+        return self.path
+
+    def print_file_structure(self):
          """ print out the code structure
              http://stackoverflow.com/questions/9727673/
              list-directory-tree-structure-using-python
          """
+         startpath = self.root
          for root, dirs, files in os.walk(startpath):
             level = root.replace(startpath, '').count(os.sep)
             indent = ' ' * 4 * (level)

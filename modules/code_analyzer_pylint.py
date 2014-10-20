@@ -34,6 +34,7 @@ class Pylint_Analyzer(object):
             return - the errors associated with the specified file
         """
         message = ['pylint', '-rn', '--msg-template="{line}:{C}:{msg}"', root]
+        print "root", root
 
         p1 = subprocess.Popen(message, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout_value, stderr_value = p1.communicate()
@@ -50,7 +51,6 @@ class Pylint_Analyzer(object):
     def parse_pylint_results(self, results):
         pylint_results = {}
         for item in results:
-            print item
             if item.startswith('*************'):
                 name = self.get_file_name(item)
                 pylint_results.update({name: {}})
