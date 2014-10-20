@@ -14,7 +14,7 @@ def create_author_mappings_for_file(filepath, filename):
 
 
 if __name__ == '__main__':
-    files = find_python_files_in_project('/Users/jasonpinto/plumbum/')
+    files = find_python_files_in_project('/Users/jasonpinto/pattern')
     for file in files:
         if file != '':
             file_path = os.path.dirname(file)
