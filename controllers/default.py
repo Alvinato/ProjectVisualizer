@@ -13,14 +13,16 @@ from file_struct import Code_Structure
 from code_analyzer_pylint import Pylint_Analyzer
 
 def index():
+    name, path = "pease", "C:\Users\Arjun\pease"
+
     # obtain the file structure of the code base
-    #code_base_01 = Code_Structure("PlumBum", "C:\Users\Arjun\python_stuff")
+    code_base_01 = Code_Structure(name, path)
+
     #root = code_base_01.get_root()
     #code_base_01.print_file_structure(root)
 
     # give first analyzer the code base information
-    print 'START'
-    pylint_analyzer = Pylint_Analyzer("PlumBum", "C:\Users\Arjun\python_stuff")
+    code_base_01_pylint = Pylint_Analyzer(name, path)
 
     return dict(message=T('Hello World'))
 
