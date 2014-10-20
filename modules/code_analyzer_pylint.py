@@ -54,3 +54,14 @@ class Pylint_Analyzer(object):
         else:
             print list_of_errors
         return analyzer_results
+
+    def parse_pylint_results(results):
+        pylint_results = {}
+        for item in results:
+            if item.startswith('*************'):
+                name = get_file_name(item)
+                pylint_results.update({name: {}})
+            else:
+                line_number, error_type, message = get_line_and_error(item)
+                pylint_results[name].update({line_number : {"category" : error_type, "desc" : message}})
+        return pylint_results
