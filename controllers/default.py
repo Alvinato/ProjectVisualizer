@@ -13,19 +13,19 @@ from file_struct import Code_Structure
 from code_analyzer_pylint import Pylint_Analyzer
 
 def index():
-    path_to_root = {"Arjun" : "C:\Users\Arjun\git", "Jason" : "C:\Users\jasonpinto"}
+    path_to_root = {"Arjun" : "/home/asumal/git/cs410", "Jason" : "C:\Users\jasonpinto"}
 
-    name, path = "plumbum", "%s\plumbum\plumbum" % (path_to_root["Arjun"])
+    name, path = "plumbum", "%s/plumbum/plumbum" % (path_to_root["Arjun"])
     #name, path = "plumbum", "%s\plumbum\plumbum" % (path_to_root["Jason"])
-
+    print path
     # obtain the file structure of the code base
     plumbum_structure = Code_Structure(name, path)
-    path = plumbum_structure.get_path()
-    #print "code structure", path
+    code_structure = plumbum_structure.get_path()
+    print "code structure\n", code_structure
 
     # give first analyzer the code base information
-    plumbum_pylint = Pylint_Analyzer(name, path)
-    analysis = plumbum_pylint.get_analysis()
+#    plumbum_pylint = Pylint_Analyzer(name, path)
+#    analysis = plumbum_pylint.get_analysis()
     #print "analysis", analysis
 
     return dict(message=T('Hello World'))

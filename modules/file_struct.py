@@ -51,6 +51,6 @@ class Code_Structure(object):
         for file in files:
             structure.update({file : None})
         for subdir in subdirs:
-            new_path = "%s\%s" % (path, subdir)
+            new_path = "%s/%s" % (path, subdir)
             structure.update({subdir : self.create_path(new_path)})
         return structure
