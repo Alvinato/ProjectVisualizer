@@ -13,7 +13,7 @@ from file_struct import Code_Structure
 from code_analyzer_pylint import Pylint_Analyzer
 
 def index():
-    name, path = "pease", "C:\Users\Arjun\pease"
+    name, path = "pease", "C:\Users\Arjun\git\plumbum\plumbum"
 
     # obtain the file structure of the code base
     code_base_01 = Code_Structure(name, path)

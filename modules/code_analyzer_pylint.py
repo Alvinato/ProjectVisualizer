@@ -50,6 +50,7 @@ class Pylint_Analyzer(object):
     def parse_pylint_results(self, results):
         pylint_results = {}
         for item in results:
+            print item
             if item.startswith('*************'):
                 name = self.get_file_name(item)
                 pylint_results.update({name: {}})
