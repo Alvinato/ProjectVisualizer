@@ -1,8 +1,5 @@
 import subprocess
 from collections import OrderedDict
-import git
-import sys
-import os
 
 
 def get_contributors_for_file(file_path, filename):
