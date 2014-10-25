@@ -1,4 +1,5 @@
 {
-"plumbum_location":"'/Users/jasonpinto/plumbum/",
-"pattern_location":"/Users/jasonpinto/pattern"
+"plumbum_location":"/Users/jasonpinto/plumbum",
+"pattern_location":"/Users/jasonpinto/pattern",
+"debug":"off"
 }
