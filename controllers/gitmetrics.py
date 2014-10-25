@@ -6,7 +6,7 @@ def get_contributors_for_file(file_path, filename):
     """Returns an ordered dictionary that represents the author for every single
     line of code in a file. Mapping is line_number:author email"""
     output = subprocess.check_output("git blame  --show-email {} "
-                                     "| grep -o -p '<.*>' "
+                                     "| grep '<.*>' "
                                      "| cut -d '>' -f1"
                                      "| cut -d '<' -f2".format(filename),
                                      shell=True,
@@ -24,7 +24,7 @@ def get_contributors_for_file(file_path, filename):
 def get_contributor_for_line(file_path, filename, line_number):
     "Get the email for an author of a specific line of code"
     contributor = subprocess.check_output("git blame -L {},{} --show-email {} "
-                                          "| grep -o -p '<.*>' "
+                                          "| grep '<.*>' "
                                           "| cut -d '>' -f1"
                                           "| cut -d '<' -f2".format(line_number, line_number, filename),
                                           shell=True,
