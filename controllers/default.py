@@ -9,20 +9,53 @@
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
 
-import settings as SET
+import config
 import pylintanalzyer
 import authormapper
+import filehelper
 
 def fusion():
     """ """
-    config = SET.load_project_properties()
-    path = config['arjun']['plumbum']
+    info = config.create_preferences()
+    path = info['arjun']['plumbum']
+    #path = info['jason']['plumbum']
     code_base = path + '/plumbum/cli'
 
-    files = authormapper.find_python_files_in_project(code_base)
+    files = filehelper.find_python_files_in_project(code_base)
+    git = authormapper.get_git_analysis(path, files)
+    print 'DONE GIT'
     pylint = pylintanalzyer.get_pylint_analysis(files)
-    print pylint
+    print 'DONE PYLINT'
+    solution = {}
+    print 'START'
+    for element in git:
+        print 'ELEMENT:'
+        for file_name in element:
+            solution[file_name] = {}
+            print 'FILE_NAME:', file_name
+            if file_name in pylint:
+                print 'INSIDE PYLINT'
+                for line_number in element[file_name]:
+                    print "GIT", line_number, element[file_name][line_number]['code']
+                    if (line_number in pylint[file_name]):
+                        print "PYLINT", line_number, pylint[file_name][line_number]
+                        solution[file_name][line_number] = {'category':pylint[file_name][line_number]['category'],
+                                                            'color':pylint[file_name][line_number]['color'],
+                                                            'author':element[file_name][line_number]['author'],
+                                                            'code':element[file_name][line_number]['code']}
+                    else:
+                        solution[file_name][line_number] = {'category':'N',
+                                                            'color':'black',
+                                                            'author':element[file_name][line_number]['author'],
+                                                            'code':element[file_name][line_number]['code']}
+            else:
+                solution[file_name][line_number] = {'category':'N',
+                                                    'color':'black',
+                                                    'author':element[file_name][line_number]['author'],
+                                                    'code':element[file_name][line_number]['code']}
 
+    print solution
+    return solution
 
 def index():
     path_to_root = {"Arjun" : "/home/asumal/git/cs410", "Jason" : "/Users/jasonpinto"}

@@ -1,6 +1,17 @@
 from json import load
 
-CONFIG_LOCATION = "config.json"
+CONFIG_LOCATION = "preferences.json"
+
+def create_preferences():
+    configuration = {}
+    configuration['arjun'] = {"plumbum" : "/home/asumal/git/cs410/plumbum",
+                              "pattern" : "/home/asumal/git/cs410/pattern"}
+
+    configuration['jason'] = {"plumbum" : "/Users/jasonpinto/plumbum",
+                              "pattern" : "/Users/jasonpinto/pattern"}
+
+    configuration['debug'] = 'off'
+    return configuration
 
 def load_project_properties():
     try:

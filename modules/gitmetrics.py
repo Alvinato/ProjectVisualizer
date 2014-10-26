@@ -30,7 +30,7 @@ if __name__ == "__main__":
     "Testing functions"
 
     from sys import argv
-    from settings import load_project_properties
+    from config import load_project_properties
 
     try:
         script, user, code_base = argv

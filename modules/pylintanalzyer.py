@@ -2,6 +2,7 @@ import subprocess
 
 WARNING = 'No config file found, using default configuration'
 IGNORE_LINE = '*'
+COLOR = {'C':'green', 'E':'orange', 'F':'purple', 'R':'read', 'W':'blue'}
 
 def get_pylint_analysis(code_base):
     """ """
@@ -33,7 +34,7 @@ def parse_pylint_output(pylint_output):
 
     for pylint_line in pylint_output:
         line_number, category = parse_pylint_line(pylint_line)
-        solution[line_number] = {'category':category}
+        solution[line_number] = {'category':category, 'color':COLOR[category]}
     return solution
 
 def parse_pylint_line(pylint_line):
@@ -50,7 +51,7 @@ if __name__ == '__main__':
     "Testing functions"
 
     from sys import argv
-    from settings import load_project_properties
+    from config import load_project_properties
     from filehelper import find_python_files_in_project
 
     try:
@@ -61,5 +62,6 @@ if __name__ == '__main__':
         config = load_project_properties()
 
         file_path = config[user][code_base]
-        files = find_python_files_in_project(file_path)
+        files = find_python_files_in_project(file_path + '/plumbum/cli')
         solution = get_pylint_analysis(files)
+        print solution
