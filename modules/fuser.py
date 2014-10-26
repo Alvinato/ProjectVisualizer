@@ -1,4 +1,4 @@
-from settings import load_project_properties
+from config import load_project_properties
 from filehelper import find_python_files_in_project
 from authormapper import get_contributors_for_file
 from filehelper import convert_file_to_json
@@ -12,9 +12,9 @@ class Fuser():
     def __init__(self):
         self.config = load_project_properties()
 
-    def generate_project_object(self):
+    def generate_project_object(self, project_location):
         project_object = []
-        files = find_python_files_in_project(str(self.config['plumbum_location']))
+        files = find_python_files_in_project(str(project_location))
         for file in files:
             if file != '':
                 file_dict = convert_file_to_json(file)
@@ -31,6 +31,6 @@ class Fuser():
 
 if __name__ == '__main__':
     fuser = Fuser()
-    project = fuser.generate_project_object()
+    project = fuser.generate_project_object(fuser.config['jason']['plumbum'])
     for item in project:
         print item
