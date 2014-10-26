@@ -1,15 +1,13 @@
 import subprocess
 from collections import OrderedDict
 
+FILE_COMMAND = "git blame --show-email {} | grep '<.*>' | cut -d '>' -f1 | cut -d '<' -f2"
+LINE_COMMAND = "git blame -L {},{} --show-email {} | grep '<.*>' | cut -d '>' -f1 | cut -d '<' -f2"
 
 def get_contributors_for_file(file_path, filename):
     """Returns an ordered dictionary that represents the author for every single
     line of code in a file. Mapping is line_number:author email"""
-    output = subprocess.check_output("git blame  --show-email {} "
-                                     "| grep '<.*>' "
-                                     "| cut -d '>' -f1"
-                                     "| cut -d '<' -f2".format(filename),
-                                     shell=True,
+    output = subprocess.check_output(FILE_COMMAND.format(filename), shell=True,
                                      cwd=r'{}'.format(file_path))
     output_array = output.split('\n')
     num_lines = len(output_array)
@@ -23,12 +21,8 @@ def get_contributors_for_file(file_path, filename):
 
 def get_contributor_for_line(file_path, filename, line_number):
     "Get the email for an author of a specific line of code"
-    contributor = subprocess.check_output("git blame -L {},{} --show-email {} "
-                                          "| grep '<.*>' "
-                                          "| cut -d '>' -f1"
-                                          "| cut -d '<' -f2".format(line_number, line_number, filename),
-                                          shell=True,
-                                          cwd=r'{}'.format(file_path))
+    contributor = subprocess.check_output(LINE_COMMAND.format(line_number, line_number, filename),
+                                          shell=True, cwd=r'{}'.format(file_path))
     return contributor
 
 
