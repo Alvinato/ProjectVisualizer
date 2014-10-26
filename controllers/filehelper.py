@@ -23,7 +23,8 @@ def find_python_files_in_project(filepath):
 
     output = subprocess.check_output("find {} -name '*.py'".format(filepath),shell=True, cwd=r'{}'.format(filepath))
     output_array = output.splitlines()
-    return output_array
+    filtered = [i for i in output_array if '__init__' not in i]
+    return filtered
 
 if __name__ == '__main__':
     "Testing functions"
