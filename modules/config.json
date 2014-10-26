@@ -1,0 +1,11 @@
+{
+"arjun" : {
+		"plumbum" : "/home/asumal/git/cs410/plumbum",
+	   	"pattern" : "/home/asumal/git/cs410/pattern"
+	  },
+"jason" : {
+		"plumbum" : "/Users/jasonpinto/plumbum",
+	   	"pattern" : "/Users/jasonpinto/pattern"
+	  },
+"debug" : "off"
+}

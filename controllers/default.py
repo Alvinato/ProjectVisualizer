@@ -9,13 +9,13 @@
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
 
-import settings
+import settings as SET
 import pylintanalzyer
 import authormapper
 
 def fusion():
     """ """
-    config = settings.load_project_properties()
+    config = SET.load_project_properties()
     path = config['arjun']['plumbum']
     code_base = path + '/plumbum/cli'
 
