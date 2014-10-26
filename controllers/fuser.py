@@ -4,13 +4,13 @@ from authormapper import get_contributors_for_file
 from filehelper import convert_file_to_json
 import os
 import json
+
 class Fuser():
 
     config = {}
 
     def __init__(self):
         self.config = load_project_properties()
-
 
     def generate_project_object(self):
         project_object = []
@@ -29,19 +29,8 @@ class Fuser():
                 json.dump(project_object, outfile, sort_keys = True, indent = 4)
         return project_object
 
-
-
-
-
 if __name__ == '__main__':
     fuser = Fuser()
     project = fuser.generate_project_object()
     for item in project:
         print item
-
-
-
-
-
-
-
