@@ -7,6 +7,7 @@ LINE_COMMAND = "git blame -L {},{} --show-email {} | grep '<.*>' | cut -d '>' -f
 def get_contributors_for_file(file_path, filename):
     """Returns an ordered dictionary that represents the author for every single
     line of code in a file. Mapping is line_number:author email"""
+
     output = subprocess.check_output(FILE_COMMAND.format(filename), shell=True,
                                      cwd=r'{}'.format(file_path))
     output_array = output.split('\n')
@@ -20,6 +21,7 @@ def get_contributors_for_file(file_path, filename):
 
 def get_contributor_for_line(file_path, filename, line_number):
     "Get the email for an author of a specific line of code"
+
     contributor = subprocess.check_output(LINE_COMMAND.format(line_number, line_number, filename),
                                           shell=True, cwd=r'{}'.format(file_path))
     return contributor
@@ -27,16 +29,19 @@ def get_contributor_for_line(file_path, filename, line_number):
 if __name__ == "__main__":
     "Testing functions"
 
-    jason = {'file_path' : '/Users/jasonpinto/plumbum/plumbum',
-             'file_name' : '/Users/jasonpinto/plumbum/plumbum/build.py',
-             'line_number' : '1'}
+    from sys import argv
+    from settings import load_project_properties
 
-    arjun = {'file_path' : '/home/asumal/git/cs410/plumbum',
-             'file_name' : '/home/asumal/git/cs410/plumbum/build.py',
-             'line_number' : '1'}
+    try:
+        script, user = argv
+    except ValueError:
+        print "Incorrect number of arguments"
+    else:
+        config = load_project_properties()
+        print 'config', config
 
-    print "File\n", get_contributors_for_file(arjun['file_path'], arjun['file_name'])
-    #print "File\n", get_contributors_for_file(jason['file_path'], jason['file_name'])
+        file_path = config[user]['pattern']
+        file_name = file_path + '/setup.py'
 
-    print "Line\n", get_contributor_for_line(arjun['file_path'], arjun['file_name'], arjun['line_number'])
-    #print "Line\n", get_contributor_for_file(jason['file_path'], jason['file_name'], jason['line_number'])
+        print "File\n", get_contributors_for_file(file_path, file_name)
+        print "Line\n", get_contributor_for_line(file_path, file_name, '134')
