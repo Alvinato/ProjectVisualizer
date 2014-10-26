@@ -33,15 +33,15 @@ if __name__ == "__main__":
     from settings import load_project_properties
 
     try:
-        script, user = argv
+        script, user, code_base = argv
     except ValueError:
         print "Incorrect number of arguments"
     else:
         config = load_project_properties()
-        print 'config', config
+        #print 'config', config
 
-        file_path = config[user]['pattern']
+        file_path = config[user][code_base]
         file_name = file_path + '/setup.py'
 
         print "File\n", get_contributors_for_file(file_path, file_name)
-        print "Line\n", get_contributor_for_line(file_path, file_name, '134')
+        print "Line\n", get_contributor_for_line(file_path, file_name, '1')
