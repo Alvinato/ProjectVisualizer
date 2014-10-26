@@ -9,8 +9,20 @@
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
 
-from file_struct import Code_Structure
-from code_analyzer_pylint import Pylint_Analyzer
+import settings
+import pylintanalzyer
+import authormapper
+
+def fusion():
+    """ """
+    config = settings.load_project_properties()
+    path = config['arjun']['plumbum']
+    code_base = path + '/plumbum/cli'
+
+    files = authormapper.find_python_files_in_project(code_base)
+    pylint = pylintanalzyer.get_pylint_analysis(files)
+    print pylint
+
 
 def index():
     path_to_root = {"Arjun" : "/home/asumal/git/cs410", "Jason" : "/Users/jasonpinto"}
