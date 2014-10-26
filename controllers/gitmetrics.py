@@ -18,13 +18,11 @@ def get_contributors_for_file(file_path, filename):
         line_number = line_number + 1
     return line_contributors
 
-
 def get_contributor_for_line(file_path, filename, line_number):
     "Get the email for an author of a specific line of code"
     contributor = subprocess.check_output(LINE_COMMAND.format(line_number, line_number, filename),
                                           shell=True, cwd=r'{}'.format(file_path))
     return contributor
-
 
 if __name__ == "__main__":
     "Testing functions"

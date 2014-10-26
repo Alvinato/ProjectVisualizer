@@ -1,9 +1,6 @@
 from json import load
 
-PLUMBUM_LOCATION = ""
-PATTERN_LOCATION = ""
 CONFIG_LOCATION = "config.json"
-
 
 def load_project_properties():
     try:
@@ -13,8 +10,7 @@ def load_project_properties():
     except Exception:
         raise Exception("ERROR: Could not load project properties")
 
-
 if __name__ == '__main__':
-    #Test
-    dict = load_project_properties()
-    print dict
+    # Test
+    properties = load_project_properties()
+    print "config.json\n", properties
