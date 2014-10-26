@@ -33,5 +33,18 @@ def get_contributor_for_line(file_path, filename, line_number):
 
 
 if __name__ == "__main__":
-    "NOTE: Just use for testing purposes"
-    print get_contributors_for_file('/Users/jasonpinto/plumbum/plumbum', '/Users/jasonpinto/plumbum/plumbum/version.py')
+    "Testing functions"
+
+    jason = {'file_path' : '/Users/jasonpinto/plumbum/plumbum',
+             'file_name' : '/Users/jasonpinto/plumbum/plumbum/build.py',
+             'line_number' : '1'}
+
+    arjun = {'file_path' : '/home/asumal/git/cs410/plumbum',
+             'file_name' : '/home/asumal/git/cs410/plumbum/build.py',
+             'line_number' : '1'}
+
+    print "File\n", get_contributors_for_file(arjun['file_path'], arjun['file_name'])
+    #print "File\n", get_contributors_for_file(jason['file_path'], jason['file_name'])
+
+    print "Line\n", get_contributor_for_line(arjun['file_path'], arjun['file_name'], arjun['line_number'])
+    #print "Line\n", get_contributor_for_file(jason['file_path'], jason['file_name'], jason['line_number'])
