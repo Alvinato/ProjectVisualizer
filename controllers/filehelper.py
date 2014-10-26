@@ -2,6 +2,13 @@ from collections import OrderedDict
 import subprocess
 
 def convert_file_to_json(filename):
+    """ For each file_name, associate code with line number.
+    filelines = {'filename' : {'1' : {'code' : 'start of file'},
+                               ...
+                               'n' : {'code' : 'end of file}
+                              }
+                }"""
+
     file_lines = {}
     file_lines[filename] = {}
     with open(filename) as file:
@@ -12,6 +19,8 @@ def convert_file_to_json(filename):
     return file_lines
 
 def find_python_files_in_project(filepath):
+    """ Given a code base, find all the python files. Return as a list """
+
     output = subprocess.check_output("find {} -name '*.py'".format(filepath),shell=True, cwd=r'{}'.format(filepath))
     output_array = output.splitlines()
     return output_array
@@ -31,4 +40,6 @@ if __name__ == '__main__':
         #print 'config', config
 
         file_path = config[user][code_base]
+        file_name = file_path + '/setup.py'
         print "List of Python Files\n", find_python_files_in_project(file_path)
+        print "Code by Line number for 1 file\n", convert_file_to_json(file_name)
