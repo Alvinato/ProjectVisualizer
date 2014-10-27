@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <style type="text/css">
+
+text {
+  font-size: 11px;
+  pointer-events: none;
+}
+
+text.parent {
+  fill: #1f77b4;
+}
+
+circle {
+  fill:#0000FF;
+  stroke: #999;
+  pointer-events: all;
+}
+
+circling {
+	fill: #FFE4C4;
+	stroke: #999;
+	pointer-events: all; 
+}
+
+circle.parent {
+  fill: #DC143;
+  fill-opacity: .5;
+  stroke: steelblue;
+}
+
+circle.parent:hover {
+  stroke: #FFE4C4;
+  stroke-width: .5px;
+}
+
+circle.child {
+  pointer-events: none;
+}
+
+    </style>
+  </head>
+  <body>
+    <h2>
+      Flare code size<br>
+      circle packing
+    </h2>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js"></script>
+ 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript">
+
+// first need to know how to create multidimensional array... 
+// grab name and children...
+
+
+
+/*var result = new Array();
+
+for(var i = 0; i < data.length; i++) {
+  var arr = new Array();     creates the new array
+  for(var key in data[i]) {    for every key in data
+    arr.push(data[i][key]);  // push the key into the index...
+  }
+  result.push(arr);
+}*/
+
+var w = 1280,
+    h = 800,
+    r = 720,
+    x = d3.scale.linear().range([0, r]),
+    y = d3.scale.linear().range([0, r]),
+    node,
+    root;
+
+var pack = d3.layout.pack()
+    .size([r, r])
+    .value(function(d) {
+    return d.size;
+    })
+
+var vis = d3.select("body").insert("svg:svg", "h2")
+    .attr("width", w)
+    .attr("height", h)
+  	.append("svg:g")
+  	.attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
+
+
+
+d3.json("area.json", function(data){
+	var arr = [];
+	for (var i in data){
+	arr.push([i, data[i]]);
+	}
+	
+console.log(arr[0]);   
+console.log(arr[1][0]);
+console.log(arr[1][1][0]); 
+
+console.log(arr[1][1][0].children[0]);
+
+var firstLayer = [];
+var secondLayer;
+var thirdLayer; 
+
+	
+	for (var j = 0; j < arr[1][1].length; j++){
+		firstLayer.push(arr[1][1][j]);
+		//console.log(firstLayer);
+		//if (arr[1][1][1][2] == "children"){
+			// go through the next layer of countries...
+	//			for (var k = 0; k < arr[1][1].length; k++){
+					// i need to print out the names for these countries... 
+					// make dimensional array that correlates to color...
+//					secondLayer = arr[1][1][1][2][k];
+					//console.log(secondLayer);	
+				}
+		//}
+		
+	// just want to try and print everything out...
+	/*for (var j = 0; j < arr.length; j++){
+		if(arr.[j][0] == "children" ){
+		for(var k = 0; k < arr[j][1].length; k++){
+				if(arr.[k][0] == "children" ){
+					for(var l = 0; l < arr[l][1].length; l++){
+						console.log(arr[1])
+					}
+				}
+		}
+		}
+	}*/
+	
+	 console.log(firstLayer[1].name);
+	 console.log(firstLayer[10].color);
+  node = root = data;
+
+
+  var nodes = pack.nodes(root);
+
+
+  vis.selectAll("circle") // selects all circles that are going to be made 
+      .data(nodes)  // gets the data from the json files
+    .enter().append("svg:circle")  // binds each piece of data to a circle
+     // .attr("class", function(d) { return d.children ? "parent" : "child";})// basically asks is there children?? if there is it a parent and if not then it is a child...
+      
+
+
+
+  
+     .style("fill", function(d){ 
+        // returning component will return the style... which is the color...
+     	console.log(firstLayer.length);
+
+      	for (var i = 0; i < firstLayer.length; i++){
+      		console.log("inside styling is running right now");
+ 	 		if(d.name == firstLayer[i].name){
+ 	 			console.log("inside the if right now");
+ 	 			var color;
+ 	 			if (firstLayer.color == undefined){
+ 	 				console.log("inside the undefined if right now");
+ 	 				color = "red";
+ 	 			}
+ 	 			color = firstLayer[i].color;
+ 	 			console.log(color);
+ 	 			return color;
+ 	 		}
+      	}
+      })
+      .attr("cx", function(d) { return d.x; })// where is it getting its x data point??  
+      .attr("cy", function(d) { return d.y; })
+      .attr("r", function(d) { return d.r; }) 
+      .on("click", function(d) { return zoom(node == d ? root : d); });
+  vis.selectAll("rect")
+      .data(nodes)
+    .enter().append("svg:rect")
+      //.attr("class", function(d) { return d.children ? "parent" : "child"; })
+      .attr("x", function(d) { console.log(d.x); return d.x- Math.sqrt(Math.pow(d.r,2)/8); })
+      .attr("y", function(d) { console.log(d.y); return d.y- Math.sqrt(Math.pow(d.r,2)/8); })
+        .attr("height", function(d) { return Math.sqrt(Math.pow(d.r,2)/2);})
+        .attr("width", function (d) {return Math.sqrt(Math.pow(d.r,2)/2);})
+        .attr("stroke", "black")
+        .attr("stroke-width", "1")
+        .style("fill-opacity", 0)
+  
+        .style("fill", function(d){ 
+        // returning component will return the style... which is the color...
+     	//console.log(firstLayer.length);
+
+      	for (var i = 0; i < firstLayer.length; i++){
+      		//console.log("inside styling is running right now");
+ 	 		if(d.name == firstLayer[i].name){
+ 	 			//console.log("inside the if right now");
+ 	 			var color;
+ 	 			if (firstLayer.color == undefined){
+ 	 				//console.log("inside the undefined if right now");
+ 	 				color = "red";
+ 	 			}
+ 	 			color = firstLayer[i].color;
+ 	 			//console.log(color);
+ 	 			return color;
+ 	 		}
+      	}
+      })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
+      .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
+      .text(function(d) { return d.name; });
+
+
+    // this is the handler for every circle... need to create another handler for showing the codee eventually...
+  d3.select(window).on("click", function() { zoom(root); });
+});
+
+function zoom(d, i) {
+  var k = r / d.r / 2;
+  x.domain([d.x - d.r, d.x + d.r]);
+  y.domain([d.y - d.r, d.y + d.r]);
+
+  var t = vis.transition()
+      .duration(d3.event.altKey ? 7500 : 750);
+
+  t.selectAll("circle")
+      .attr("cx", function(d) { return x(d.x); })
+      .attr("cy", function(d) { return y(d.y); })
+      .attr("r", function(d) { return k * d.r; });
+t.selectAll("rect")
+    .attr("opacity" , 0.7);
+
+  t.selectAll("text")
+      .attr("x", function(d) { return x(d.x); })
+      .attr("y", function(d) { return y(d.y); })
+      .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
+
+  node = d;
+  d3.event.stopPropagation();
+}
+
+    </script>
+  </body>
+</html>
