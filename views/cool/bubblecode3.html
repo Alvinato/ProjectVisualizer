@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <style type="text/css">
+
+        text {
+            font-size: 11px;
+            pointer-events: none;
+        }
+
+        text.parent {
+            fill: #1f77b4;
+        }
+
+        circle {
+            fill:#0000FF;
+            stroke: #999;
+            pointer-events: all;
+        }
+
+        circling {
+            fill: #FFE4C4;
+            stroke: #999;
+            pointer-events: all;
+        }
+
+        circle.parent {
+            fill: #DC143;
+            fill-opacity: .5;
+            stroke: steelblue;
+        }
+
+        circle.parent:hover {
+            stroke: #FFE4C4;
+            stroke-width: .5px;
+        }
+
+        circle.child {
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+<h2>
+</h2>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    // first need to know how to create multidimensional array...
+    // grab name and children...
+
+// this is going to be the string scanner stuff...
+
+
+
+    var w = 1280,
+            h = 800,
+            r = 720,								// the radius...
+            x = d3.scale.linear().range([0, r]),   // so all the circles are actually scaling....
+            y = d3.scale.linear().range([0, r]),
+            node,
+            root,
+            projectNamez = true,
+            projectNameu = true;
+
+
+    // this has to do with sorting the circles into a pack...
+    var pack = d3.layout.pack()
+            .size([r, r])
+            .value(function(d) {
+                return d.size;
+            })
+
+    var vis = d3.select("body").insert("svg:svg", "h2")
+            .attr("width", w)
+            .attr("height", h)
+            .append("svg:g")
+            .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
+
+    // trying with the new data set...
+    var red = 0;
+    var blue = 0;
+    var black = 0;
+    var pythonFilesColor = [];
+    var currentlypy = false;
+    var FileCounter = 0;
+    var ColourCounter = 0;
+
+    function sifter(d){
+        console.log(d);
+
+        for (var i in d) {
+
+            console.log(i);
+            console.log(d[i]);
+            if (i == "name") {
+            }
+
+            if (typeof d[i] == "string") {
+                if (d[i].substring(d[i].length, d[i].length - 3) == ".py") {
+                    currentlypy = true;
+                    pythonFilesColor.push(d[i]);
+                }
+            }
+
+
+            if (i.substring(0,4) == "line"){
+
+                for(var u in d[i]){
+                   console.log([u]);
+                    console.log(d[i][u]);
+
+                    if (u == "color") {
+                        currentlypy = false;
+                    }
+
+                    if (d[i][u] == "blue") {
+                        pythonFilesColor.push("blue");
+                        console.log("blue is found");
+                    }
+                    if (d[i][u] == "black") {
+                        pythonFilesColor.push("black")
+                        console.log("black is found");
+                    }
+                    if (d[i][u] == "red") {
+                        pythonFilesColor.push("red");
+                        console.log("Red is found");
+                    }
+                }
+            }
+
+            if (i == "children") {
+
+                for (var t in d[i]) {
+                    sifter(d[i][t]);
+                }
+            }
+        }
+    }
+
+function colorcoder(d){
+
+    for (var g = 0; g < pythonFilesColor.length; g++) {
+        var pythonFile = pythonFilesColor[g];
+
+        var a = g + 1;
+        if (d.name == pythonFile) {
+            console.log("this is what your testing   " + pythonFilesColor[a]);
+            // basically if it is a python file keep running
+            /*while (pythonFilesColor[a].substring(pythonFilesColor[a].length - 2, pythonFilesColor[a].length) != "py") {
+                console.log("inside the while loop is working right now");
+                console.log("this should be color:  " + pythonFilesColor[a]);
+                if (pythonFilesColor == "red") {
+                    red += 20;
+                }
+                if (pythonFilesColor == "blue") {
+                    blue += 20;
+                }
+                a++;
+
+            }*/
+
+            return "green";
+
+        }
+        return "red"
+    }
+
+
+
+
+}
+
+    // the json stuff...
+    d3.json("testing2.json", function(data){
+
+
+        sifter(data);
+        console.log("after the sifter");
+
+
+      console.log("the list retrieved of colors...");
+        for(var e = 0; e < pythonFilesColor.length; e++){
+            // try and print out everything...
+           console.log(pythonFilesColor[e]);
+            pythonFilesColor[e];
+        }
+
+        for (var key in data){
+
+            if (key.substring(key.length-2, key.length) == "py"){
+                console.log("there are this many python files")
+            };
+        }
+
+        node = root = data;
+
+        var nodes = pack.nodes(root);
+
+
+        // there is no magnitude of color in this...
+        var colorScale = d3.scale.linear()
+                .domain([red, blue])
+                .range(["red", "blue"]); // will add in black later dont know if this will work yet...
+
+        var collecting = false;
+        vis.selectAll("circle") // selects all circles that are going to be made
+                .data(nodes)  // gets the data from the json files
+                .enter().append("svg:circle")  // binds each piece of data to a circle
+                .style("fill", function(d){
+
+
+                    // TODODODODODOTODODOD!!!!!!!
+
+                    // REMEMBER THAT YOU HAVE TO CALL THE FUNCTION UP TOP CALLED color coder... need to find a way to magnitize the color... llook into scaling a bit more...
+
+                    for (var g = 0; g < pythonFilesColor.length; g++){
+                        var pythonFile = pythonFilesColor[g];
+
+                        if(d.name == pythonFile){
+                            // we want to loop from where we left off here
+                            return "green";
+                        }
+                    }
+
+
+                    return "red";
+                })
+                .attr("cx", function(d) { return d.x; })// where is it getting its x data point??
+                .attr("cy", function(d) { return d.y; }) // the d should be referencing the data objects...
+                .attr("r", function(d) { return d.r; })
+                .on("click", function(d) {   // so this is the zoom function...
+                    console.log("zoom zoom zoom");
+                    return zoom(node == d ? root : d); });
+
+
+        // we need to use this text atribute to write the actual code in the boxes...
+        // need to figure out how to create the text so that it fits in the bubble line by line...
+        // we need to dynamically write this text so we need to call a function that will loop through and render
+        // every single line in the json file....
+        vis.selectAll("text")
+                .data(nodes)
+                .enter().append("svg:text")
+                .attr("x", function(d) {                    // all this code here will make the project name go in the
+                                                                // top corner and the rest of the code in the little bubbles
+                    if (projectNamez == true){
+                        projectNamez = false;
+
+                        return 0;
+                    }else{
+
+                        return d.x;
+                    }
+                     })
+                .attr("y", function(d) {
+
+                    if (projectNameu == true){
+
+                        projectNameu = false;
+                        return 0;
+                    }else {
+
+                        return d.y;
+                    }
+                    })
+                .attr("dy", ".35em")
+                .attr("text-anchor", "middle")
+                .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
+                .on("click", function(){
+                     // when the words are pressed we display something else here...
+                    //console.log("the words have been pressed");
+                    //return zoom(node == d ? root : d)
+
+                })
+                .text(function(d) { return d.name; });
+
+
+
+
+        /*d3.selectAll("circle").on("contextmenu", function(d, i) {
+
+        console.log("this was pressed");
+
+
+        }),*/
+
+
+
+        /*d3.select(window).on("click", function() {
+            console.log("the zoom was pressed");
+            zoom(root);
+        });*/
+    });
+
+
+    // we need zoom to go in close into the bubble, and once its there we need the bubble to show the code...
+    function zoom(d) {
+
+
+        var k = r / d.r / 2;
+        x.domain([d.x - d.r, d.x + d.r]);
+        y.domain([d.y - d.r, d.y + d.r]);
+        projectNameu = true;
+        projectNamez = true;
+
+        var t = vis.transition()
+                .duration(d3.event.altKey ? 7500 : 750);
+
+        t.selectAll("circle")
+                .attr("cx", function(d) { return x(d.x); })
+                .attr("cy", function(d) { return y(d.y); })
+                .attr("r", function(d) { return k * d.r; });
+
+        t.selectAll("text")// we have to do this again when rerendering all the text...
+                .attr("x", function(d) {
+                    if (projectNamez == true){
+                        projectNamez = false;
+                        return x(0);
+                    }else
+                    {
+                        return x(d.x);
+                    }
+                 })
+                .attr("y", function(d) {
+                    if (projectNameu == true){
+                        projectNameu = false;
+                        return y(0);
+                    }else
+                    {
+                        return y(d.y);
+                    }
+                     })
+                .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
+
+        node = d;
+        d3.event.stopPropagation();
+
+    }
+
+</script>
+</body>
+</html>
