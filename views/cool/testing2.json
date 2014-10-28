@@ -1,0 +1,86 @@
+{
+    "name": "THE PROJECT NAME",
+    "children": [
+        {
+            "name": "version.py",
+			"size":"200000392"
+        },
+        {
+            "name": "commands",
+            "children": [
+                {
+                    "name": "daemons.py",
+                    "size": "5000000000"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "60003000000"
+                },
+                {
+                    "name": "base.py",
+                    "size": "60000000000"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "45645300000",
+					"line1": {
+							
+							"string": "asdkjfhasdkjfhaksjdhf",
+		            		"color": "blue",
+		            		"error": "C",
+		            		"author": "Arjun"
+		       	 	},
+		
+		       	 	"line2": {
+						
+						"string": "asdfasdfasdfasdf",
+		            	"color": "blue",
+		            	"error": "B",
+		            	"author": "Arjun"
+		       	 	},
+		
+		       	 	"line3": {
+						
+						"string": "sfasdfasdf",
+		            	"color": "red",
+		            	"error": "None",
+		            	"author": "Alvin"
+		        	}
+                }
+            ]
+        },
+        {
+            "name": "fs",
+            "children": [
+                {
+                    "name": "mounts.py",
+                    "size": "500000000"
+                },
+                {
+                    "name": "__init___.py",
+                    "size": "60003000000"
+                },
+                {
+                    "name": "atomic.py",
+                    "size": "6000000000"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "4564530000"
+                }
+            ]
+        }
+    ]
+}
+	
+	
+	
+	
