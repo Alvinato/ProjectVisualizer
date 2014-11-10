@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from gluon import *
+#from gluon import *
 import os
 
 class Code_Structure(object):
@@ -11,7 +11,7 @@ class Code_Structure(object):
     def __init__(self, name, root):
         self.name = name
         self.root = root
-        self.path = self.create_path(root)
+        #self.path = self.create_path(root)
 
     def get_path(self):
         return self.path
@@ -48,9 +48,35 @@ class Code_Structure(object):
         """
         structure = {}
         root, subdirs, files = next(os.walk(path))
-        for file in files:
-            structure.update({file : None})
-        for subdir in subdirs:
-            new_path = "%s/%s" % (path, subdir)
-            structure.update({subdir : self.create_path(new_path)})
+        #print "root: %s\n subirs: %s\n files: %s\n" % (root, subdirs, files)
+        structure.update({"name" : root})
+
+        if (subdirs or files):
+            children = []
+            if (subdirs):
+                for subdir in subdirs:
+                    new_path = "%s/%s" % (path, subdir)
+                    children.append(self.create_path(new_path))
+            if (files):
+                for file in files:
+                    temp_file_dict = {}
+                    temp_file_dict["name"] = file
+                    temp_file_dict["path"] = "%s/%s" % (path, file)
+                    temp_file_dict["size"] = ""
+                    temp_file_dict["colour"] = ""
+                    children.append(temp_file_dict)
+            structure.update({"children" : children})
         return structure
+
+if __name__ == "__main__":
+    import json
+
+    structure = Code_Structure("Plumbum", "/home/asumal/git/cs410/plumbum/plumbum")
+    print structure.get_name()
+    print structure.get_root()
+
+    path = structure.create_path(structure.get_root())
+    temp = open("sample_output.json", "w")
+    json.dump(path, temp)
+    temp.close()
+    print path
