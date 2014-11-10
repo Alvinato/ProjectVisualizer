@@ -1,4 +1,4 @@
-import pylintanalzyer as PLA
+from modules.pylintanalzyer import pylintanalzyer as PLA
 import unittest
 
 class Test_PylintAnalzyer(unittest.TestCase):
