@@ -42,7 +42,7 @@ def parse_pylint_line(pylint_line):
     try:
         line_number, category = pylint_line.split(":")
     except ValueError:
-        print "ERROR: ", pylint_line
+        print "ERROR in parse_pylint_line: ", pylint_line
         raise ValueError()
     else:
         return line_number, category
