@@ -14,11 +14,60 @@
                 },
                 {
                     "name": "processes.py",
-                    "size": "60003000000"
+                    "size": "60003000000",
+                    "line1": {
+
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "red",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+                    "line2": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "red",
+                        "error": "B",
+                        "author": "Arjun"
+                    }
                 },
                 {
                     "name": "base.py",
-                    "size": "60000000000"
+                    "size": "60000000000",
+                    "line1": {
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "blue",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+                    "line2": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "blue",
+                        "error": "B",
+                        "author": "Arjun"
+                    },
+                    "line3": {
+                        "string": "sfasdfasdf",
+                        "color": "blue",
+                        "error": "None",
+                        "author": "Alvin"
+                    },
+                    "line4": {
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "blue",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+                    "line5": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "green",
+                        "error": "B",
+                        "author": "Arjun"
+                    },
+                    "line6": {
+                        "string": "sfasdfasdf",
+                        "color": "red",
+                        "error": "None",
+                        "author": "Alvin"
+                    }
                 },
                 {
                     "name": "processes.py",
@@ -30,7 +79,7 @@
 					"line1": {
 							
 							"string": "asdkjfhasdkjfhaksjdhf",
-		            		"color": "blue",
+		            		"color": "red",
 		            		"error": "C",
 		            		"author": "Arjun"
 		       	 	},
@@ -38,7 +87,7 @@
 		       	 	"line2": {
 						
 						"string": "asdfasdfasdfasdf",
-		            	"color": "blue",
+		            	"color": "red",
 		            	"error": "B",
 		            	"author": "Arjun"
 		       	 	},
@@ -58,7 +107,48 @@
             "children": [
                 {
                     "name": "mounts.py",
-                    "size": "500000000"
+                    "size": "500000000",
+                    "line1": {
+
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "red",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+
+                    "line2": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "green",
+                        "error": "B",
+                        "author": "Arjun"
+                    },
+
+                    "line3": {
+                        "string": "sfasdfasdf",
+                        "color": "blue",
+                        "error": "None",
+                        "author": "Alvin"
+                    },
+                    "line4": {
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "red",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+
+                    "line5": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "green",
+                        "error": "B",
+                        "author": "Arjun"
+                    },
+
+                    "line6": {
+                        "string": "sfasdfasdf",
+                        "color": "blue",
+                        "error": "None",
+                        "author": "Alvin"
+                    }
                 },
                 {
                     "name": "__init___.py",
@@ -73,8 +163,29 @@
                     "size": "6003040000"
                 },
                 {
-                    "name": "___init___.py",
-                    "size": "4564530000"
+                    "name": "omg.py",
+                    "size": "4564530000",
+                    "line1": {
+
+                        "string": "asdkjfhasdkjfhaksjdhf",
+                        "color": "red",
+                        "error": "C",
+                        "author": "Arjun"
+                    },
+
+                    "line2": {
+                        "string": "asdfasdfasdfasdf",
+                        "color": "green",
+                        "error": "B",
+                        "author": "Arjun"
+                    },
+
+                    "line3": {
+                        "string": "sfasdfasdf",
+                        "color": "blue",
+                        "error": "None",
+                        "author": "Alvin"
+                    }
                 }
             ]
         }

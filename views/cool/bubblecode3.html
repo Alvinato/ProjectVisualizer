@@ -49,7 +49,7 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
+<script type="text/javascript" src="Colour.js"></script>
 <script type="text/javascript">
 
     // first need to know how to create multidimensional array...
@@ -83,121 +83,37 @@
             .append("svg:g")
             .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
 
-    // trying with the new data set...
+
     var red = 0;
     var blue = 0;
     var black = 0;
-    var pythonFilesColor = [];
+    var pythonFiles = [];
+
     var currentlypy = false;
     var FileCounter = 0;
     var ColourCounter = 0;
 
-    function sifter(d){
-        console.log(d);
 
-        for (var i in d) {
-
-            console.log(i);
-            console.log(d[i]);
-            if (i == "name") {
-            }
-
-            if (typeof d[i] == "string") {
-                if (d[i].substring(d[i].length, d[i].length - 3) == ".py") {
-                    currentlypy = true;
-                    pythonFilesColor.push(d[i]);
-                }
-            }
-
-
-            if (i.substring(0,4) == "line"){
-
-                for(var u in d[i]){
-                   console.log([u]);
-                    console.log(d[i][u]);
-
-                    if (u == "color") {
-                        currentlypy = false;
-                    }
-
-                    if (d[i][u] == "blue") {
-                        pythonFilesColor.push("blue");
-                        console.log("blue is found");
-                    }
-                    if (d[i][u] == "black") {
-                        pythonFilesColor.push("black")
-                        console.log("black is found");
-                    }
-                    if (d[i][u] == "red") {
-                        pythonFilesColor.push("red");
-                        console.log("Red is found");
-                    }
-                }
-            }
-
-            if (i == "children") {
-
-                for (var t in d[i]) {
-                    sifter(d[i][t]);
-                }
-            }
-        }
-    }
-
-function colorcoder(d){
-
-    for (var g = 0; g < pythonFilesColor.length; g++) {
-        var pythonFile = pythonFilesColor[g];
-
-        var a = g + 1;
-        if (d.name == pythonFile) {
-            console.log("this is what your testing   " + pythonFilesColor[a]);
-            // basically if it is a python file keep running
-            /*while (pythonFilesColor[a].substring(pythonFilesColor[a].length - 2, pythonFilesColor[a].length) != "py") {
-                console.log("inside the while loop is working right now");
-                console.log("this should be color:  " + pythonFilesColor[a]);
-                if (pythonFilesColor == "red") {
-                    red += 20;
-                }
-                if (pythonFilesColor == "blue") {
-                    blue += 20;
-                }
-                a++;
-
-            }*/
-
-            return "green";
-
-        }
-        return "red"
-    }
-
-
-
-
-}
 
     // the json stuff...
     d3.json("testing2.json", function(data){
 
 
         sifter(data);
-        console.log("after the sifter");
+     //   console.log("after the sifter");
 
-
-      console.log("the list retrieved of colors...");
-        for(var e = 0; e < pythonFilesColor.length; e++){
-            // try and print out everything...
-           console.log(pythonFilesColor[e]);
-            pythonFilesColor[e];
-        }
-
-        for (var key in data){
+       /* for (var key in data){
 
             if (key.substring(key.length-2, key.length) == "py"){
                 console.log("there are this many python files")
             };
-        }
+        }*/
+
+    //    for (var o = 0; o < pythonFiles.length; o++){
+  //          console.log(pythonFiles[o]);
+//        }
+
+
 
         node = root = data;
 
@@ -210,40 +126,109 @@ function colorcoder(d){
                 .range(["red", "blue"]); // will add in black later dont know if this will work yet...
 
         var collecting = false;
-        vis.selectAll("circle") // selects all circles that are going to be made
-                .data(nodes)  // gets the data from the json files
-                .enter().append("svg:circle")  // binds each piece of data to a circle
+        vis.selectAll("circle")
+                .data(nodes)
+                .enter().append("svg:circle")
                 .style("fill", function(d){
+                    var blue = 0;
+                    var green = 0;
+                    var red = 0;
+                    //console.log("the name of the current file being checked " + d.name);
+                    for (var g = 0; g < pythonFiles.length; g++) {
 
+                        if (d.name == pythonFiles[g]) {
 
-                    // TODODODODODOTODODOD!!!!!!!
+                            if (g+1 >= pythonFiles.length ||
+                                    pythonFiles[g+1].substring(pythonFiles[g+1].length-2, pythonFiles[g+1].length) == "py"){
+                                //console.log("deleting one with no errors" + pythonFiles[g]);
+                                pythonFiles.splice(g, 1);
+                                return "violet";
+                            }
+                            var e;
+                            for ( e = g + 1; e < pythonFiles.length; e++) {
+                                var porc = pythonFiles[e];
+                                if (porc == "green") {
+                                    green++;
+                                }
+                                if (porc == "red") {
+                                    red++;
+                                }
 
-                    // REMEMBER THAT YOU HAVE TO CALL THE FUNCTION UP TOP CALLED color coder... need to find a way to magnitize the color... llook into scaling a bit more...
+                                if (porc == "blue") {
+                                    blue++;
+                                }
+                                if (porc.substring(porc.length - 2, porc.length) == "py") {
+                                    break;  // end this loop as soon as a python file has been found...
+                                }
+                            }
 
-                    for (var g = 0; g < pythonFilesColor.length; g++){
-                        var pythonFile = pythonFilesColor[g];
+                            for (var t = g; t < e; t++){
+                              //  console.log("deleting ...." + pythonFiles[t]);
+                                pythonFiles.splice(t, 0);
+                            }
 
-                        if(d.name == pythonFile){
-                            // we want to loop from where we left off here
-                            return "green";
+                            for (var v = 0; v < pythonFiles.length; v++){
+                              //  console.log(pythonFiles[v]);
+                            }
+                            // lets print out the colors and see if they got incrementedc
+                            //console.log(d.name + " <-- this is the colors for");
+                            //console.log("this is the amount of blue available " + blue);
+                            //console.log("this is the amount of red available " + red);
+                            //console.log("this is the amount of green available " + green);
+
+                            if (blue == 0 && green == 0 && red == 0) {
+                                return "violet"; // we end the loop before we can increment everything...
+                            }
+
+                            // find how different all three are to each other...
+                            var total = (green + blue + red);
+                            var redPercentage = red/total;
+                            var greenPercentage = green/ total;
+                            var bluePercentage = blue/total;
+
+                            // now find the percentage of the total 255;
+
+                            var redAmount = 255 * redPercentage;
+                            var greenAmount = 255 * greenPercentage;
+                            var blueAmount = 255 * bluePercentage;
+                            var tColor = new RGBColour(redAmount, greenAmount, blueAmount);
+                            var newColor = tColor.getCSSHexadecimalRGB();
+                            return newColor;
                         }
-                    }
+                        }
+                    //console.log("returning pink");
+                    return "orange";
 
-
-                    return "red";
                 })
                 .attr("cx", function(d) { return d.x; })// where is it getting its x data point??
                 .attr("cy", function(d) { return d.y; }) // the d should be referencing the data objects...
                 .attr("r", function(d) { return d.r; })
-                .on("click", function(d) {   // so this is the zoom function...
+               // .style("visibility", function (d)
+                //{
+                 /*   if(d == root){
+                       return "visible";
+                    }
+                    else{
+
+                        if(d.parent.parent){
+                            return "hidden";
+                        }
+                        return "visible";
+                    }
+                   // return d.parent.parent? "hidden": "visible";
+*/
+
+                //})
+                .on("click", function(d) {
                     console.log("zoom zoom zoom");
-                    return zoom(node == d ? root : d); });
+                    return zoom(node == d ? root : d); })
 
 
-        // we need to use this text atribute to write the actual code in the boxes...
-        // need to figure out how to create the text so that it fits in the bubble line by line...
-        // we need to dynamically write this text so we need to call a function that will loop through and render
-        // every single line in the json file....
+// this w   ill disable all onclick events... now we want do disable certain onclick events...
+ // need to learn how to make a class and add certain elements to it...
+    //d3.selectAll("circle")
+        //    .on('click', null);
+
         vis.selectAll("text")
                 .data(nodes)
                 .enter().append("svg:text")
@@ -271,6 +256,23 @@ function colorcoder(d){
                     })
                 .attr("dy", ".35em")
                 .attr("text-anchor", "middle")
+                .style("visibility", function (d)
+                {
+
+                    // this here is meant to try and hide certain aspects...
+                  //  if(d == root){
+                   //     return "visible";
+                  //  }
+                  //  else{
+                    //    if(d.parent.parent){
+                      //      return "hidden";
+                       // }
+                       // return "visible";
+                    //}
+                    // return d.parent.parent? "hidden": "visible";
+
+
+                })
                 .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
                 .on("click", function(){
                      // when the words are pressed we display something else here...
@@ -298,7 +300,7 @@ function colorcoder(d){
         });*/
     });
 
-
+        // todooo need to take into account filesizes...
     // we need zoom to go in close into the bubble, and once its there we need the bubble to show the code...
     function zoom(d) {
 
@@ -315,7 +317,22 @@ function colorcoder(d){
         t.selectAll("circle")
                 .attr("cx", function(d) { return x(d.x); })
                 .attr("cy", function(d) { return y(d.y); })
-                .attr("r", function(d) { return k * d.r; });
+                .attr("r", function(d) { return k * d.r; })
+        /*.style("visibility", function (d)
+        {
+            if(d == root){
+                return "visible";
+            }
+            else{
+                if(d.parent.parent){
+                    return "hidden";
+                }
+                return "visible";
+            }
+            // return d.parent.parent? "hidden": "visible";
+
+
+        });*/
 
         t.selectAll("text")// we have to do this again when rerendering all the text...
                 .attr("x", function(d) {
@@ -340,8 +357,97 @@ function colorcoder(d){
 
         node = d;
         d3.event.stopPropagation();
-
     }
+
+
+    // this finds all the python files and colors and puts them in a list...
+    function sifter(d){
+        //console.log(d);
+
+        for (var i in d) {
+
+            // console.log(i);
+            //console.log(d[i]);
+            if (i == "name") {
+            }
+
+            if (typeof d[i] == "string") {
+                if (d[i].substring(d[i].length, d[i].length - 3) == ".py") {
+                    currentlypy = true;
+                    pythonFiles.push(d[i]);
+                }
+            }
+
+
+            if (i.substring(0,4) == "line"){
+
+                for(var u in d[i]){
+                    //console.log([u]);
+                    // console.log(d[i][u]);
+
+                    if (u == "color") {
+                        currentlypy = false;
+                    }
+
+                    if (d[i][u] == "blue") {
+                        pythonFiles.push("blue");
+                        // console.log("blue is found");
+                    }
+                    if (d[i][u] == "green") {
+                        pythonFiles.push("green");
+                        //console.log("black is found");
+                    }
+                    if (d[i][u] == "red") {
+                        pythonFiles.push("red");
+                        //  console.log("Red is found");
+                    }
+                }
+            }
+
+            if (i == "children") {
+
+                for (var t in d[i]) {
+                    sifter(d[i][t]);
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+    function colorcoder(d){
+
+        for (var g = 0; g < pythonFiles.length; g++) {
+            var pythonFile = pythonFiles[g];
+
+            var a = g + 1;
+            if (d.name == pythonFile) {
+                console.log("this is what your testing   " + pythonFiles[a]);
+                // basically if it is a python file keep running
+                /*while (pythonFiles[a].substring(pythonFiles[a].length - 2, pythonFiles[a].length) != "py") {
+                 console.log("inside the while loop is working right now");
+                 console.log("this should be color:  " + pythonFiles[a]);
+                 if (pythonFiles == "red") {
+                 red += 20;
+                 }
+                 if (pythonFiles == "blue") {
+                 blue += 20;
+                 }
+                 a++;
+
+                 }*/
+
+                return "green";
+
+            }
+            return "red"
+        }
+    }
+
 
 </script>
 </body>
