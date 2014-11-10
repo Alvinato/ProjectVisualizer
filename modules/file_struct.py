@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
-#from gluon import *
 import os
+import json
 
 class Code_Structure(object):
     """ Contains the file structure of a code base
@@ -11,7 +10,7 @@ class Code_Structure(object):
     def __init__(self, name, root):
         self.name = name
         self.root = root
-        #self.path = self.create_path(root)
+        self.path = json.dumps(self.create_path(root))
 
     def get_path(self):
         return self.path
@@ -69,14 +68,5 @@ class Code_Structure(object):
         return structure
 
 if __name__ == "__main__":
-    import json
-
     structure = Code_Structure("Plumbum", "/home/asumal/git/cs410/plumbum/plumbum")
-    print structure.get_name()
-    print structure.get_root()
-
-    path = structure.create_path(structure.get_root())
-    temp = open("sample_output.json", "w")
-    json.dump(path, temp)
-    temp.close()
-    print path
+    structure.print_file_structure()

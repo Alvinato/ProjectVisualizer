@@ -8,6 +8,12 @@
 ## - download is for downloading files uploaded in the db (does streaming)
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
+import file_struct as FS
+
+def testing_structure():
+    structure = FS.Code_Structure("Plumbum", "/home/asumal/git/cs410/plumbum/plumbum")
+    return dict(structure = structure.get_path())
+
 
 import config
 import pylintanalzyer
