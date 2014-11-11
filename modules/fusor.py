@@ -3,18 +3,19 @@
 import filehelper as FH
 import authormapper as AM
 import pylintanalzyer as PA
+import json as JS
 
 def fuse(path_to_code_base):
-    # initialize 'solution' dictionary and 'lines' list
-    solution, lines = {}, []
-    solution["name"] = path_to_code_base
-
     # retrieves a list of all .py files inside the specified code_base
     files = FH.find_python_files_in_project(path_to_code_base)
 
     # iterate through list of .py files
     for file in files:
-        print file
+
+        # initialize 'solution' dictionary and 'lines' list
+        solution, lines = {}, []
+        solution["path"] = file
+
         # GIT ANALYSIS
         git_results = AM.create_author_mappings_for_file(path_to_code_base, file)
 
@@ -23,20 +24,30 @@ def fuse(path_to_code_base):
 
         # FUSION
         max_lines = git_results["size"] + 1
-        fusion = fuse_analyses(git_results[file], pylint_results[file], max_lines)
+        fusion = combine_results(git_results[file], pylint_results[file], max_lines)
 
         # add result to 'lines' list
         lines.append(fusion)
 
-        break
+        # add 'lines' list to 'solution' dictionary
+        solution["lines"] = lines
 
-    # add 'lines' list to 'solution' dictionary
-    solution["lines"] = lines
+        # convert 'solution' dictionary into JSON object
+        solution = JS.dumps(solution)
 
-    # save fusion to file
+        #change name of file
+        file_to_save = file.replace(".py", ".json")
+
+        # save fusion to file
+        with open(file_to_save, 'w') as saving_to_file:
+            saving_to_file.write(solution)
+
     return solution
 
-def fuse_analyses(git_results, pylint_results, max_lines):
+def fuse_file(path_to_file):
+    
+
+def combine_results(git_results, pylint_results, max_lines):
 
     # setup list to hold solution
     solution = []
