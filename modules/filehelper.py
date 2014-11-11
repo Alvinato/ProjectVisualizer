@@ -14,7 +14,7 @@ def convert_file_to_json(filename):
     with open(filename) as file:
         line_num = 1
         for line in file:
-            file_lines[filename][str(line_num)] = {'code':line}
+            file_lines[filename][line_num] = {'code':line}
             line_num = line_num + 1
     return file_lines
 

@@ -45,7 +45,7 @@ def parse_pylint_line(pylint_line):
         print "ERROR in parse_pylint_line: ", pylint_line
         raise ValueError()
     else:
-        return line_number, category
+        return int(line_number), category
 
 if __name__ == '__main__':
     "Testing functions"
@@ -63,5 +63,5 @@ if __name__ == '__main__':
 
         file_path = config[user][code_base]
         files = find_python_files_in_project(file_path + '/plumbum/cli')
-        solution = get_pylint_analysis(files)
+        solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
         print solution

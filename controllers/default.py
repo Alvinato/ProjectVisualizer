@@ -12,7 +12,8 @@ import file_struct as FS
 
 def testing_structure():
     structure = FS.Code_Structure("Plumbum", "/home/asumal/git/cs410/plumbum/plumbum")
-    return dict(structure = structure.get_path())
+    path = structure.get_path()
+    return dict(structure = path)
 
 
 import config

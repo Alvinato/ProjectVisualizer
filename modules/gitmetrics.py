@@ -15,7 +15,7 @@ def get_contributors_for_file(file_path, filename):
     line_number = 1
     line_contributors = OrderedDict()
     while line_number != num_lines:
-        line_contributors[str(line_number)] = output_array[line_number - 1]
+        line_contributors[line_number] = output_array[line_number - 1]
         line_number = line_number + 1
     return line_contributors
 
