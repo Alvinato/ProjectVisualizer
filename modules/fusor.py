@@ -11,41 +11,41 @@ def fuse(path_to_code_base):
 
     # iterate through list of .py files
     for file in files:
+        fuse_file(path_to_code_base, file)
 
-        # initialize 'solution' dictionary and 'lines' list
-        solution, lines = {}, []
-        solution["path"] = file
 
-        # GIT ANALYSIS
-        git_results = AM.create_author_mappings_for_file(path_to_code_base, file)
+def fuse_file(path_to_code_base, path_to_file):
+    # initialize 'solution' dictionary and 'lines' list
+    solution, lines = {}, []
+    solution["path"] = path_to_file
 
-        # PYLINT ANALYSIS
-        pylint_results = PA.pylint_analyzer(file)
+    # GIT ANALYSIS
+    git_results = AM.create_author_mappings_for_file(path_to_code_base, path_to_file)
 
-        # FUSION
-        max_lines = git_results["size"] + 1
-        fusion = combine_results(git_results[file], pylint_results[file], max_lines)
+    # PYLINT ANALYSIS
+    pylint_results = PA.pylint_analyzer(path_to_file)
 
-        # add result to 'lines' list
-        lines.append(fusion)
+    # FUSION
+    max_lines = git_results["size"] + 1
+    fusion = combine_results(git_results[path_to_file], pylint_results[path_to_file], max_lines)
 
-        # add 'lines' list to 'solution' dictionary
-        solution["lines"] = lines
+    # add result to 'lines' list
+    lines.append(fusion)
 
-        # convert 'solution' dictionary into JSON object
-        solution = JS.dumps(solution)
+    # add 'lines' list to 'solution' dictionary
+    solution["lines"] = lines
 
-        #change name of file
-        file_to_save = file.replace(".py", ".json")
+    # convert 'solution' dictionary into JSON object
+    solution = JS.dumps(solution)
 
-        # save fusion to file
-        with open(file_to_save, 'w') as saving_to_file:
-            saving_to_file.write(solution)
+    #change name of file
+    file_to_save = path_to_file.replace(".py", ".json")
+
+    # save fusion to file
+    with open(file_to_save, 'w') as saving_to_file:
+         saving_to_file.write(solution)
 
     return solution
-
-def fuse_file(path_to_file):
-    
 
 def combine_results(git_results, pylint_results, max_lines):
 
@@ -80,7 +80,8 @@ if __name__ == "__main__":
     import config
 
     info = config.create_preferences()
-    path = info['arjun']['plumbum']
 
-    solution = fuse(path)
-    #print solution
+    path_to_code_base = info['arjun']['plumbum']
+    path_to_file = path_to_code_base + "/docs/conf.py"
+    solution = fuse_file(path_to_code_base, path_to_file )
+    print solution
