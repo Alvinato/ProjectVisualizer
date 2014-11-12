@@ -2,14 +2,16 @@
 import os
 import json
 
-def create_structure(path, pylint_analysis, git_analysis):
+def create_structure(path, name, pylint_analysis, git_analysis):
     """ Given the root directory, this function will return
         The file structure of the code base.
     """
     structure = {}
     root, subdirs, files = next(os.walk(path))
     print "root: %s\n subirs: %s\n files: %s\n" % (root, subdirs, files)
-    structure.update({"name" : root})
+
+    structure.update({"name" : name})
+    structure.update({"path" : root})
 
     # http://stackoverflow.com/a/18435
     files = [module for module in files if module.endswith(".py")]
@@ -21,7 +23,7 @@ def create_structure(path, pylint_analysis, git_analysis):
             for subdir in subdirs:
                 new_path = "%s/%s" % (path, subdir)
                 print new_path
-                children.append(create_structure(new_path, pylint_analysis, git_analysis))
+                children.append(create_structure(new_path, subdir, pylint_analysis, git_analysis))
 
         if (files):
             for file in files:
@@ -40,10 +42,10 @@ if __name__ == '__main__':
     import authormapper as AM
     import pylintanalzyer as PY
 
-    path_to_code_base = "/home/asumal/git/cs410/pattern/pattern"
+    path_to_code_base = "/home/asumal/git/cs410/plumbum/plumbum"
 
     list_of_files = FH.find_python_files_in_project(path_to_code_base)
     pylint_analysis = PY.get_pylint_analysis(list_of_files)
     git_analysis = AM.get_git_analysis(path_to_code_base, list_of_files)
 
-    print json.dumps(create_structure(path_to_code_base, pylint_analysis, git_analysis))
+    print json.dumps(create_structure(path_to_code_base, "Plumbum", pylint_analysis, git_analysis))
