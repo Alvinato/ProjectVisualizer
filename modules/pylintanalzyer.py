@@ -20,15 +20,15 @@ def pylint_analyzer(path_to_file):
 
     stderr_as_list = stderr.splitlines()
     if (len(stderr_as_list) == 1 and stderr_as_list[0] == WARNING):
-        solution = parse_pylint_output(stdout.splitlines(), path_to_file)
+        solution = parse_pylint_output(stdout.splitlines())
         #print "RETURNING: ", solution
-        return solution
+        return {path_to_file : solution}
     else:
         raise Exception(stderr)
 
-def parse_pylint_output(pylint_output, path_to_file):
+def parse_pylint_output(pylint_output):
     """ """
-    result, solution = {}, {}
+    solution = {}
     bubble_colour = {'C': 0, 'E': 0, 'F': 0, 'R': 0, 'W': 0}
 
     if (pylint_output[0].startswith(IGNORE_LINE)):
@@ -40,11 +40,10 @@ def parse_pylint_output(pylint_output, path_to_file):
         solution[line_number] = {'category':category, 'colour':COLOR[category]}
 
     print bubble_colour
-    result["category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
-    result["colour"] = COLOR[result["category"]]
-    result[path_to_file] = solution
+    solution["bubble_category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
+    solution["bubble_colour"] = COLOR[solution["bubble_category"]]
 
-    return result
+    return solution
 
 def parse_pylint_line(pylint_line):
     """ """
