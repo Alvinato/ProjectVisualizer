@@ -39,7 +39,6 @@ def parse_pylint_output(pylint_output):
         bubble_colour[category] += 1
         solution[line_number] = {'category':category, 'colour':COLOR[category]}
 
-    print bubble_colour
     solution["bubble_category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
     solution["bubble_colour"] = COLOR[solution["bubble_category"]]
 
@@ -71,5 +70,6 @@ if __name__ == '__main__':
 
         file_path = config[user][code_base]
         files = find_python_files_in_project(file_path + '/plumbum/cli')
-        solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
-        print solution
+        #solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
+        #print solution
+        print get_pylint_analysis(files)

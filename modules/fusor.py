@@ -14,20 +14,14 @@ def fuse(path_to_code_base):
         fuse_file(path_to_code_base, file)
 
 
-def fuse_file(path_to_code_base, path_to_file):
+def fuse_file(path_to_code_base, path_to_file, pylint_results, git_results):
     # initialize 'solution' dictionary and 'lines' list
     solution, lines = {}, []
     solution["path"] = path_to_file
 
-    # GIT ANALYSIS
-    git_results = AM.create_author_mappings_for_file(path_to_code_base, path_to_file)
-
-    # PYLINT ANALYSIS
-    pylint_results = PA.pylint_analyzer(path_to_file)
-
     # FUSION
     max_lines = git_results["size"] + 1
-    fusion = combine_results(git_results[path_to_file], pylint_results[path_to_file], max_lines)
+    fusion = combine_results(git_results, pylint_results, max_lines)
 
     # add result to 'lines' list
     lines.append(fusion)
@@ -64,7 +58,7 @@ def combine_results(git_results, pylint_results, max_lines):
 
         if (line_number in pylint_results):
             # There is an pylint error on this line
-            component["colour"] = pylint_results[line_number]["color"]
+            component["colour"] = pylint_results[line_number]["colour"]
             component["error"] = pylint_results[line_number]["category"]
         else:
             # There is no pylint error on this line

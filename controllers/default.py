@@ -8,6 +8,28 @@
 ## - download is for downloading files uploaded in the db (does streaming)
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
+
+import filehelper as FH
+import authormapper as AM
+import pylintanalzyer as PY
+import fusor as FR
+import file_struct as FS
+
+def final():
+    path_to_code_base = "/home/asumal/git/cs410/plumbum/plumbum/cli"
+    list_of_files = FH.find_python_files_in_project(path_to_code_base)
+    pylint_analysis = PY.get_pylint_analysis(list_of_files)
+    git_analysis = AM.get_git_analysis(path_to_code_base, list_of_files)
+
+    for python_file in list_of_files:
+        FR.fuse_file(path_to_code_base, python_file, pylint_analysis[python_file], git_analysis[python_file])
+
+
+
+
+
+
+
 import file_struct as FS
 
 def testing_structure():
