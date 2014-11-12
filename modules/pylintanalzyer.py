@@ -2,7 +2,7 @@ import subprocess
 
 WARNING = 'No config file found, using default configuration'
 IGNORE_LINE = '*'
-COLOR = {'C':'green', 'E':'orange', 'F':'purple', 'R':'read', 'W':'blue'}
+COLOR = {'C':'blue', 'E':'yellow', 'F':'red', 'R':'green', 'W':'purple'}
 
 def get_pylint_analysis(code_base):
     """ """
@@ -20,22 +20,31 @@ def pylint_analyzer(path_to_file):
 
     stderr_as_list = stderr.splitlines()
     if (len(stderr_as_list) == 1 and stderr_as_list[0] == WARNING):
-        solution = parse_pylint_output(stdout.splitlines())
+        solution = parse_pylint_output(stdout.splitlines(), path_to_file)
         #print "RETURNING: ", solution
-        return {path_to_file : solution}
+        return solution
     else:
         raise Exception(stderr)
 
-def parse_pylint_output(pylint_output):
+def parse_pylint_output(pylint_output, path_to_file):
     """ """
-    solution = {}
+    result, solution = {}, {}
+    bubble_colour = {'C': 0, 'E': 0, 'F': 0, 'R': 0, 'W': 0}
+
     if (pylint_output[0].startswith(IGNORE_LINE)):
         pylint_output = pylint_output[1:]
 
     for pylint_line in pylint_output:
         line_number, category = parse_pylint_line(pylint_line)
-        solution[line_number] = {'category':category, 'color':COLOR[category]}
-    return solution
+        bubble_colour[category] += 1
+        solution[line_number] = {'category':category, 'colour':COLOR[category]}
+
+    print bubble_colour
+    result["category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
+    result["colour"] = COLOR[result["category"]]
+    result[path_to_file] = solution
+
+    return result
 
 def parse_pylint_line(pylint_line):
     """ """

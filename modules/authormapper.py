@@ -43,5 +43,5 @@ if __name__ == '__main__':
         files = find_python_files_in_project(file_name)
         #print files
         git_results = create_author_mappings_for_file(file_path, file_name + "/application.py")
-        print git_results["size"]
+        print git_results
         #print get_git_analysis(file_path, files)
