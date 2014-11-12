@@ -12,7 +12,8 @@ def create_structure(path, pylint_analysis, git_analysis):
     structure.update({"name" : root})
 
     # http://stackoverflow.com/a/18435
-    files = [module for module in files if not (module.endswith(".json") or module.startswith("__init__"))]
+    files = [module for module in files if module.endswith(".py")]
+    files = [module for module in files if (not module.startswith("__init__"))]
 
     if (subdirs or files):
         children = []
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     import authormapper as AM
     import pylintanalzyer as PY
 
-    path_to_code_base = "/home/asumal/git/cs410/plumbum/plumbum"
+    path_to_code_base = "/home/asumal/git/cs410/pattern/pattern"
 
     list_of_files = FH.find_python_files_in_project(path_to_code_base)
     pylint_analysis = PY.get_pylint_analysis(list_of_files)
