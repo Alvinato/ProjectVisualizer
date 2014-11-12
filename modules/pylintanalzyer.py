@@ -72,4 +72,4 @@ if __name__ == '__main__':
         files = find_python_files_in_project(file_path + '/plumbum/cli')
         #solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
         #print solution
-        print get_pylint_analysis(files)
+        print get_pylint_analysis("files")
