@@ -39,8 +39,8 @@ def parse_pylint_output(pylint_output):
         bubble_colour[category] += 1
         solution[line_number] = {'category':category, 'colour':COLOR[category]}
 
-    solution["bubble_category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
-    solution["bubble_colour"] = COLOR[solution["bubble_category"]]
+    solution["category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
+    solution["colour"] = COLOR[solution["category"]]
 
     return solution
 

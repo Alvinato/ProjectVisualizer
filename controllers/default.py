@@ -13,7 +13,7 @@ import filehelper as FH
 import authormapper as AM
 import pylintanalzyer as PY
 import fusor as FR
-import file_struct as FS
+import filestructure as FS
 
 def final():
     path_to_code_base = "/home/asumal/git/cs410/plumbum/plumbum/cli"
@@ -24,7 +24,9 @@ def final():
     for python_file in list_of_files:
         FR.fuse_file(path_to_code_base, python_file, pylint_analysis[python_file], git_analysis[python_file])
 
+    solution = FS.create_structure(path_to_code_base, pylint_analysis, git_analysis)
 
+    return dict(solution = solution)
 
 
 
