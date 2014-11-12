@@ -52,17 +52,10 @@
 <script type="text/javascript" src="Colour.js"></script>
 <script type="text/javascript">
 
-    // first need to know how to create multidimensional array...
-    // grab name and children...
-
-// this is going to be the string scanner stuff...
-
-
-
     var w = 1280,
             h = 800,
-            r = 720,								// the radius...
-            x = d3.scale.linear().range([0, r]),   // so all the circles are actually scaling....
+            r = 720,
+            x = d3.scale.linear().range([0, r]),
             y = d3.scale.linear().range([0, r]),
             node,
             root,
@@ -70,7 +63,6 @@
             projectNameu = true;
 
 
-    // this has to do with sorting the circles into a pack...
     var pack = d3.layout.pack()
             .size([r, r])
             .value(function(d) {
@@ -93,42 +85,35 @@
     var FileCounter = 0;
     var ColourCounter = 0;
 
+    var globalData;
+    var directoryHash = {};  // this is now a hashmap...  // now for each directory we are going to have another set of directories...
+    var indexforHidden = 0;
+    var hiddenChildren = [];
+    var thiddenChildren = [];
+    var firstLayerText = [];
+    var jsonobjectstosend = {};
 
+    var Json = new Object;
 
-    // the json stuff...
     d3.json("testing2.json", function(data){
 
-
+        globalData = data;
         sifter(data);
-     //   console.log("after the sifter");
-
-       /* for (var key in data){
-
-            if (key.substring(key.length-2, key.length) == "py"){
-                console.log("there are this many python files")
-            };
-        }*/
-
-    //    for (var o = 0; o < pythonFiles.length; o++){
-  //          console.log(pythonFiles[o]);
-//        }
-
-
+        hashmap(data);
 
         node = root = data;
-
         var nodes = pack.nodes(root);
-
-
-        // there is no magnitude of color in this...
-        var colorScale = d3.scale.linear()
-                .domain([red, blue])
-                .range(["red", "blue"]); // will add in black later dont know if this will work yet...
 
         var collecting = false;
         vis.selectAll("circle")
                 .data(nodes)
                 .enter().append("svg:circle")
+                .attr("id", function(d){
+                    if(d.name.substring(d.name.length-3, d.name.length) == ".py"){
+                        return d.name.substring(0,d.name.length-3);
+                    }
+                    return d.name;
+                })
                 .style("fill", function(d){
                     var blue = 0;
                     var green = 0;
@@ -196,16 +181,15 @@
                             return newColor;
                         }
                         }
-                    //console.log("returning pink");
                     return "orange";
 
                 })
                 .attr("cx", function(d) { return d.x; })// where is it getting its x data point??
                 .attr("cy", function(d) { return d.y; }) // the d should be referencing the data objects...
                 .attr("r", function(d) { return d.r; })
-               // .style("visibility", function (d)
-                //{
-                 /*   if(d == root){
+                .style("visibility", function (d)
+                {
+                    if(d == root){
                        return "visible";
                     }
                     else{
@@ -215,28 +199,34 @@
                         }
                         return "visible";
                     }
-                   // return d.parent.parent? "hidden": "visible";
-*/
+                    return d.parent.parent? "hidden": "visible";
 
-                //})
+
+                })
                 .on("click", function(d) {
                     console.log("zoom zoom zoom");
                     return zoom(node == d ? root : d); })
 
 
-// this w   ill disable all onclick events... now we want do disable certain onclick events...
- // need to learn how to make a class and add certain elements to it...
-    //d3.selectAll("circle")
-        //    .on('click', null);
-
+        // need to figure out how to show the text as well...
         vis.selectAll("text")
                 .data(nodes)
                 .enter().append("svg:text")
+                .attr("id", function(d){
+                    var ourID = d.name;
+                    var t = "t";
+                    if(ourID.substring(ourID.length-3, ourID.length) == ".py"){
+                        ourID = ourID.substring(0,ourID.length-3);
+                    }
+
+                    var returning = t.concat(ourID);
+                    //console.log("returning   " + returning);
+                    return returning;
+                })
                 .attr("x", function(d) {                    // all this code here will make the project name go in the
-                                                                // top corner and the rest of the code in the little bubbles
+                                                           // top corner and the rest of the code in the little bubbles
                     if (projectNamez == true){
                         projectNamez = false;
-
                         return 0;
                     }else{
 
@@ -244,13 +234,10 @@
                     }
                      })
                 .attr("y", function(d) {
-
                     if (projectNameu == true){
-
                         projectNameu = false;
                         return 0;
                     }else {
-
                         return d.y;
                     }
                     })
@@ -259,51 +246,65 @@
                 .style("visibility", function (d)
                 {
 
-                    // this here is meant to try and hide certain aspects...
-                  //  if(d == root){
-                   //     return "visible";
-                  //  }
-                  //  else{
-                    //    if(d.parent.parent){
-                      //      return "hidden";
-                       // }
-                       // return "visible";
-                    //}
-                    // return d.parent.parent? "hidden": "visible";
 
+                    if(d == root){
+                        return "visible";
+                    }
+                    else{
+                        if(d.parent.parent){
+                            return "hidden";
+                        }
+                        return "visible";
+                    }
+                     return d.parent.parent? "hidden": "visible";
 
                 })
                 .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
-                .on("click", function(){
-                     // when the words are pressed we display something else here...
-                    //console.log("the words have been pressed");
-                    //return zoom(node == d ? root : d)
-
-                })
                 .text(function(d) { return d.name; });
-
-
-
-
-        /*d3.selectAll("circle").on("contextmenu", function(d, i) {
-
-        console.log("this was pressed");
-
-
-        }),*/
-
-
-
-        /*d3.select(window).on("click", function() {
-            console.log("the zoom was pressed");
-            zoom(root);
-        });*/
     });
 
-        // todooo need to take into account filesizes...
-    // we need zoom to go in close into the bubble, and once its there we need the bubble to show the code...
+
+//   TODO !!!! WE ARE GOING TO NEED TO HIDE THE CORRECT TEXT AS WELL THROUGH THE ZOOM FUNCTION...
+// 1.) AS SOON AS WE ZOOM IN WE SHOULD HIDE THE DIRECTORY TEXT AND SHOW THE LOWER LAYER TEXT
     function zoom(d) {
 
+        var ddname;
+        var textname;
+            if (d.name.substring(d.name.length - 3, d.name.length) == ".py") {
+                ddname = d.name.substring(0, d.name.length - 3);
+            } else {
+                ddname = d.name;
+            }
+
+        textname = "t".concat(ddname);
+
+        var textElement = document.getElementById(textname);
+        var element = document.getElementById(ddname);
+
+        // lets add a t in front of all text elements...
+
+        if(textElement.style.visibility == "visible"){
+
+        }
+        // if anything that is invisible is clicked...
+        if(element.style.visibility != "visible"){
+            var name = d.name;
+            for (var g in directoryHash){
+                var key = g;
+                var contents = directoryHash[g]; // this is going to be the contents of each one... thus we are finding i ---> the key
+                for (var h = 0; h < contents.length; h++){
+                    if (name == contents[h]){
+                        sifter2(globalData, key);
+                        zoom(Json);
+                        return;
+                    }
+                }
+            }
+            return;
+        }
+
+        // unhides the one that was picked...
+        unhider(d);
 
         var k = r / d.r / 2;
         x.domain([d.x - d.r, d.x + d.r]);
@@ -318,21 +319,6 @@
                 .attr("cx", function(d) { return x(d.x); })
                 .attr("cy", function(d) { return y(d.y); })
                 .attr("r", function(d) { return k * d.r; })
-        /*.style("visibility", function (d)
-        {
-            if(d == root){
-                return "visible";
-            }
-            else{
-                if(d.parent.parent){
-                    return "hidden";
-                }
-                return "visible";
-            }
-            // return d.parent.parent? "hidden": "visible";
-
-
-        });*/
 
         t.selectAll("text")// we have to do this again when rerendering all the text...
                 .attr("x", function(d) {
@@ -363,13 +349,9 @@
     // this finds all the python files and colors and puts them in a list...
     function sifter(d){
         //console.log(d);
-
         for (var i in d) {
-
             // console.log(i);
             //console.log(d[i]);
-            if (i == "name") {
-            }
 
             if (typeof d[i] == "string") {
                 if (d[i].substring(d[i].length, d[i].length - 3) == ".py") {
@@ -377,25 +359,20 @@
                     pythonFiles.push(d[i]);
                 }
             }
-
-
             if (i.substring(0,4) == "line"){
-
                 for(var u in d[i]){
                     //console.log([u]);
                     // console.log(d[i][u]);
-
                     if (u == "color") {
                         currentlypy = false;
                     }
-
                     if (d[i][u] == "blue") {
                         pythonFiles.push("blue");
                         // console.log("blue is found");
                     }
                     if (d[i][u] == "green") {
                         pythonFiles.push("green");
-                        //console.log("black is found");
+                        //console.log("green is found");
                     }
                     if (d[i][u] == "red") {
                         pythonFiles.push("red");
@@ -403,9 +380,7 @@
                     }
                 }
             }
-
             if (i == "children") {
-
                 for (var t in d[i]) {
                     sifter(d[i][t]);
                 }
@@ -413,40 +388,124 @@
         }
     }
 
-
-
-
-
-
-
-    function colorcoder(d){
-
-        for (var g = 0; g < pythonFiles.length; g++) {
-            var pythonFile = pythonFiles[g];
-
-            var a = g + 1;
-            if (d.name == pythonFile) {
-                console.log("this is what your testing   " + pythonFiles[a]);
-                // basically if it is a python file keep running
-                /*while (pythonFiles[a].substring(pythonFiles[a].length - 2, pythonFiles[a].length) != "py") {
-                 console.log("inside the while loop is working right now");
-                 console.log("this should be color:  " + pythonFiles[a]);
-                 if (pythonFiles == "red") {
-                 red += 20;
-                 }
-                 if (pythonFiles == "blue") {
-                 blue += 20;
-                 }
-                 a++;
-
-                 }*/
-
-                return "green";
-
+    // input global data and the directory...
+    function sifter2(d, directory){
+        for (var i in d) {
+            if (d.name == directory){
+                Json = d;
             }
-            return "red"
+            if(i == "children"){
+                for (var t in d[i]){
+                    sifter2(d[i][t], directory);
+                }
+            }
         }
     }
+
+    // this does all the hiding and unhiding...  -- > we have to work on hiding the letters of the directories...
+function unhider(d){
+
+    console.log(d);
+
+    for (var i in directoryHash)
+    {
+
+        //TODO!!!  we cant just have a project name case... we need to check every directory and it needs its own set of things that it can show...
+
+        if (d.name == globalData.name) {
+
+            while (hiddenChildren.length != 0) {
+                // have to do the exact samething for the text...
+                var element = document.getElementById(hiddenChildren.pop());
+                element.style.visibility = "hidden";
+                var telement = document.getElementById(thiddenChildren.pop());
+                telement.style.visibility = "hidden";
+
+
+            }
+
+            for (var i in d) {
+                if(i == "children"){
+                    for (var t in d[i]){
+                        console.log(d[i][t].name);
+                        var name = d[i][t].name;
+                        var textname = "t".concat(name);
+
+                        if(textname.substring(textname.length-3, textname.length) == ".py"){
+
+                            textname = textname.substring(0,textname.length-3);
+                        }else{
+                            textname = textname;
+                        }
+                        var celement = document.getElementById(textname);
+                        celement.style.visibility = "visible";
+                    }
+                }
+            }
+            return;
+        }
+
+        if (d.name == i){    // set visible only the things within that scope and set everything else to be invisible...
+            var innards = directoryHash[i];
+            for(var v = 0; v < innards.length; v++){
+                 var ddname;
+                 var textddname;
+                var firstTxt = "t".concat(d.name);
+                if(innards[v].substring(innards[v].length-3, innards[v].length) == ".py"){
+                    ddname = innards[v].substring(0,innards[v].length-3);
+                }else{
+                    console.log(innards[v]);
+                    ddname = innards[v];   // this is the line we need to get back to normal
+
+                    }
+
+
+                textddname = "t".concat(ddname);
+                hiddenChildren.push(ddname);
+                thiddenChildren.push(textddname);
+                firstLayerText.push(firstTxt);
+
+                var element = document.getElementById(ddname);
+                    element.style.visibility = "visible";
+
+                var telement = document.getElementById(textddname);
+                    telement.style.visibility = "visible";
+
+                var currentdirectoryElement = document.getElementById(firstTxt);
+                currentdirectoryElement.style.visibility = "hidden";
+            }
+        }
+
+    }
+
+}
+
+    // this creates a hashmap of every directory with its contents.
+   //TODO MAYBE SHOULD DO THIS WITH THE COLORS IN THE PYTHON FILES??
+function hashmap(d){
+
+    var key;
+    var children = [];
+
+    for (var i in d) {
+        if(i == "name"){
+            if (d[i].substring(d[i].length-3, d[i].length) != ".py"){
+                key = d[i];
+            }
+        }
+        if (i == "children"){
+            for (var t in d[i]) {
+                children.push(d[i][t].name);
+                hashmap(d[i][t]);
+            }
+        directoryHash[key] = children;
+        }
+
+    }
+
+}
+
+
 
 
 </script>
