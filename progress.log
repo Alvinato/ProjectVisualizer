@@ -1421,3 +1421,8 @@
 [2014-11-12 11:06:13] EDIT jaat/modules/test_authormapper.py: 0
 [2014-11-12 11:06:27] EDIT jaat/modules/test_authormapper.py: 0
 [2014-11-12 11:06:42] EDIT jaat/modules/test_authormapper.py: -3
+[2014-11-12 11:23:37] CREATE test_config.py: 0
+[2014-11-12 11:27:28] EDIT jaat/modules/test_config.py: 15
+[2014-11-12 11:27:40] EDIT jaat/modules/test_config.py: 0
+[2014-11-12 11:27:44] EDIT jaat/modules/test_config.py: 0
+[2014-11-12 11:29:37] EDIT jaat/modules/test_config.py: 0
