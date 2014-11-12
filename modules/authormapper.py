@@ -5,10 +5,10 @@ import os
 
 def get_git_analysis(path, files):
     """ """
-    solution = []
+    solution = {}
     for python_file in files:
         git_results = create_author_mappings_for_file(path, python_file)
-        solution.append(git_results)
+        solution.update(git_results)
     return solution
 
 def create_author_mappings_for_file(filepath, filename):
@@ -20,7 +20,7 @@ def create_author_mappings_for_file(filepath, filename):
     file_dict = convert_file_to_json(filename)
     for key in file_dict[filename].keys():
         file_dict[filename][int(key)]['author'] = authors[int(key)]
-    file_dict["size"] = len(file_dict[filename])
+    file_dict[filename]["size"] = len(file_dict[filename])
     return file_dict
 
 if __name__ == '__main__':
@@ -42,6 +42,6 @@ if __name__ == '__main__':
         file_name = file_path + '/plumbum/cli'
         files = find_python_files_in_project(file_name)
         #print files
-        git_results = create_author_mappings_for_file(file_path, file_name + "/application.py")
-        print git_results
-        #print get_git_analysis(file_path, files)
+        #git_results = create_author_mappings_for_file(file_path, file_name + "/application.py")
+        #print git_results
+        print get_git_analysis(file_path, files)
