@@ -1,17 +1,19 @@
-import filehelper as FH
+import modules.filehelper as FH
 
-import authormapper as AM
-import pylintanalzyer as PY
+import modules.authormapper as AM
+import modules.pylintanalzyer as PY
 
-import fusor as FR
-import filestructure as FS
+import modules.fusor as FR
+import modules.filestructure as FS
 
 PLUMBUM = "plumbum"
 PATTERN = "pattern"
 
-def final():
-    path_to_plumbum = "/home/asumal/git/cs410/plumbum/plumbum"
-    path_to_pattern = "/home/asumal/git/cs410/pattern/pattern"
+def final(path_to_plubum=None, path_to_pattern=None):
+
+    if path_to_pattern == None or path_to_pattern == None:
+        path_to_plumbum = "/home/asumal/git/cs410/plumbum/plumbum"
+        path_to_pattern = "/home/asumal/git/cs410/pattern/pattern"
 
     list_of_files = FH.find_python_files_in_project(path_to_pattern)
     pylint_analysis = PY.get_pylint_analysis(list_of_files)
