@@ -134,7 +134,7 @@ var ColourCounter = 0;
 
 
 var globalData;
-var directoryHash = {};  // this is now a hashmap...  // now for each directory we are going to have another set of directories...
+var directoryHash = {};
 var indexforHidden = 0;
 var hiddenChildren = [];
 var thiddenChildren = [];
@@ -293,6 +293,8 @@ function zoom(d) {
     textname = "t".concat(ddname);
 
 // ---->> getting the directory of the thing zoomed... // we should make a seperate function for this....
+
+
     var directoryofzoomed = directoryGrabber(d);
       for (var a = 0; a < redundantChecker.length; a++){
           if (redundantChecker[a] == d.name){

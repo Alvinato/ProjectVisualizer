@@ -57,6 +57,24 @@
                         "colour": "green",
                         "name": "thingtwo.py",
                         "size": 200
+                        },
+                        {
+                            "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer",
+                            "name": "newer",
+                            "children": [
+                                {
+                                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer/thingthree.py",
+                                    "colour": "green",
+                                    "name": "thingthree.py",
+                                    "size": 20
+                                },
+                                {
+                                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer/thingfour.py",
+                                    "colour": "green",
+                                    "name": "thingfour.py",
+                                    "size": 20
+                                }
+                            ]
                         }
                     ]
                 }
