@@ -77,5 +77,5 @@ if __name__ == "__main__":
 
     path_to_code_base = info['arjun']['plumbum']
     path_to_file = path_to_code_base + "/docs/conf.py"
-    solution = fuse_file(path_to_code_base, path_to_file )
+    solution = fuse_file(path_to_code_base, path_to_file,)
     print solution
