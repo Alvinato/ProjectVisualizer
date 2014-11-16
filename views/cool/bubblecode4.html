@@ -97,7 +97,7 @@
 <script type="text/javascript">
 // duplicates only work with them in different directories and having only one of them...!!!
 // no numbers in the names either...
-//  TODO!!!  work on the color now...
+// TODO!! --- > WE NEED TO WORK ON TRYING TO GET THE SCROLLERS INSIDE THOSE CIRCLES...
 var w = 1280,
         h = 800,
         r = 720,
@@ -153,9 +153,6 @@ d3.json("sample_plumbum_output.json", function(data){
     sifter(data);
     sifter3(data);
 
-    for (var q = 0, keys = Object.keys(directoryColors), qq = keys.length; q < qq; q++) {
-        console.log('key : ' + keys[q] + ' val : ' + directoryColors[keys[q]]);
-    }
     hashmap(data);
     duplicateRenamer();
     node = root = data;
@@ -170,7 +167,6 @@ d3.json("sample_plumbum_output.json", function(data){
             .enter()
             .append("svg:circle")
             .attr("id", function(d){
-
                 var ddname = d.name;
                 if(d.name.substring(d.name.length-3, d.name.length) == ".py"){
                     ddname = d.name.substring(0,d.name.length-3);
@@ -189,14 +185,12 @@ d3.json("sample_plumbum_output.json", function(data){
                     return newID;
                 }
             })
-
-        // TODO!!! the colors no longer work with the new json file format!!  // working on now...
             .style("fill", function(d){
                 var result = colorMixer(d);
                 return result;
             })
-            .attr("cx", function(d) { return d.x; })// where is it getting its x data point??
-            .attr("cy", function(d) { return d.y; }) // the d should be referencing the data objects...
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; })
             .attr("r", function(d) { return d.r; })
             .style("visibility", function (d)
             {
@@ -211,7 +205,6 @@ d3.json("sample_plumbum_output.json", function(data){
                     return "visible";
                 }
                 return d.parent.parent? "hidden": "visible";
-
             })
             .on("click", function(d) {
                 // this gives the data object...
@@ -283,14 +276,13 @@ d3.json("sample_plumbum_output.json", function(data){
             .text(function(d) { return d.name; });
 });
 
+//----> this is the section where we are going to insert the scroller inside the bubble here...
 
 //   TODO !!!! WE ARE GOING TO NEED TO HIDE THE CORRECT TEXT AS WELL THROUGH THE ZOOM FUNCTION...
 // 1.) AS SOON AS WE ZOOM IN WE SHOULD HIDE THE DIRECTORY TEXT AND SHOW THE LOWER LAYER TEXT
 function zoom(d) {
 
     // --> assigning element names...
-    console.log(d);
-    console.log(d.name);
     var ddname = d.name;
     var textname;
     if (d.name.substring(d.name.length - 3, d.name.length) == ".py") {
@@ -302,8 +294,6 @@ function zoom(d) {
 
 // ---->> getting the directory of the thing zoomed... // we should make a seperate function for this....
     var directoryofzoomed = directoryGrabber(d);
-
-
       for (var a = 0; a < redundantChecker.length; a++){
           if (redundantChecker[a] == d.name){
               for (var o in directoryHash){
@@ -340,7 +330,7 @@ function zoom(d) {
     // ---> handles all hidden bubbles that are pressed...
     // not referring to the local1.py...
     if(element.style.visibility == "hidden"){
-        console.log("this should not be running");
+
         sifter2(globalData, directoryofzoomed);
         zoom(Json);
         return;
@@ -404,8 +394,6 @@ function sifter2(d, directory){
 
 
 function unhider(d){
-
-
     //console.log("this is inside the unhider right now" + d.name);
     for (var i in directoryHash)
     {
@@ -475,8 +463,6 @@ function unhider(d){
 
 // this creates a hashmap of every directory with its contents.
 //TODO MAYBE SHOULD DO THIS WITH THE COLORS IN THE PYTHON FILES??
-
-
 // trying to fix problem with the same name... --- > try and make it so that anything that has the same name has a one behind it...
 function hashmap(d){  // we need the hashmap to have the same id...
     var key;
@@ -497,31 +483,20 @@ function hashmap(d){  // we need the hashmap to have the same id...
     }
 }
 
-
-// TODO!! ---> DONT KNOW IF THE CODE WILL WORK WITH MORE THEN ONE SAMENAME
 var redundantChecker = [];
-// this adds a number to any names that are duplicates so that it can be IDed properly...
 function duplicateRenamer(){
 for (var i = 0, keys = Object.keys(directoryHash), ii = keys.length; i < ii; i++) {
-
-    var val = directoryHash[keys[i]]; // this is going to be the contents of each key
-
+    var val = directoryHash[keys[i]];
     for (var f = 0, keys = Object.keys(directoryHash), ff = keys.length; f < ff; f++) {
         var fval = directoryHash[keys[f]];
        // console.log('key : ' + keys[i] + ' val : ' + directoryHash[keys[i]]);  // we need to go through each hash
        // console.log('key2 : ' + keys[f] + ' val2 : ' + directoryHash[keys[f]]);  // and see if they match through the looop
-
         for (var u = 0; u < val.length; u++) {
             var counter = 1;
             for (var k = 0; k < fval.length; k++) {
-               // console.log("comparing these two values here:  " + val[u] +
-               //         "  and this one:   " + fval[k]);
-
                 if (f != i && val[u] == fval[k]) {
-                   // console.log(" WE HAVE FOUND A DUPLICATE!!!" + val[u] + " AND  " + fval[k]);
                     var theSubstring = fval[k];
                          redundantChecker.push(val[u]); // put everything that is redundant in here...
-                    // need to check if there is py at the end.. if there is then we need to put the 1before the .py...
                     if (theSubstring.substring(theSubstring.length - 3, theSubstring.length) == ".py") {
                         theSubstring = theSubstring.substring(0, theSubstring.length - 3); // ths now does not have .py
                         theSubstring = theSubstring.concat(counter.toString());
@@ -529,11 +504,8 @@ for (var i = 0, keys = Object.keys(directoryHash), ii = keys.length; i < ii; i++
                     } else {
                         theSubstring = val[k].concat(counter.toString());
                     }
-                 //console.log(" this is what is going to change in the hashtable:  " + theSubstring);
-                   // console.log(fval);
                     fval[k] = theSubstring;
                     redundantChecker.push(fval[k]);
-                   // console.log(fval[k]);
                     counter++;
                 }
 
@@ -545,8 +517,6 @@ for (var i = 0, keys = Object.keys(directoryHash), ii = keys.length; i < ii; i++
 }
 
 
-// 1.) first we need to just return the colors of each directory...
-//2.) we need to make a list of directories and all the colors that follow them...
 function colorMixer(d){
 
     var green = 0;
@@ -559,13 +529,12 @@ function colorMixer(d){
    {
        return d.colour;
     }else{
-       // we need to go through directoryColor here...
        for (var u in directoryColors){
            if (d.name == u){
-               console.log("this is working");
-               console.log(directoryColors[u][0]);
+
+
                for (var h = 0; h < directoryColors[u].length; h++){   // not going through the contents right
-                   console.log("the loop is working ");
+
                    if (directoryColors[u][h] == "green") {
                        green++;
                    }
@@ -573,15 +542,12 @@ function colorMixer(d){
                        red++;
                    }
                    if (directoryColors[u][h] == "blue") {
-                       console.log("blue is being incremented");
+
                        blue++;
                    }
                }
                }
            }
-       console.log("green: " + green);
-       console.log("red: " + red);
-       console.log("blue: " + blue);
        var total = (green + blue + red);
        var redPercentage = red/total;
        var greenPercentage = green/ total;
@@ -596,12 +562,42 @@ function colorMixer(d){
        return "orange";
 }
 
-function sifter(d){
-    //console.log(d);
-    for (var i in d) {
-        // console.log(i);
-        //console.log(d[i]);
 
+
+var directoryColors = {};
+function sifter3(d){
+    var key;
+    var children = [];
+    for (var i in d) {
+        if(i == "name"){
+            if (d[i].substring(d[i].length-3, d[i].length) != ".py"){
+                key = d[i];
+            }
+        }
+        if (i == "children"){
+            for (var t in d[i]) {
+                children.push(d[i][t].colour);
+                //children.push(d[i][t].name);
+                sifter3(d[i][t]);
+            }
+            directoryColors[key] = children;
+        }
+    }
+}
+
+
+// outputs the directory given the path...
+function directoryGrabber(d){
+    var num = d.path.search(d.name);
+    var vari = d.path.substring(0, num);
+    var varia  = vari.split("/");
+    var directoryofzoomed = varia[varia.length-2];
+    return directoryofzoomed;
+}
+//--> no longer need this function here
+function sifter(d){
+
+    for (var i in d) {
         if (typeof d[i] == "string") {
             if (d[i].substring(d[i].length, d[i].length - 3) == ".py") {
                 currentlypy = true;
@@ -637,42 +633,6 @@ function sifter(d){
     }
 }
 
-
-var directoryColors = {};
-// remember we are making the list for colors...
-// ok the colors work now...
-function sifter3(d){
-    var key;
-    var children = [];
-    for (var i in d) {
-        if(i == "name"){
-            if (d[i].substring(d[i].length-3, d[i].length) != ".py"){
-                key = d[i];
-            }
-        }
-        if (i == "children"){
-
-            // we need to collect all the colors from the children here...
-            for (var t in d[i]) {
-                children.push(d[i][t].colour);
-                //children.push(d[i][t].name);
-                sifter3(d[i][t]);
-            }
-            directoryColors[key] = children;
-        }
-    }
-}
-
-
-// outputs the directory given the path...
-function directoryGrabber(d){
-    var num = d.path.search(d.name);
-    var vari = d.path.substring(0, num);
-    var varia  = vari.split("/");
-    var directoryofzoomed = varia[varia.length-2];
-    return directoryofzoomed;
-
-}
 </script>
 
 

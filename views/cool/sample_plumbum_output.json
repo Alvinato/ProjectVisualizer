@@ -8,7 +8,7 @@
             "children": [
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/cli/application.py",
-                    "colour": "blue",
+                    "colour": "green",
                     "name": "application.py",
                     "size": 579
                 },
@@ -38,10 +38,29 @@
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/atomic.py",
-                    "colour": "blue",
+                    "colour": "green",
                     "name": "atomic.py",
                     "size": 308
+                },{
+
+                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new",
+                    "name": "new",
+                    "children": [
+                        {
+                        "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/thingone.py",
+                        "colour": "green",
+                        "name": "thingone.py",
+                        "size": 500
+                        },
+                        {
+                        "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/thingtwo.py",
+                        "colour": "green",
+                        "name": "thingtwo.py",
+                        "size": 200
+                        }
+                    ]
                 }
+
             ]
         },
         {
@@ -62,7 +81,7 @@
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/path/remote.py",
-                    "colour": "purple",
+                    "colour": "green",
                     "name": "remote.py",
                     "size": 261
                 },
@@ -98,19 +117,19 @@
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/session.py",
-                    "colour": "blue",
+                    "colour": "red",
                     "name": "session.py",
                     "size": 225
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/remote.py",
-                    "colour": "blue",
+                    "colour": "red",
                     "name": "remote.py",
                     "size": 363
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/paramiko_machine.py",
-                    "colour": "blue",
+                    "colour": "red",
                     "name": "paramiko_machine.py",
                     "size": 314
                 }
@@ -122,13 +141,13 @@
             "children": [
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/processes.py",
-                    "colour": "blue",
+                    "colour": "red",
                     "name": "processes.py",
                     "size": 211
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/base.py",
-                    "colour": "blue",
+                    "colour": "red",
                     "name": "base.py",
                     "size": 434
                 },
@@ -140,7 +159,7 @@
                 },
                 {
                     "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/daemons.py",
-                    "colour": "blue",
+                    "colour": "green",
                     "name": "daemons.py",
                     "size": 99
                 }
@@ -148,7 +167,7 @@
         },
         {
             "path": "/home/asumal/git/cs410/plumbum/plumbum/version.py",
-            "colour": "blue",
+            "colour": "red",
             "name": "version.py",
             "size": 3
         },
