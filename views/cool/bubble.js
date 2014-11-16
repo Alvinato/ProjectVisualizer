@@ -17,7 +17,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json("area.json", function(error, root) {
+d3.json("plumbum.json", function(error, root) {
   if (error) return console.error(error);
 
   var focus = root,
@@ -29,7 +29,11 @@ d3.json("area.json", function(error, root) {
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+  //Making change here.
       .style("fill-opacity", "1")
+        .style("visibility", function (d)
+               { if(d===root) return "visible";
+                else return d.parent === root ? "visible": "hidden";})
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
     
   var text = svg.selectAll("text")
@@ -44,7 +48,8 @@ d3.json("area.json", function(error, root) {
 
   d3.select("body")
       .style("background", color(-1))
-      .on("click", function() { zoom(root); });
+      .on("click", function() 
+          { zoom( focus.parent ? focus.parent : root); });
 
   zoomTo([root.x, root.y, root.r * 2 + margin]);
 
@@ -58,12 +63,19 @@ d3.json("area.json", function(error, root) {
           return function(t) { zoomTo(i(t)); };
         });
 
-        
-    //transition.selectAll("circle")
-      //  .style("visibility", function(d) {return d.parent === "root" ? "visible": "hidden"});
+      transition.selectAll("circle")
+        .filter(function(d) {return d.parent === focus 
+                    || this.style.visibility === "visible" 
+                    || d === focus; })
+        .each("start", function(d) { if (d.parent === focus || d === focus ) 
+                    this.style.visibility = "visible";})
+        .each("end", function(d) { 
+            if (d.parent !== focus && d !== focus) 
+                    this.style.visibility = "hidden";});
+      
       
     transition.selectAll("text")
-      .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+      .filter(function(d) { return d === focus || d.parent === focus || this.style.display === "inline"; })
         .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
         .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
         .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
