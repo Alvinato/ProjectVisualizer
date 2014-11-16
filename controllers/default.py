@@ -21,6 +21,6 @@ def final():
         result = FR.fuse_file(path_to_pattern, python_file, pylint_analysis[python_file], git_analysis[python_file])
         FR.save_file(result, python_file, PATTERN)
 
-    solution = FS.create_structure(path_to_plumbum, PATTERN, pylint_analysis, git_analysis, PATTERN)
+    solution = FS.create_structure(path_to_pattern, PATTERN, pylint_analysis, git_analysis, PATTERN)
 
     return dict(solution = solution)
