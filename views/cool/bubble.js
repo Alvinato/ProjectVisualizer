@@ -28,12 +28,13 @@ d3.json("plumbum.json", function(error, root) {
       .data(nodes)
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+    //Chnage colors here ? ? ? ?     ??? ? ?? ? ?? ? ? ? ? ?
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-  //Making change here.
       .style("fill-opacity", "1")
-        .style("visibility", function (d)
+      .style("visibility", function (d)
                { if(d===root) return "visible";
                 else return d.parent === root ? "visible": "hidden";})
+      .append
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
     
   var text = svg.selectAll("text")
@@ -48,7 +49,7 @@ d3.json("plumbum.json", function(error, root) {
 
   d3.select("body")
       .style("background", color(-1))
-      .on("click", function() 
+      .on("click", function() //TODO: change here for scroll thing
           { zoom( focus.parent ? focus.parent : root); });
 
   zoomTo([root.x, root.y, root.r * 2 + margin]);
@@ -63,6 +64,8 @@ d3.json("plumbum.json", function(error, root) {
           return function(t) { zoomTo(i(t)); };
         });
 
+      //TODO: Maybe show neighbouring children
+      //Zooming in and out of a circle.
       transition.selectAll("circle")
         .filter(function(d) {return d.parent === focus 
                     || this.style.visibility === "visible" 
@@ -86,6 +89,64 @@ d3.json("plumbum.json", function(error, root) {
     node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
   }
+    
+    /* COLORS ATTEMPT
+    function colorize (d){
+        var green = 0;
+        var red = 0;
+        var blue = 0;
+            for( var a in d.children){
+                console.log("hello");
+                if(a.chilren){
+                green += countg(a);
+                red += countr(a);
+                blue += countb(a);
+                }
+            }
+        var total = (green + blue + red);
+       var redPercentage = red/total;
+       var greenPercentage = green/ total;
+       var bluePercentage = blue/total;
+       var redAmount = 255 * redPercentage;
+       var greenAmount = 255 * greenPercentage;
+       var blueAmount = 255 * bluePercentage;
+       var tColor = new RGBColour(redAmount, greenAmount, blueAmount);
+       var newColor = tColor.getCSSHexadecimalRGB();
+       return newColor;
+    }
+    
+    function countg(d){
+        var a = 0;
+        for (var b in d.children){
+            if(b.children)
+                a += countg(b);
+            else{ if(b.colour == "green")
+                return a++;}
+            return a;
+        }
+    }
+    function countb(d){
+        var a = 0;
+        for (var b in d.children){
+            if(b.children)
+                a += countg(b);
+            if(b.colour == "blue")
+                return a++;
+            return a;
+        }
+    }
+    function countr(d){
+        var a = 0;
+        for (var b in d.children){
+            if(b.children)
+                a += countg(b);
+            if(b.colour == "red")
+                return a++;
+            return a;
+        }
+    }
+    */
+    
 });
 
 d3.select(self.frameElement).style("height", diameter + "px");
