@@ -29,8 +29,8 @@ d3.json("plumbum.json", function(error, root) {
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node" : "node node--root"; })
     //Chnage colors here ? ? ? ?     ??? ? ?? ? ?? ? ? ? ? ?
-      .style("fill", function(d) { return //colorize(d);
-       d.children ? color(d.depth) : null; 
+      .style("fill", function(d) { return colorize(d);
+//      d.children ? color(d.depth) : null; 
                                  })
       .style("fill-opacity", "1")
       .style("visibility", function (d)
@@ -104,62 +104,99 @@ d3.json("plumbum.json", function(error, root) {
     circle.attr("r", function(d) { return d.r * k; });
   }
     
-    /*
+    
     function colorize (d){
+        if(!d.children)
+            return d.colour;
+        
+        var g = d.children;
+        
         var green = 0;
         var red = 0;
         var blue = 0;
-            for( var a in d.children){
-                console.log(a.colour);
-                if(a.chilren){
-                green += countg(a);
-                red += countr(a);
-                blue += countb(a);
-                }
-            }
-        var total = (green + blue + red);
+        console.log(g.length);
+        for(i = 0; i < g.length; i++){
+            var a = g[i];
+                green += count(a, "green");
+                red += count(a, "red");
+                blue += count(a, "blue");
+            console.log(blue);
+        }
+        
+       var total = (green + blue + red);
        var redPercentage = red/total;
        var greenPercentage = green/ total;
        var bluePercentage = blue/total;
-       var redAmount = 255 * redPercentage;
-       var greenAmount = 255 * greenPercentage;
-       var blueAmount = 255 * bluePercentage;
-       var tColor = new RGBColour(redAmount, greenAmount, blueAmount);
-       var newColor = tColor.getCSSHexadecimalRGB();
-       return newColor;
+       var redAmount = (255 * redPercentage);
+       var greenAmount = (255 * greenPercentage);
+       var blueAmount = (255 * bluePercentage);
+       var tColor = d3.rgb(redAmount, greenAmount, blueAmount);
+        console.log(tColor);
+    //   var newColor = tColor.getCSSHexadecimalRGB();
+       return tColor;
     }
     
-    function countg(d){
+    function count(d, c){
         var a = 0;
-        for (var b in d.children){
-            if(b.children)
-                a += countg(b);
-            else{ if(b.colour == "green")
-                return a++;}
-            return a;
+        var k = d.children;
+        
+        if(!k){
+            if(d.colour === c)
+                return 1;
+            return 0;
         }
+        
+        for(i = 0; i < k.length; i++){
+            var m = k[i];
+            //console.log("crash");
+            a += count(m, c);   
+        }
+        return a;
+        
     }
+    /*
     function countb(d){
-        var a = 0;
-        for (var b in d.children){
-            if(b.children)
-                a += countg(b);
-            if(b.colour == "blue")
-                return a++;
-            return a;
+        if(!d){
+         var a = 0;
+        var g = d.children;
+        //console.log(g);
+        if(!d.children){
+            if(d.colour =="blue")
+                return 1;
+            return 0;
         }
+        
+        for (i = 0; i < g.length; i++){
+            console.log(g[i]);
+            if(g[i].children)
+                a += countb(g[i]);
+            a+=countb(g[i]);
+           // countg(g[i]);
+        }
+        return a;
+        }return 0;
     }
     function countr(d){
         var a = 0;
-        for (var b in d.children){
-            if(b.children)
-                a += countg(b);
-            if(b.colour == "red")
-                return a++;
-            return a;
+        if(!d){
+        var g = d.children;
+        console.log(g);
+        if(!d.children){
+            if(d.colour =="red")
+                return 1;
+            return 0;
         }
-    }
-   // */
+        
+        for (i = 0; i < g.length; i++){
+            console.log(g[i]);
+            if(g[i].children)
+                a += countr(g[i]);
+            a+=countr(g[i]);
+           // countg(g[i]);
+        }
+        return a;}
+        return 0;
+    }*/
     
 });
 

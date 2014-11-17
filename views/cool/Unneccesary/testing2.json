@@ -3,194 +3,163 @@
     "children": [
         {
             "name": "version.py",
-			"size":"200000392"
+			"size":"200000392",
+            "colour": "blue"
         },
         {
             "name": "commands",
             "children": [
                 {
                     "name": "daemons.py",
-                    "size": "5000000000"
+                    "size": "5000000000",
+                    "colour": "red"
                 },
                 {
                     "name": "processes.py",
                     "size": "60003000000",
-                    "line1": {
-
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "red",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-                    "line2": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "red",
-                        "error": "B",
-                        "author": "Arjun"
-                    }
+                    "colour": "blue"
                 },
                 {
                     "name": "base.py",
                     "size": "60000000000",
-                    "line1": {
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "blue",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-                    "line2": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "blue",
-                        "error": "B",
-                        "author": "Arjun"
-                    },
-                    "line3": {
-                        "string": "sfasdfasdf",
-                        "color": "blue",
-                        "error": "None",
-                        "author": "Alvin"
-                    },
-                    "line4": {
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "blue",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-                    "line5": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "green",
-                        "error": "B",
-                        "author": "Arjun"
-                    },
-                    "line6": {
-                        "string": "sfasdfasdf",
-                        "color": "red",
-                        "error": "None",
-                        "author": "Alvin"
-                    }
+                    "colour" : "green"
                 },
                 {
                     "name": "processes.py",
-                    "size": "6003040000"
+                    "size": "6003040000",
+                    "colour": "red"
                 },
                 {
                     "name": "___init___.py",
                     "size": "45645300000",
-					"line1": {
-							
-							"string": "asdkjfhasdkjfhaksjdhf",
-		            		"color": "red",
-		            		"error": "C",
-		            		"author": "Arjun"
-		       	 	},
-		
-		       	 	"line2": {
-						
-						"string": "asdfasdfasdfasdf",
-		            	"color": "red",
-		            	"error": "B",
-		            	"author": "Arjun"
-		       	 	},
-		
-		       	 	"line3": {
-						
-						"string": "sfasdfasdf",
-		            	"color": "red",
-		            	"error": "None",
-		            	"author": "Alvin"
-		        	}
-                }
-            ]
-        },
-        {
-            "name": "fs",
+					"colour": "green"
+                },
+                {
+            "name": "commands",
             "children": [
                 {
-                    "name": "mounts.py",
-                    "size": "500000000",
-                    "line1": {
-
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "red",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-
-                    "line2": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "green",
-                        "error": "B",
-                        "author": "Arjun"
-                    },
-
-                    "line3": {
-                        "string": "sfasdfasdf",
-                        "color": "blue",
-                        "error": "None",
-                        "author": "Alvin"
-                    },
-                    "line4": {
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "red",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-
-                    "line5": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "green",
-                        "error": "B",
-                        "author": "Arjun"
-                    },
-
-                    "line6": {
-                        "string": "sfasdfasdf",
-                        "color": "blue",
-                        "error": "None",
-                        "author": "Alvin"
-                    }
-                },
-                {
-                    "name": "__init___.py",
-                    "size": "60003000000"
-                },
-                {
-                    "name": "atomic.py",
-                    "size": "6000000000"
+                    "name": "daemons.py",
+                    "size": "5000000000",
+                    "colour": "red"
                 },
                 {
                     "name": "processes.py",
-                    "size": "6003040000"
+                    "size": "60003000000",
+                    "colour": "blue"
                 },
                 {
-                    "name": "omg.py",
-                    "size": "4564530000",
-                    "line1": {
-
-                        "string": "asdkjfhasdkjfhaksjdhf",
-                        "color": "red",
-                        "error": "C",
-                        "author": "Arjun"
-                    },
-
-                    "line2": {
-                        "string": "asdfasdfasdfasdf",
-                        "color": "green",
-                        "error": "B",
-                        "author": "Arjun"
-                    },
-
-                    "line3": {
-                        "string": "sfasdfasdf",
-                        "color": "blue",
-                        "error": "None",
-                        "author": "Alvin"
-                    }
+                    "name": "base.py",
+                    "size": "60000000000",
+                    "colour" : "green"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000",
+                    "colour": "red"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "45645300000",
+					"colour": "green"
                 }
             ]
         }
-    ]
-}
+            ]
+        },
+        {
+            "name": "commands",
+            "children": [
+                {
+                    "name": "daemons.py",
+                    "size": "5000000000",
+                    "colour": "red"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "60003000000",
+                    "colour": "blue"
+                },
+                {
+                    "name": "base.py",
+                    "size": "60000000000",
+                    "colour" : "green"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000",
+                    "colour": "red"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "45645300000",
+					"colour": "green"
+                },
+                {
+            "name": "commands",
+            "children": [
+                {
+                    "name": "daemons.py",
+                    "size": "5000000000",
+                    "colour": "red"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "60003000000",
+                    "colour": "blue"
+                },
+                {
+                    "name": "base.py",
+                    "size": "60000000000",
+                    "colour" : "green"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000",
+                    "colour": "red"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "45645300000",
+					"colour": "green"
+                },
+                {
+            "name": "commands",
+            "children": [
+                {
+                    "name": "daemons.py",
+                    "size": "5000000000",
+                    "colour": "red"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "60003000000",
+                    "colour": "blue"
+                },
+                {
+                    "name": "base.py",
+                    "size": "60000000000",
+                    "colour" : "green"
+                },
+                {
+                    "name": "processes.py",
+                    "size": "6003040000",
+                    "colour": "red"
+                },
+                {
+                    "name": "___init___.py",
+                    "size": "45645300000",
+					"colour": "green"
+                }
+            ]
+        }
+                
+            ]
+        }
+            ]
+        }
+        
+            ]
+        }
 	
 	
 	
