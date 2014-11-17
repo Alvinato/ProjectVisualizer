@@ -26,6 +26,8 @@ def get_contributor_for_line(file_path, filename, line_number):
                                           shell=True, cwd=r'{}'.format(file_path))
     return contributor
 
+
+
 if __name__ == "__main__":
     "Testing functions"
 
@@ -41,7 +43,15 @@ if __name__ == "__main__":
         #print 'config', config
 
         file_path = config[user][code_base]
+        #print file_path
         file_name = file_path + '/setup.py'
 
-        print "File\n", get_contributors_for_file(file_path, file_name)
-        print "Line\n", get_contributor_for_line(file_path, file_name, '1')
+        #print "File\n", get_contributors_for_file(file_path, file_name)
+        #print "Line\n", get_contributor_for_line(file_path, file_name, '1')
+
+        import os
+        name = os.path.abspath("fusor.py")
+        parent = os.path.abspath(os.path.join(name, os.pardir))
+        print name, parent
+        print "File\n", get_contributors_for_file(parent, name)
+        #print "Line\n", get_contributor_for_line(file_path, file_name, '1')
