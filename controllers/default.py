@@ -11,7 +11,7 @@ PATTERN = "pattern"
 
 def final(path_to_plubum=None, path_to_pattern=None):
 
-    if path_to_pattern == None or path_to_pattern == None:
+    if path_to_plubum == None or path_to_pattern == None:
         path_to_plumbum = "/home/asumal/git/cs410/plumbum/plumbum"
         path_to_pattern = "/home/asumal/git/cs410/pattern/pattern"
 
