@@ -71,6 +71,7 @@ def combine_results(git_results, pylint_results, max_lines):
         # add GIT METRICS
         component["line"] = str(line_number)
         component["author"] = git_results[line_number]["author"]
+        component["code"] = git_results[line_number]["code"]
 
         if (line_number in pylint_results):
             # There is an pylint error on this line
