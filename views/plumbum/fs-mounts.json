@@ -1,1 +1,266 @@
-{"path": "/home/asumal/git/cs410/plumbum/plumbum/fs/mounts.py", "lines": [[{"error": "C", "line": "1", "code": "import re\n", "colour": "blue", "author": "roey.ghost@gmail.com"}, {"error": "none", "line": "2", "code": "\n", "colour": "black", "author": "roey.ghost@gmail.com"}, {"error": "R", "line": "3", "code": "class MountEntry(object):\n", "colour": "green", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "4", "code": "    \"\"\"\n", "colour": "black", "author": "roey.ghost@gmail.com"}, {"error": "none", "line": "5", "code": "    Represents a mount entry (device file, mount point and file system type)\n", "colour": "black", "author": "tomer.filiba@emc.com"}, {"error": "none", "line": "6", "code": "    \"\"\"\n", "colour": "black", "author": "roey.ghost@gmail.com"}, {"error": "none", "line": "7", "code": "    def __init__(self, dev, point, fstype, options):\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "8", "code": "        self.dev = dev\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "9", "code": "        self.point = point\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "10", "code": "        self.fstype = fstype\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "11", "code": "        self.options = options.split(\",\")\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "12", "code": "    def __str__(self):\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "C", "line": "13", "code": "        return \"%s on %s type %s (%s)\" % (self.dev, self.point, self.fstype, \",\".join(self.options))\n", "colour": "blue", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "14", "code": "\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "C", "line": "15", "code": "MOUNT_PATTERN = re.compile(r\"(.+?)\\s+on\\s+(.+?)\\s+type\\s+(\\S+)(?:\\s+\\((.+?)\\))?\")\n", "colour": "blue", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "16", "code": "\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "17", "code": "def mount_table():\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "18", "code": "    \"\"\"returns the system's current mount table (a list of\n", "colour": "black", "author": "tomer.filiba@emc.com"}, {"error": "none", "line": "19", "code": "    :class:`MountEntry <plumbum.unixutils.MountEntry>` objects)\"\"\"\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "F", "line": "20", "code": "    from plumbum.cmd import mount\n", "colour": "red", "author": "tomer.filiba@emc.com"}, {"error": "C", "line": "21", "code": "    \n", "colour": "blue", "author": "tomer.filiba@emc.com"}, {"error": "none", "line": "22", "code": "    table = []\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "23", "code": "    for line in mount().splitlines():\n", "colour": "black", "author": "roey.ghost@gmail.com"}, {"error": "C", "line": "24", "code": "        m = MOUNT_PATTERN.match(line)\n", "colour": "blue", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "25", "code": "        if not m:\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "26", "code": "            continue\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "27", "code": "        table.append(MountEntry(*m.groups()))\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "28", "code": "    return table\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "29", "code": "\n", "colour": "black", "author": "roey.ghost@gmail.com"}, {"error": "C", "line": "30", "code": "def mounted(fs):\n", "colour": "blue", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "31", "code": "    \"\"\"\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "C", "line": "32", "code": "    Indicates if a the given filesystem (device file or mount point) is currently mounted\n", "colour": "blue", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "33", "code": "    \"\"\"\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "34", "code": "    return any(fs == entry.dev or fs == entry.point for entry in mount_table())\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "35", "code": "\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "36", "code": "\n", "colour": "black", "author": "tomerfiliba@gmail.com"}, {"error": "none", "line": "37", "code": "\n", "colour": "black", "author": "tomerfiliba@gmail.com"}]]}
+{
+    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/mounts.py",
+    "lines": [
+        [
+            {
+                "error": "C",
+                "line": "1",
+                "code": "import re\n",
+                "colour": "blue",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "2",
+                "code": "\n",
+                "colour": "black",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "R",
+                "line": "3",
+                "code": "class MountEntry(object):\n",
+                "colour": "green",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "4",
+                "code": "    \"\"\"\n",
+                "colour": "black",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "5",
+                "code": "    Represents a mount entry (device file, mount point and file system type)\n",
+                "colour": "black",
+                "author": "tomer.filiba@emc.com"
+            },
+            {
+                "error": "none",
+                "line": "6",
+                "code": "    \"\"\"\n",
+                "colour": "black",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "7",
+                "code": "    def __init__(self, dev, point, fstype, options):\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "8",
+                "code": "        self.dev = dev\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "9",
+                "code": "        self.point = point\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "10",
+                "code": "        self.fstype = fstype\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "11",
+                "code": "        self.options = options.split(\",\")\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "12",
+                "code": "    def __str__(self):\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "C",
+                "line": "13",
+                "code": "        return \"%s on %s type %s (%s)\" % (self.dev, self.point, self.fstype, \",\".join(self.options))\n",
+                "colour": "blue",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "14",
+                "code": "\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "C",
+                "line": "15",
+                "code": "MOUNT_PATTERN = re.compile(r\"(.+?)\\s+on\\s+(.+?)\\s+type\\s+(\\S+)(?:\\s+\\((.+?)\\))?\")\n",
+                "colour": "blue",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "16",
+                "code": "\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "17",
+                "code": "def mount_table():\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "18",
+                "code": "    \"\"\"returns the system's current mount table (a list of\n",
+                "colour": "black",
+                "author": "tomer.filiba@emc.com"
+            },
+            {
+                "error": "none",
+                "line": "19",
+                "code": "    :class:`MountEntry <plumbum.unixutils.MountEntry>` objects)\"\"\"\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "F",
+                "line": "20",
+                "code": "    from plumbum.cmd import mount\n",
+                "colour": "red",
+                "author": "tomer.filiba@emc.com"
+            },
+            {
+                "error": "C",
+                "line": "21",
+                "code": "    \n",
+                "colour": "blue",
+                "author": "tomer.filiba@emc.com"
+            },
+            {
+                "error": "none",
+                "line": "22",
+                "code": "    table = []\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "23",
+                "code": "    for line in mount().splitlines():\n",
+                "colour": "black",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "C",
+                "line": "24",
+                "code": "        m = MOUNT_PATTERN.match(line)\n",
+                "colour": "blue",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "25",
+                "code": "        if not m:\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "26",
+                "code": "            continue\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "27",
+                "code": "        table.append(MountEntry(*m.groups()))\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "28",
+                "code": "    return table\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "29",
+                "code": "\n",
+                "colour": "black",
+                "author": "roey.ghost@gmail.com"
+            },
+            {
+                "error": "C",
+                "line": "30",
+                "code": "def mounted(fs):\n",
+                "colour": "blue",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "31",
+                "code": "    \"\"\"\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "C",
+                "line": "32",
+                "code": "    Indicates if a the given filesystem (device file or mount point) is currently mounted\n",
+                "colour": "blue",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "33",
+                "code": "    \"\"\"\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "34",
+                "code": "    return any(fs == entry.dev or fs == entry.point for entry in mount_table())\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "35",
+                "code": "\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "36",
+                "code": "\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            },
+            {
+                "error": "none",
+                "line": "37",
+                "code": "\n",
+                "colour": "black",
+                "author": "tomerfiliba@gmail.com"
+            }
+        ]
+    ]
+}

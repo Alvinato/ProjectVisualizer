@@ -67,7 +67,7 @@
 
 // why dont i just put viewport inside the circle...??
 
-    d3.json("states.json", function (states) {
+    d3.json("/Users/taranbir/Downloads/web2py/applications/jaat/views/plumbum/fs-mounts.json", function (states) {
 
         var colorScale = d3.scale.category20();
 
@@ -148,11 +148,11 @@
                 .viewport(d3.select(".viewport"));
 
         // tack on index to each data item for easy to read display
-        states.items.forEach(function(nextState, i) {
+        states.lines.forEach(function(nextState, i) {
             nextState.index = i;
         });
 
-        virtualScroller.data(states.items, function(d) { return d.id; });
+        virtualScroller.data(states.lines, function(d) { return d.colour; });
 
         chartGroup.call(virtualScroller);
 

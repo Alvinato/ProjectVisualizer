@@ -27,14 +27,27 @@ d3.json("plumbum.json", function(error, root) {
   var circle = svg.selectAll("circle")
       .data(nodes)
     .enter().append("circle")
-      .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" :                          "node node--root"; })
+      .attr("class", function(d) { return d.parent ? d.children ? "node" : "node" : "node node--root"; })
     //Chnage colors here ? ? ? ?     ??? ? ?? ? ?? ? ? ? ? ?
-      .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+      .style("fill", function(d) { return //colorize(d);
+       d.children ? color(d.depth) : null; 
+                                 })
       .style("fill-opacity", "1")
       .style("visibility", function (d)
                { if(d===root) return "visible";
                 else return d.parent === root ? "visible": "hidden";})
-      .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+      .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+        
+    //Ateempt scollder
+ // var scr = circle//.append("info-svg")
+   //     .append("text")
+     //   .text("ASAHAHHS\n\n\n\\n\n\n\\n\nn\n\n\\n\n\n\\n");
+  //.style("display", function(d) { return d.parent === root ? null : "none"; });
+    
+    
+    /* gARBAGE */
+    /************/
+            
     
   var text = svg.selectAll("text")
       .data(nodes)
@@ -91,13 +104,13 @@ d3.json("plumbum.json", function(error, root) {
     circle.attr("r", function(d) { return d.r * k; });
   }
     
-    /* COLORS ATTEMPT
+    /*
     function colorize (d){
         var green = 0;
         var red = 0;
         var blue = 0;
             for( var a in d.children){
-                console.log("hello");
+                console.log(a.colour);
                 if(a.chilren){
                 green += countg(a);
                 red += countr(a);
@@ -146,7 +159,7 @@ d3.json("plumbum.json", function(error, root) {
             return a;
         }
     }
-    */
+   // */
     
 });
 
