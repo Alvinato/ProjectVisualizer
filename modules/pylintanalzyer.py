@@ -2,7 +2,7 @@ import subprocess
 
 WARNING = 'No config file found, using default configuration'
 IGNORE_LINE = '*'
-COLOR = {'C':'blue', 'E':'yellow', 'F':'red', 'R':'green', 'W':'purple'}
+COLOR = {'E':'red', 'R':'blue', 'W':'green'}
 
 def get_pylint_analysis(code_base):
     """ """
