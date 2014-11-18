@@ -29,15 +29,18 @@ def pylint_analyzer(path_to_file):
 def parse_pylint_output(pylint_output):
     """ """
     solution = {}
-    bubble_colour = {'C': 0, 'E': 0, 'F': 0, 'R': 0, 'W': 0}
+    bubble_colour = {'E': 0, 'R': 0, 'W': 0}
 
     if (pylint_output[0].startswith(IGNORE_LINE)):
         pylint_output = pylint_output[1:]
 
     for pylint_line in pylint_output:
         line_number, category = parse_pylint_line(pylint_line)
-        bubble_colour[category] += 1
-        solution[line_number] = {'category':category, 'colour':COLOR[category]}
+        if (category == 'C' or category == 'F'):
+            pass
+        else:
+            bubble_colour[category] += 1
+            solution[line_number] = {'category':category, 'colour':COLOR[category]}
     print bubble_colour
     solution["category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
     solution["colour"] = COLOR[solution["category"]]
