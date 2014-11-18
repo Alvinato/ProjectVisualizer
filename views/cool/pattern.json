@@ -1,11 +1,11 @@
 {
-    "name": "/home/asumal/git/cs410/pattern/pattern",
+    "name": "pattern",
     "children": [
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/graph",
+            "name": "graph",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/pattern/pattern/graph/commonsense.py",
+                    "path": "pattern/graph-commonsense.json",
                     "colour": "blue",
                     "name": "commonsense.py",
                     "size": 281
@@ -13,34 +13,34 @@
             ]
         },
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/db"
+            "name": "db"
         },
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/server",
+            "name": "server",
             "children": [
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy",
+                    "name": "cherrypy",
                     "children": [
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy",
+                            "name": "cherrypy",
                             "children": [
                                 {
-                                    "name": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/wsgiserver",
+                                    "name": "wsgiserver",
                                     "children": [
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/wsgiserver/wsgiserver2.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-wsgiserver-wsgiserver2.json",
                                             "colour": "blue",
                                             "name": "wsgiserver2.py",
                                             "size": 2342
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/wsgiserver/ssl_pyopenssl.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-wsgiserver-ssl_pyopenssl.json",
                                             "colour": "blue",
                                             "name": "ssl_pyopenssl.py",
                                             "size": 256
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/wsgiserver/ssl_builtin.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-wsgiserver-ssl_builtin.json",
                                             "colour": "blue",
                                             "name": "ssl_builtin.py",
                                             "size": 91
@@ -48,28 +48,28 @@
                                     ]
                                 },
                                 {
-                                    "name": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process",
+                                    "name": "process",
                                     "children": [
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process/servers.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-process-servers.json",
                                             "colour": "purple",
                                             "name": "servers.py",
                                             "size": 438
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process/plugins.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-process-plugins.json",
                                             "colour": "blue",
                                             "name": "plugins.py",
                                             "size": 690
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process/win32.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-process-win32.json",
                                             "colour": "blue",
                                             "name": "win32.py",
                                             "size": 174
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process/wspbus.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-process-wspbus.json",
                                             "colour": "blue",
                                             "name": "wspbus.py",
                                             "size": 432
@@ -77,112 +77,112 @@
                                     ]
                                 },
                                 {
-                                    "name": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib",
+                                    "name": "lib",
                                     "children": [
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/auth_basic.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-auth_basic.json",
                                             "colour": "blue",
                                             "name": "auth_basic.py",
                                             "size": 87
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/auth_digest.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-auth_digest.json",
                                             "colour": "blue",
                                             "name": "auth_digest.py",
                                             "size": 365
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/xmlrpcutil.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-xmlrpcutil.json",
                                             "colour": "blue",
                                             "name": "xmlrpcutil.py",
                                             "size": 55
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/httputil.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-httputil.json",
                                             "colour": "blue",
                                             "name": "httputil.py",
                                             "size": 512
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/reprconf.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-reprconf.json",
                                             "colour": "blue",
                                             "name": "reprconf.py",
                                             "size": 485
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/caching.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-caching.json",
                                             "colour": "purple",
                                             "name": "caching.py",
                                             "size": 465
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/covercp.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-covercp.json",
                                             "colour": "blue",
                                             "name": "covercp.py",
                                             "size": 365
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/cptools.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-cptools.json",
                                             "colour": "blue",
                                             "name": "cptools.py",
                                             "size": 616
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/profiler.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-profiler.json",
                                             "colour": "blue",
                                             "name": "profiler.py",
                                             "size": 208
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/encoding.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-encoding.json",
                                             "colour": "blue",
                                             "name": "encoding.py",
                                             "size": 388
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/http.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-http.json",
                                             "colour": "purple",
                                             "name": "http.py",
                                             "size": 7
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/static.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-static.json",
                                             "colour": "blue",
                                             "name": "static.py",
                                             "size": 363
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/sessions.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-sessions.json",
                                             "colour": "blue",
                                             "name": "sessions.py",
                                             "size": 871
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/cpstats.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-cpstats.json",
                                             "colour": "blue",
                                             "name": "cpstats.py",
                                             "size": 662
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/auth.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-auth.json",
                                             "colour": "blue",
                                             "name": "auth.py",
                                             "size": 87
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/jsontools.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-jsontools.json",
                                             "colour": "blue",
                                             "name": "jsontools.py",
                                             "size": 87
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/httpauth.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-httpauth.json",
                                             "colour": "blue",
                                             "name": "httpauth.py",
                                             "size": 354
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib/gctools.py",
+                                            "path": "pattern/server-cherrypy-cherrypy-lib-gctools.json",
                                             "colour": "blue",
                                             "name": "gctools.py",
                                             "size": 214
@@ -190,103 +190,103 @@
                                     ]
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cptools.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cptools.json",
                                     "colour": "purple",
                                     "name": "_cptools.py",
                                     "size": 510
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpcompat.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpcompat.json",
                                     "colour": "blue",
                                     "name": "_cpcompat.py",
                                     "size": 353
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpreqbody.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpreqbody.json",
                                     "colour": "blue",
                                     "name": "_cpreqbody.py",
                                     "size": 965
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpcompat_subprocess.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpcompat_subprocess.json",
                                     "colour": "blue",
                                     "name": "_cpcompat_subprocess.py",
                                     "size": 1538
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpmodpy.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpmodpy.json",
                                     "colour": "blue",
                                     "name": "_cpmodpy.py",
                                     "size": 344
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpnative_server.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpnative_server.json",
                                     "colour": "blue",
                                     "name": "_cpnative_server.py",
                                     "size": 149
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpwsgi.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpwsgi.json",
                                     "colour": "blue",
                                     "name": "_cpwsgi.py",
                                     "size": 408
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cplogging.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cplogging.json",
                                     "colour": "blue",
                                     "name": "_cplogging.py",
                                     "size": 440
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpserver.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpserver.json",
                                     "colour": "purple",
                                     "name": "_cpserver.py",
                                     "size": 205
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cprequest.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cprequest.json",
                                     "colour": "blue",
                                     "name": "_cprequest.py",
                                     "size": 956
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cperror.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cperror.json",
                                     "colour": "blue",
                                     "name": "_cperror.py",
                                     "size": 556
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpdispatch.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpdispatch.json",
                                     "colour": "blue",
                                     "name": "_cpdispatch.py",
                                     "size": 636
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpchecker.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpchecker.json",
                                     "colour": "blue",
                                     "name": "_cpchecker.py",
                                     "size": 327
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpconfig.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpconfig.json",
                                     "colour": "blue",
                                     "name": "_cpconfig.py",
                                     "size": 295
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpwsgi_server.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpwsgi_server.json",
                                     "colour": "blue",
                                     "name": "_cpwsgi_server.py",
                                     "size": 63
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cpthreadinglocal.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cpthreadinglocal.json",
                                     "colour": "blue",
                                     "name": "_cpthreadinglocal.py",
                                     "size": 239
                                 },
                                 {
-                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/_cptree.py",
+                                    "path": "pattern/server-cherrypy-cherrypy-_cptree.json",
                                     "colour": "blue",
                                     "name": "_cptree.py",
                                     "size": 290
@@ -296,36 +296,36 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/server/static"
+                    "name": "static"
                 }
             ]
         },
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/web",
+            "name": "web",
             "children": [
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/cache"
+                    "name": "cache"
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/locale"
+                    "name": "locale"
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/soup",
+                    "name": "soup",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/soup/BeautifulSoupTests.py",
+                            "path": "pattern/web-soup-BeautifulSoupTests.json",
                             "colour": "blue",
                             "name": "BeautifulSoupTests.py",
                             "size": 902
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/soup/BeautifulSoup.py",
+                            "path": "pattern/web-soup-BeautifulSoup.json",
                             "colour": "blue",
                             "name": "BeautifulSoup.py",
                             "size": 2017
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/soup/setup.py",
+                            "path": "pattern/web-soup-setup.json",
                             "colour": "blue",
                             "name": "setup.py",
                             "size": 60
@@ -333,124 +333,124 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/imap"
+                    "name": "imap"
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/pdf",
+                    "name": "pdf",
                     "children": [
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/web/pdf/cmap"
+                            "name": "cmap"
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/converter.py",
+                            "path": "pattern/web-pdf-converter.json",
                             "colour": "blue",
                             "name": "converter.py",
                             "size": 497
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/runlength.py",
+                            "path": "pattern/web-pdf-runlength.json",
                             "colour": "blue",
                             "name": "runlength.py",
                             "size": 50
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/fontmetrics.py",
+                            "path": "pattern/web-pdf-fontmetrics.json",
                             "colour": "blue",
                             "name": "fontmetrics.py",
                             "size": 46
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/layout.py",
+                            "path": "pattern/web-pdf-layout.json",
                             "colour": "blue",
                             "name": "layout.py",
                             "size": 675
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/latin_enc.py",
+                            "path": "pattern/web-pdf-latin_enc.json",
                             "colour": "blue",
                             "name": "latin_enc.py",
                             "size": 241
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdfdevice.py",
+                            "path": "pattern/web-pdf-pdfdevice.json",
                             "colour": "blue",
                             "name": "pdfdevice.py",
                             "size": 174
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdffont.py",
+                            "path": "pattern/web-pdf-pdffont.json",
                             "colour": "blue",
                             "name": "pdffont.py",
                             "size": 702
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdftypes.py",
+                            "path": "pattern/web-pdf-pdftypes.json",
                             "colour": "blue",
                             "name": "pdftypes.py",
                             "size": 260
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdfinterp.py",
+                            "path": "pattern/web-pdf-pdfinterp.json",
                             "colour": "blue",
                             "name": "pdfinterp.py",
                             "size": 834
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/cmapdb.py",
+                            "path": "pattern/web-pdf-cmapdb.json",
                             "colour": "blue",
                             "name": "cmapdb.py",
                             "size": 421
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/utils.py",
+                            "path": "pattern/web-pdf-utils.json",
                             "colour": "blue",
                             "name": "utils.py",
                             "size": 276
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/ascii85.py",
+                            "path": "pattern/web-pdf-ascii85.json",
                             "colour": "blue",
                             "name": "ascii85.py",
                             "size": 81
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/lzw.py",
+                            "path": "pattern/web-pdf-lzw.json",
                             "colour": "blue",
                             "name": "lzw.py",
                             "size": 101
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/arcfour.py",
+                            "path": "pattern/web-pdf-arcfour.json",
                             "colour": "blue",
                             "name": "arcfour.py",
                             "size": 49
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdfparser.py",
+                            "path": "pattern/web-pdf-pdfparser.json",
                             "colour": "blue",
                             "name": "pdfparser.py",
                             "size": 791
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/encodingdb.py",
+                            "path": "pattern/web-pdf-encodingdb.json",
                             "colour": "blue",
                             "name": "encodingdb.py",
                             "size": 58
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/glyphlist.py",
+                            "path": "pattern/web-pdf-glyphlist.json",
                             "colour": "blue",
                             "name": "glyphlist.py",
                             "size": 4339
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/pdfcolor.py",
+                            "path": "pattern/web-pdf-pdfcolor.json",
                             "colour": "blue",
                             "name": "pdfcolor.py",
                             "size": 33
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/psparser.py",
+                            "path": "pattern/web-pdf-psparser.json",
                             "colour": "blue",
                             "name": "psparser.py",
                             "size": 686
@@ -458,10 +458,10 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/docx",
+                    "name": "docx",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/docx/docx.py",
+                            "path": "pattern/web-docx-docx.json",
                             "colour": "blue",
                             "name": "docx.py",
                             "size": 1016
@@ -469,19 +469,19 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/oauth"
+                    "name": "oauth"
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/feed",
+                    "name": "feed",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/feed/feedparser.py",
+                            "path": "pattern/web-feed-feedparser.json",
                             "colour": "blue",
                             "name": "feedparser.py",
                             "size": 4017
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/feed/setup.py",
+                            "path": "pattern/web-feed-setup.json",
                             "colour": "blue",
                             "name": "setup.py",
                             "size": 47
@@ -489,34 +489,34 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/web/json",
+                    "name": "json",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/json/scanner.py",
+                            "path": "pattern/web-json-scanner.json",
                             "colour": "blue",
                             "name": "scanner.py",
                             "size": 77
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/json/tool.py",
+                            "path": "pattern/web-json-tool.json",
                             "colour": "blue",
                             "name": "tool.py",
                             "size": 39
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/json/encoder.py",
+                            "path": "pattern/web-json-encoder.json",
                             "colour": "blue",
                             "name": "encoder.py",
                             "size": 567
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/json/decoder.py",
+                            "path": "pattern/web-json-decoder.json",
                             "colour": "blue",
                             "name": "decoder.py",
                             "size": 427
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/web/json/ordered_dict.py",
+                            "path": "pattern/web-json-ordered_dict.json",
                             "colour": "purple",
                             "name": "ordered_dict.py",
                             "size": 119
@@ -524,7 +524,7 @@
                     ]
                 },
                 {
-                    "path": "/home/asumal/git/cs410/pattern/pattern/web/api.py",
+                    "path": "pattern/web-api.json",
                     "colour": "blue",
                     "name": "api.py",
                     "size": 37
@@ -532,40 +532,40 @@
             ]
         },
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/vector",
+            "name": "vector",
             "children": [
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/vector/svm",
+                    "name": "svm",
                     "children": [
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvm-3.11"
+                            "name": "libsvm-3.11"
                         },
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/vector/svm/liblinear-1.93"
+                            "name": "liblinear-1.93"
                         },
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvm-3.17"
+                            "name": "libsvm-3.17"
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/liblinearutil.py",
+                            "path": "pattern/vector-svm-liblinearutil.json",
                             "colour": "purple",
                             "name": "liblinearutil.py",
                             "size": 250
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/liblinear.py",
+                            "path": "pattern/vector-svm-liblinear.json",
                             "colour": "purple",
                             "name": "liblinear.py",
                             "size": 295
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvm.py",
+                            "path": "pattern/vector-svm-libsvm.json",
                             "colour": "purple",
                             "name": "libsvm.py",
                             "size": 334
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvmutil.py",
+                            "path": "pattern/vector-svm-libsvmutil.json",
                             "colour": "purple",
                             "name": "libsvmutil.py",
                             "size": 255
@@ -573,7 +573,7 @@
                     ]
                 },
                 {
-                    "path": "/home/asumal/git/cs410/pattern/pattern/vector/stemmer.py",
+                    "path": "pattern/vector-stemmer.json",
                     "colour": "blue",
                     "name": "stemmer.py",
                     "size": 343
@@ -581,19 +581,19 @@
             ]
         },
         {
-            "name": "/home/asumal/git/cs410/pattern/pattern/text",
+            "name": "text",
             "children": [
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/de",
+                    "name": "de",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/de/__main__.py",
+                            "path": "pattern/text-de-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 11
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/de/inflect.py",
+                            "path": "pattern/text-de-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 581
@@ -601,16 +601,16 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/es",
+                    "name": "es",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/es/__main__.py",
+                            "path": "pattern/text-es-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 11
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/es/inflect.py",
+                            "path": "pattern/text-es-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 424
@@ -618,16 +618,16 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/it",
+                    "name": "it",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/it/__main__.py",
+                            "path": "pattern/text-it-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 5
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/it/inflect.py",
+                            "path": "pattern/text-it-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 446
@@ -635,16 +635,16 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/fr",
+                    "name": "fr",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/fr/__main__.py",
+                            "path": "pattern/text-fr-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 11
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/fr/inflect.py",
+                            "path": "pattern/text-fr-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 300
@@ -652,16 +652,16 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/nl",
+                    "name": "nl",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/nl/__main__.py",
+                            "path": "pattern/text-nl-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 11
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/nl/inflect.py",
+                            "path": "pattern/text-nl-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 416
@@ -669,37 +669,37 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/en",
+                    "name": "en",
                     "children": [
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/text/en/wordlist"
+                            "name": "wordlist"
                         },
                         {
-                            "name": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet",
+                            "name": "wordnet",
                             "children": [
                                 {
-                                    "name": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet",
+                                    "name": "pywordnet",
                                     "children": [
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet/concordance.py",
+                                            "path": "pattern/text-en-wordnet-pywordnet-concordance.json",
                                             "colour": "blue",
                                             "name": "concordance.py",
                                             "size": 1
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet/wordnet.py",
+                                            "path": "pattern/text-en-wordnet-pywordnet-wordnet.json",
                                             "colour": "purple",
                                             "name": "wordnet.py",
                                             "size": 1426
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet/setup.py",
+                                            "path": "pattern/text-en-wordnet-pywordnet-setup.json",
                                             "colour": "blue",
                                             "name": "setup.py",
                                             "size": 10
                                         },
                                         {
-                                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet/wntools.py",
+                                            "path": "pattern/text-en-wordnet-pywordnet-wntools.json",
                                             "colour": "blue",
                                             "name": "wntools.py",
                                             "size": 343
@@ -707,30 +707,30 @@
                                     ]
                                 },
                                 {
-                                    "name": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/dict"
+                                    "name": "dict"
                                 }
                             ]
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/__main__.py",
+                            "path": "pattern/text-en-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 11
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/inflect_quantify.py",
+                            "path": "pattern/text-en-inflect_quantify.json",
                             "colour": "blue",
                             "name": "inflect_quantify.py",
                             "size": 418
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/inflect.py",
+                            "path": "pattern/text-en-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 810
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/modality.py",
+                            "path": "pattern/text-en-modality.json",
                             "colour": "blue",
                             "name": "modality.py",
                             "size": 488
@@ -738,16 +738,16 @@
                     ]
                 },
                 {
-                    "name": "/home/asumal/git/cs410/pattern/pattern/text/xx",
+                    "name": "xx",
                     "children": [
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/xx/__main__.py",
+                            "path": "pattern/text-xx-__main__.json",
                             "colour": "blue",
                             "name": "__main__.py",
                             "size": 5
                         },
                         {
-                            "path": "/home/asumal/git/cs410/pattern/pattern/text/xx/inflect.py",
+                            "path": "pattern/text-xx-inflect.json",
                             "colour": "blue",
                             "name": "inflect.py",
                             "size": 131
@@ -755,13 +755,13 @@
                     ]
                 },
                 {
-                    "path": "/home/asumal/git/cs410/pattern/pattern/text/search.py",
+                    "path": "pattern/text-search.json",
                     "colour": "blue",
                     "name": "search.py",
                     "size": 1088
                 },
                 {
-                    "path": "/home/asumal/git/cs410/pattern/pattern/text/tree.py",
+                    "path": "pattern/text-tree.json",
                     "colour": "blue",
                     "name": "tree.py",
                     "size": 1713
@@ -769,7 +769,7 @@
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/pattern/pattern/metrics.py",
+            "path": "pattern/metrics.json",
             "colour": "blue",
             "name": "metrics.py",
             "size": 1053
