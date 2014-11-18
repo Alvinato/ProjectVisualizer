@@ -17,7 +17,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json("plumbum.json", function(error, root) {
+d3.json("Unneccesary/testing2.json", function(error, root) {
   if (error) return console.error(error);
 
   var focus = root,
@@ -35,17 +35,6 @@ d3.json("plumbum.json", function(error, root) {
                 else return d.parent === root ? "visible": "hidden";})
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
         
-    //Ateempt scollder
- // var scr = circle//.append("info-svg")
-   //     .append("text")
-     //   .text("ASAHAHHS\n\n\n\\n\n\n\\n\nn\n\n\\n\n\n\\n");
-  //.style("display", function(d) { return d.parent === root ? null : "none"; });
-    
-    
-    /* gARBAGE */
-    /************/
-            
-    
   var text = svg.selectAll("text")
       .data(nodes)
     .enter().append("text")           
@@ -67,9 +56,8 @@ d3.json("plumbum.json", function(error, root) {
 
   function zoom(d) {
     var focus0 = focus; focus = d;
-    //  console.log(root.style.fill);
 
-    var transition = d3.transition()
+      var transition = d3.transition()
         .duration(d3.event.altKey ? 7500 : 750)
         .tween("zoom", function(d) {
           var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
@@ -88,11 +76,6 @@ d3.json("plumbum.json", function(error, root) {
             if (d.parent !== focus && d !== focus) 
                     this.style.visibility = "hidden";});
 
-    //  d3.select("body")
-      //.style("background", function(d)
-        //      {return d.parent ? d.parent.style.fill : color(-1);
-          //    }); 
-    
     transition.selectAll("text")
       .filter(function(d) { return d === focus || d.parent === focus || this.style.display === "inline"; })
         .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
