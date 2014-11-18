@@ -17,7 +17,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json("Unneccesary/testing2.json", function(error, root) {
+d3.json("plumbum.json", function(error, root) {
   if (error) return console.error(error);
 
   var focus = root,
