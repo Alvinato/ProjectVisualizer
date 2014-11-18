@@ -29,8 +29,8 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node" : "node node--root"; })
     //Chnage colors here ? ? ? ?     ??? ? ?? ? ?? ? ? ? ? ?
-      .style("fill", function(d) { return colorize(d);
-//      d.children ? color(d.depth) : null; 
+      .style("fill", function(d) { console.log("A");return colorize(d);
+     // d.children ? color(d.depth) : null; 
                                  })
       .style("fill-opacity", "1")
       .style("visibility", function (d)
@@ -116,12 +116,15 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
         var blue = 0;
         console.log(g.length);
         for(i = 0; i < g.length; i++){
-            var a = g[i];
-                green += count(a, "green");
-                red += count(a, "red");
-                blue += count(a, "blue");
-            console.log(blue);
-        }
+            green += count(g[i], "green");}
+        
+        for(i = 0; i < g.length; i++)  {              
+            red += count(g[i], "red");}
+        
+        //for(i = 0; i < g.length; i++){                
+         //   blue += count(g[i], "blue");}
+        
+            //console.log(blue);
         
        var total = (green + blue + red);
        var redPercentage = red/total;
@@ -141,15 +144,14 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
         var k = d.children;
         
         if(!k){
-            if(d.colour === c)
+            if(d.colour == c)
                 return 1;
             return 0;
         }
         
-        for(i = 0; i < k.length; i++){
-            var m = k[i];
+        for(i = 0; i < k.length; i++){;
             //console.log("crash");
-            a += count(m, c);   
+            a += count(k[i], c);   
         }
         return a;
         

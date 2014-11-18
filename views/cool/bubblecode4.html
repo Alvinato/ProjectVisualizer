@@ -19,6 +19,12 @@
             stroke: #999;
             pointer-events: all;
         }
+        rectangle{
+            fill:#0000FF;
+            stroke: #999;
+            pointer-events: all;
+
+        }
 
         circling {
             fill: #FFE4C4;
@@ -90,8 +96,8 @@
     </style>
 </head>
 <body>
-<script src="virtualscroller.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="virtualscroller.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="Colour.js"></script>
 <script type="text/javascript">
@@ -115,12 +121,19 @@ var pack = d3.layout.pack()
             return d.size;
         })
 
+
+
+// going to select viewport here and place it onto body...
 var vis = d3.select("body").insert("svg:svg", "h2")
         .attr("width", w)
         .attr("height", h)
+        .attr("id","thesvg")
         .append("svg:g")
+        .attr("id","theg")
         .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
 
+document.getElementById("thesvg").style.zIndex ="1";
+document.getElementById("theg").style.zIndex ="1";
 
 var red = 0;
 var blue = 0;
@@ -146,7 +159,12 @@ var projectName;
 var projectNamecounter = 0;
 var Json = new Object;
 
-d3.json("plumbum.json", function(data){
+var idList = [];
+var idList2 = [];  // this one is for text...
+
+d3.json("sample_plumbum_output.json", function(data){
+
+    //console.log(data);
 
     var copyCounter = 1;
     globalData = data;
@@ -161,7 +179,7 @@ d3.json("plumbum.json", function(data){
         projectName = data.name;
         projectNamecounter++;
     }
-    var collecting = false;
+
     vis.selectAll("circle")
             .data(nodes)
             .enter()
@@ -175,13 +193,13 @@ d3.json("plumbum.json", function(data){
                 var checkifexists = document.getElementById(ddname);
                 //console.log(checkifexists);
                 if(checkifexists == null){
-                    //console.log("this id does not exist so return it...");
+                    idList.push(ddname);
                     return ddname;
                 }else{
-                    // copyCounter += 1;  // the counter needs to be reset here...
+
                     var string = copyCounter.toString();
                     var newID = ddname.concat(string);
-                 //   console.log("the new id that is being made here  " + newID);
+                    idList.push(newID);
                     return newID;
                 }
             })
@@ -208,8 +226,16 @@ d3.json("plumbum.json", function(data){
             })
             .on("click", function(d) {
                 // this gives the data object...
+
+                // function ... d3.json(d.path,
                 console.log("zoom zoom zoom");
-                return zoom(node == d ? root : d); })
+                return zoom(node == d ? root : d); });
+
+    // we need to give every svg element circle a Z value
+    // the z value will work... we need to set one for every single circle that was made....
+    // make an array with all the id's and select every single one and make a z value...
+
+
 
     //------------------>TEXT SECTION<-------------------
     vis.selectAll("text")
@@ -227,12 +253,14 @@ d3.json("plumbum.json", function(data){
 
                 if(checkifexists == null){
                 //    console.log("this id does not exist so return it..." + (ourID));
+                    idList2.push(ourID);
                     return (ourID);
                 }else{
                     copyCounterT += 1;  // we are going to need another counter here for the text...
                     var string = copyCounter.toString();
                     var newID = ourID.concat(string);
               //      console.log("the new id that is being made here  " + (newID));
+                    idList2.push(newID);
                     return (newID);
                 }
             })
@@ -242,7 +270,6 @@ d3.json("plumbum.json", function(data){
                     projectNamez = false;
                     return 0;
                 }else{
-
                     return d.x;
                 }
             })
@@ -258,8 +285,6 @@ d3.json("plumbum.json", function(data){
             .attr("text-anchor", "middle")
             .style("visibility", function (d)
             {
-
-
                 if(d == root){
                     return "visible";
                 }
@@ -274,15 +299,39 @@ d3.json("plumbum.json", function(data){
             })
             .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
             .text(function(d) { return d.name; });
+
+    // ---> this section is going to make the div tags in the position of every single circle...
+    // lets first hold the position of every single circle as well as size of everything...
+    // lets use a hashmap...
+
+
+    console.log(idList2.length);
+
+    for (var k = 0; k < idList.length; k++){
+        // lets select every single one
+        console.log("this is the idlist" + idList[k]);
+        var selection = document.getElementById(idList[k]);
+        var selection2 = document.getElementById(idList2[k]);
+
+        // for every selection give it a low z
+        selection.style.zIndex = "1";
+        selection2.style.zIndex = "1";
+    }
+
+
+    // try and just place the thing overtop right away...
+
+    scrollMaker(box, d.path, idName);
 });
 
-//----> this is the section where we are going to insert the scroller inside the bubble here...
 
-//   TODO !!!! WE ARE GOING TO NEED TO HIDE THE CORRECT TEXT AS WELL THROUGH THE ZOOM FUNCTION...
-// 1.) AS SOON AS WE ZOOM IN WE SHOULD HIDE THE DIRECTORY TEXT AND SHOW THE LOWER LAYER TEXT
+
+
 function zoom(d) {
 
-    // --> assigning element names...
+    console.log(d.path);
+    console.log(d.name);
+
     var ddname = d.name;
     var textname;
     if (d.name.substring(d.name.length - 3, d.name.length) == ".py") {
@@ -351,9 +400,18 @@ function zoom(d) {
             .duration(d3.event.altKey ? 7500 : 750);
 
     t.selectAll("circle")
-            .attr("cx", function(d) { return x(d.x); })
-            .attr("cy", function(d) { return y(d.y); })
-            .attr("r", function(d) { return k * d.r; })
+            .attr("cx", function(d) {
+
+              //  console.log("x coordinate: " +x(d.x) );
+                return x(d.x); })
+            .attr("cy", function(d) {
+
+                //console.log("y coordinate: " + y(d.y));
+                return y(d.y); })
+            .attr("r", function(d) {
+
+               // console.log("radius:  " + k * d.r);
+                return k * d.r; })
 
     t.selectAll("text")// we have to do this again when rerendering all the text...
             .attr("x", function(d) {
@@ -376,9 +434,269 @@ function zoom(d) {
             })
             .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
 
+    // ---->>> this is where we add the div tag if the element zoomed is zoomed all the way
+    // lets first find the coordinates of the bubble that was clicked...
+   // we need to figure out a condition to know when the bubble has been clicked all the way...
+    var box = { left: 0, top: 0 };
+    box = document.getElementById(ddname).getBoundingClientRect();
+
+    var xcoord =  box.left;
+    var ycoord = box.top;
+    var width = box.width;
+    var height = box.height;
+
+    console.log("name: " + ddname);
+    console.log("xcoord: " + xcoord);
+    console.log("ycoord: " + ycoord);
+    console.log("the height" + height);
+    console.log("the witdth " + width);
+
+
+    // basically if the python file reaches this point then we can create the new div tag...
+
+    if (d.name.substring(d.name.length-3, d.name.length) == ".py"){
+
+        idName = "d".concat(d.name.substring(0, d.name.length-3));
+        console.log(idName);
+        //scrollMaker(box, d.path, idName);
+
+        // we just call index.html right here...
+        appendScroller(box, d.path, idName);
+
+    }
+
     node = d;
     d3.event.stopPropagation();
 }
+
+function dynamicDiv(box){
+
+    // because it has transformed the square we need to find the transform mechanism...
+
+   var xcoord =  box.left;  // as long as its in the middle...   // we dont really need the input...
+   var ycoord = box.top;
+    var width = box.width + 300;
+    var height = box.height + 300;
+
+    var name = "newblock";
+
+        // ---> inside here create more div tags...
+        var iDiv = document.createElement('div');
+        iDiv.id = name;
+        iDiv.className = name;
+        document.getElementsByTagName('body')[0].appendChild(iDiv);
+
+        document.getElementById(name).style.width = 600 + "px"
+        document.getElementById(name).style.height = 600 + "px";
+            // we just have to position this better...
+        var a = document.getElementById(name);
+        a.style.position = "absolute";
+        a.style.left =  "20%" //xcoord;
+        a.style.top = "10%" //ycoord;
+        a.style.overflowY = "auto";
+        a.style.border = 1 + "px solid #AAAAAA";
+        a.style.backgroundColor = "#e8e8e8";
+        a.style.overflowX = "auto";
+        a.style.zIndex = "20";
+}
+
+
+
+
+// send in the new div tag...
+
+function appendScroller(box, path, name){
+
+    name = ".".concat(name);
+    console.log(name);
+
+
+    d3.json("states.json", function (states) {
+
+        dynamicDiv(box);
+
+        var colorScale = d3.scale.category20();
+
+        var scrollSVG = d3.select(".newblock").append("svg")
+                .attr("class", "scroll-svg")
+                .attr("id", "othersvg");
+
+        document.getElementById("othersvg").style.zIndex = "20";
+
+        // putting defs together so they can be filtered properly...
+        var defs = scrollSVG.insert("defs", ":first-child");
+        createFilters(defs);
+
+        // chartgroup is set to append onto scroll svg and class is set...
+        var chartGroup = scrollSVG.append("g")
+                .attr("class", "chartGroup")
+
+        // we append a rectangle onto chartgroup...
+        chartGroup.append("rect")
+                .attr("fill", "#FFFFFF");
+
+        var infoSVG = d3.select(".information").append("svg")
+                .attr("class", "info-svg");
+
+        var braceGroup = infoSVG.append("g")
+                .attr("transform", "translate(0,0)");
+
+        braceGroup.append("path")
+                .attr("class", "brace")
+                .attr("d", makeCurlyBrace(10, 380, 10, 20, 30, 0.55));
+
+        var braceLabelGroup = braceGroup.append("g")
+                .attr("transform", "translate(45, 176)");
+
+        braceLabelGroup.append("text")
+                .attr("class", "infotext")
+                .attr("transform", "translate(0, 0)")
+                .text("50 data items but only ");
+
+        braceLabelGroup.append("text")
+                .attr("class", "infotext")
+                .attr("transform", "translate(-1, 30)")
+                .text("15 dom nodes rendered");
+
+        braceLabelGroup.append("text")
+                .attr("class", "infotext")
+                .attr("transform", "translate(0, 60)")
+                .text("at any given time!");
+
+
+        // these are all the squares that are entering the frame...
+        var rowEnter = function(rowSelection) {
+            rowSelection.append("rect")
+                    .attr("rx", 3)
+                    .attr("ry", 3)
+                    .attr("width", "1000")
+                    .attr("height", "24")
+                    .attr("fill-opacity", 0.25)
+                    .attr("stroke", "#999999")
+                    .attr("stroke-width", "2px");
+            rowSelection.append("text")
+                    .attr("transform", "translate(10,15)");
+        };
+        // this is what is updating the index...
+        var rowUpdate = function(rowSelection) {
+            rowSelection.select("rect")
+                    .attr("fill", function(d) {
+                        // TODO!!! THIS LINE HERE IS GOING TO SHOW EVERY LINE OF CODE!!!
+
+
+
+                        return colorScale(d.id);
+                    });
+
+            // right here we should put all the text inside...
+            rowSelection.select("text")
+                    .text(function (d) {
+                        // TODO !!! this part here is going to show the lines of code
+
+
+
+                        return (d.index + 1) + ". " + d.label;
+                    });
+        };
+
+        var rowExit = function(rowSelection) {
+        };
+
+
+        // have to place a div tag inside every single bubble...
+        var virtualScroller = d3.VirtualScroller()
+                .rowHeight(30)
+                .enter(rowEnter)
+                .update(rowUpdate)
+                .exit(rowExit)
+                .svg(scrollSVG)
+                .totalRows(50)
+                .viewport(d3.select(".newblock"));
+
+        // tack on index to each data item for easy to read display
+        states.items.forEach(function(nextState, i) {
+            nextState.index = i;
+        });
+
+        virtualScroller.data(states.items, function(d) { return d.id; });
+
+        chartGroup.call(virtualScroller);
+
+        function createFilters(svgDefs) {
+            var filter = svgDefs.append("svg:filter")
+                    .attr("id", "dropShadow1")
+                    .attr("x", "0")
+                    .attr("y", "0")
+                    .attr("width", "200%")
+                    .attr("height", "200%");
+
+            filter.append("svg:feOffset")
+                    .attr("result", "offOut")
+                    .attr("in", "SourceAlpha")
+                    .attr("dx", "1")
+                    .attr("dy", "1");
+
+            filter.append("svg:feColorMatrix")
+                    .attr("result", "matrixOut")
+                    .attr("in", "offOut")
+                    .attr("type", "matrix")
+                    .attr("values", "0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.2 0");
+
+            filter.append("svg:feGaussianBlur")
+                    .attr("result", "blurOut")
+                    .attr("in", "matrixOut")
+                    .attr("stdDeviation", "1");
+
+            filter.append("svg:feBlend")
+                    .attr("in", "SourceGraphic")
+                    .attr("in2", "blurOut")
+                    .attr("mode", "normal");
+        }
+
+        function makeCurlyBrace(x1,y1,x2,y2,w,q)
+        {
+            //Calculate unit vector
+            var dx = x1-x2;
+            var dy = y1-y2;
+            var len = Math.sqrt(dx*dx + dy*dy);
+            dx = dx / len;
+            dy = dy / len;
+
+            //Calculate Control Points of path,
+            var qx1 = x1 + q*w*dy;
+            var qy1 = y1 - q*w*dx;
+            var qx2 = (x1 - .25*len*dx) + (1-q)*w*dy;
+            var qy2 = (y1 - .25*len*dy) - (1-q)*w*dx;
+            var tx1 = (x1 -  .5*len*dx) + w*dy;
+            var ty1 = (y1 -  .5*len*dy) - w*dx;
+            var qx3 = x2 + q*w*dy;
+            var qy3 = y2 - q*w*dx;
+            var qx4 = (x1 - .75*len*dx) + (1-q)*w*dy;
+            var qy4 = (y1 - .75*len*dy) - (1-q)*w*dx;
+
+            return ( "M " +  x1 + " " +  y1 +
+                    " Q " + qx1 + " " + qy1 + " " + qx2 + " " + qy2 +
+                    " T " + tx1 + " " + ty1 +
+                    " M " +  x2 + " " +  y2 +
+                    " Q " + qx3 + " " + qy3 + " " + qx4 + " " + qy4 +
+                    " T " + tx1 + " " + ty1 );
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // input global data and the directory...
 function sifter2(d, directory){
