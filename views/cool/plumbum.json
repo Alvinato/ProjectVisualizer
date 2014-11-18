@@ -1,25 +1,23 @@
 {
-    "path": "/home/asumal/git/cs410/plumbum/plumbum",
-    "name": "Plumbum",
+    "name": "plumbum",
     "children": [
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/cli",
             "name": "cli",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/cli/application.py",
-                    "colour": "green",
+                    "path": "plumbum/cli-application.json",
+                    "colour": "blue",
                     "name": "application.py",
                     "size": 579
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/cli/terminal.py",
+                    "path": "plumbum/cli-terminal.json",
                     "colour": "blue",
                     "name": "terminal.py",
                     "size": 273
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/cli/switches.py",
+                    "path": "plumbum/cli-switches.json",
                     "colour": "blue",
                     "name": "switches.py",
                     "size": 338
@@ -27,84 +25,45 @@
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/fs",
             "name": "fs",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/mounts.py",
+                    "path": "plumbum/fs-mounts.json",
                     "colour": "blue",
                     "name": "mounts.py",
                     "size": 37
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/atomic.py",
-                    "colour": "green",
+                    "path": "plumbum/fs-atomic.json",
+                    "colour": "blue",
                     "name": "atomic.py",
                     "size": 308
-                },{
-
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new",
-                    "name": "new",
-                    "children": [
-                        {
-                        "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/thingone.py",
-                        "colour": "green",
-                        "name": "thingone.py",
-                        "size": 500
-                        },
-                        {
-                        "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/thingtwo.py",
-                        "colour": "green",
-                        "name": "thingtwo.py",
-                        "size": 200
-                        },
-                        {
-                            "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer",
-                            "name": "newer",
-                            "children": [
-                                {
-                                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer/thingthree.py",
-                                    "colour": "green",
-                                    "name": "thingthree.py",
-                                    "size": 20
-                                },
-                                {
-                                    "path": "/home/asumal/git/cs410/plumbum/plumbum/fs/new/newer/thingfour.py",
-                                    "colour": "green",
-                                    "name": "thingfour.py",
-                                    "size": 20
-                                }
-                            ]
-                        }
-                    ]
                 }
-
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/path",
             "name": "path",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/path/local.py",
+                    "path": "plumbum/path-local.json",
                     "colour": "blue",
                     "name": "local.py",
                     "size": 281
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/path/base.py",
+                    "path": "plumbum/path-base.json",
                     "colour": "blue",
                     "name": "base.py",
                     "size": 297
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/path/remote.py",
-                    "colour": "green",
+                    "path": "plumbum/path-remote.json",
+                    "colour": "purple",
                     "name": "remote.py",
                     "size": 261
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/path/utils.py",
+                    "path": "plumbum/path-utils.json",
                     "colour": "blue",
                     "name": "utils.py",
                     "size": 102
@@ -112,88 +71,87 @@
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/machines",
             "name": "machines",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/local.py",
+                    "path": "plumbum/machines-local.json",
                     "colour": "blue",
                     "name": "local.py",
                     "size": 382
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/env.py",
+                    "path": "plumbum/machines-env.json",
                     "colour": "blue",
                     "name": "env.py",
                     "size": 163
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/ssh_machine.py",
+                    "path": "plumbum/machines-ssh_machine.json",
                     "colour": "blue",
                     "name": "ssh_machine.py",
                     "size": 274
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/session.py",
-                    "colour": "red",
+                    "path": "plumbum/machines-session.json",
+                    "colour": "blue",
                     "name": "session.py",
                     "size": 225
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/remote.py",
-                    "colour": "red",
+                    "path": "plumbum/machines-remote.json",
+                    "colour": "blue",
                     "name": "remote.py",
                     "size": 363
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/machines/paramiko_machine.py",
-                    "colour": "red",
+                    "path": "plumbum/machines-paramiko_machine.json",
+                    "colour": "blue",
                     "name": "paramiko_machine.py",
                     "size": 314
                 }
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/commands",
             "name": "commands",
             "children": [
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/processes.py",
-                    "colour": "red",
+                    "path": "plumbum/commands-processes.json",
+                    "colour": "blue",
                     "name": "processes.py",
                     "size": 211
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/base.py",
-                    "colour": "red",
+                    "path": "plumbum/commands-base.json",
+                    "colour": "blue",
                     "name": "base.py",
                     "size": 434
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/modifiers.py",
+                    "path": "plumbum/commands-modifiers.json",
                     "colour": "blue",
                     "name": "modifiers.py",
                     "size": 177
                 },
                 {
-                    "path": "/home/asumal/git/cs410/plumbum/plumbum/commands/daemons.py",
-                    "colour": "green",
+                    "path": "plumbum/commands-daemons.json",
+                    "colour": "blue",
                     "name": "daemons.py",
                     "size": 99
                 }
             ]
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/version.py",
-            "colour": "red",
+            "path": "plumbum/version.json",
+            "colour": "blue",
             "name": "version.py",
             "size": 3
         },
         {
-            "path": "/home/asumal/git/cs410/plumbum/plumbum/lib.py",
+            "path": "plumbum/lib.json",
             "colour": "blue",
             "name": "lib.py",
             "size": 61
         }
     ]
 }
+
