@@ -17,7 +17,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json("Unneccessary/testing2.json", function(error, root) {
+d3.json("plumbum.json", function(error, root) {
   if (error) return console.error(error);
 
   var focus = root,
@@ -28,10 +28,7 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
       .data(nodes)
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node" : "node node--root"; })
-    //Chnage colors here ? ? ? ?     ??? ? ?? ? ?? ? ? ? ? ?
-      .style("fill", function(d) { console.log("A");return colorize(d);
-     // d.children ? color(d.depth) : null; 
-                                 })
+      .style("fill", function(d) { return colorize(d); })
       .style("fill-opacity", "1")
       .style("visibility", function (d)
                { if(d===root) return "visible";
@@ -62,7 +59,7 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
   var node = svg.selectAll("circle,text");
 
   d3.select("body")
-      .style("background", color(-1))
+      .style("background", "white")
       .on("click", function() //TODO: change here for scroll thing
           { zoom( focus.parent ? focus.parent : root); });
 
@@ -70,6 +67,7 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
 
   function zoom(d) {
     var focus0 = focus; focus = d;
+    //  console.log(root.style.fill);
 
     var transition = d3.transition()
         .duration(d3.event.altKey ? 7500 : 750)
@@ -89,8 +87,12 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
         .each("end", function(d) { 
             if (d.parent !== focus && d !== focus) 
                     this.style.visibility = "hidden";});
-      
-      
+
+    //  d3.select("body")
+      //.style("background", function(d)
+        //      {return d.parent ? d.parent.style.fill : color(-1);
+          //    }); 
+    
     transition.selectAll("text")
       .filter(function(d) { return d === focus || d.parent === focus || this.style.display === "inline"; })
         .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
@@ -114,18 +116,13 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
         var green = 0;
         var red = 0;
         var blue = 0;
-        console.log(g.length);
+
         for(i = 0; i < g.length; i++){
-            green += count(g[i], "green");}
-        
-        for(i = 0; i < g.length; i++)  {              
-            red += count(g[i], "red");}
-        
-        //for(i = 0; i < g.length; i++){                
-         //   blue += count(g[i], "blue");}
-        
-            //console.log(blue);
-        
+            green += count(g[i], "green");             
+            red += count(g[i], "red");
+            blue += count(g[i], "blue");
+        }
+
        var total = (green + blue + red);
        var redPercentage = red/total;
        var greenPercentage = green/ total;
@@ -134,72 +131,24 @@ d3.json("Unneccessary/testing2.json", function(error, root) {
        var greenAmount = (255 * greenPercentage);
        var blueAmount = (255 * bluePercentage);
        var tColor = d3.rgb(redAmount, greenAmount, blueAmount);
-        console.log(tColor);
-    //   var newColor = tColor.getCSSHexadecimalRGB();
        return tColor;
     }
     
     function count(d, c){
         var a = 0;
-        var k = d.children;
-        
-        if(!k){
+        if(d.children){
+            for(var i = 0, len = d.children.length; i < len; i ++){
+                a += count(d.children[i], c);
+            }
+        }
+        else{
             if(d.colour == c)
-                return 1;
-            return 0;
-        }
-        
-        for(i = 0; i < k.length; i++){;
-            //console.log("crash");
-            a += count(k[i], c);   
+                a = 1;
+            else
+                a = 0;     
         }
         return a;
-        
     }
-    /*
-    function countb(d){
-        if(!d){
-         var a = 0;
-        var g = d.children;
-        //console.log(g);
-        if(!d.children){
-            if(d.colour =="blue")
-                return 1;
-            return 0;
-        }
-        
-        for (i = 0; i < g.length; i++){
-            console.log(g[i]);
-            if(g[i].children)
-                a += countb(g[i]);
-            a+=countb(g[i]);
-           // countg(g[i]);
-        }
-        return a;
-        }return 0;
-    }
-    function countr(d){
-        var a = 0;
-        if(!d){
-        var g = d.children;
-        console.log(g);
-        if(!d.children){
-            if(d.colour =="red")
-                return 1;
-            return 0;
-        }
-        
-        for (i = 0; i < g.length; i++){
-            console.log(g[i]);
-            if(g[i].children)
-                a += countr(g[i]);
-            a+=countr(g[i]);
-           // countg(g[i]);
-        }
-        return a;}
-        return 0;
-    }*/
-    
 });
 
 d3.select(self.frameElement).style("height", diameter + "px");
