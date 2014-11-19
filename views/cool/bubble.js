@@ -296,7 +296,7 @@ d3.json("plumbum.json", function(error, root) {
 
             rowSelection.select("text")
                     .text(function (d) {
-                        return (d.index) + ". " + d.code;
+                        return (d.author)+ ":  " + (d.index) + ". " + d.code;
                     });
         };
 
