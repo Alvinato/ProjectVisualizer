@@ -95,7 +95,7 @@ d3.json("plumbum.json", function(error, root) {
       
         var box = { left: 0, top: 0, wdith: 0, height: 0 };
       console.log(d.name);
-   // box = document.getElementById(d.name).getClientRects();
+   // box = document.getElementById(d.name).getBoundingClientRect();
 
     var xcoord =  box.left;
     var ycoord = box.top;
@@ -218,7 +218,7 @@ d3.json("plumbum.json", function(error, root) {
 
 }
     function appendScroller(box, path, name){
-        console.log("ashasds"+path);
+
     var filename = jsonnamegetter(path);
         console.log(filename);
 
@@ -296,7 +296,7 @@ d3.json("plumbum.json", function(error, root) {
 
             rowSelection.select("text")
                     .text(function (d) {
-                        return (d.author)+ ":  " + (d.index) + ". " + d.code;
+                        return (d.author) +":  " + (d.index) + ". " + d.code;
                     });
         };
 
@@ -390,8 +390,8 @@ d3.json("plumbum.json", function(error, root) {
     function dynamicDiv(box){
    var xcoord =  box.left;
    var ycoord = box.top;
-    var width = box.width + 300;
-    var height = box.height + 300;
+    var width = box.width;
+    var height = box.height;
 
     var name = "newblock";
 
@@ -401,13 +401,13 @@ d3.json("plumbum.json", function(error, root) {
         iDiv.className = name;
         document.getElementsByTagName('body')[0].appendChild(iDiv);
 
-        document.getElementById(name).style.width = 600 + "px"
-        document.getElementById(name).style.height = 600 + "px";
+        document.getElementById(name).style.width = 550 + "px"
+        document.getElementById(name).style.height = 550 + "px";
             // we just have to position this better...
         var a = document.getElementById(name);
         a.style.position = "absolute";
-        a.style.left =  "25%" //xcoord;
-        a.style.top = "10%" //ycoord;
+        a.style.left =  "203px" //xcoord;
+        a.style.top = "203px" //ycoord;
         a.style.overflowY = "auto";
         a.style.border = 1 + "px solid #AAAAAA";
         a.style.backgroundColor = "#e8e8e8";
