@@ -53,4 +53,5 @@ def get_visualization(name_of_code_base, path_to_code_base):
                                    pylint_analysis, git_analysis, name_of_code_base)
 
     solution_as_json = json.dumps(solution)
+    print solution_as_json
     return solution_as_json

@@ -1,7 +1,9 @@
 {
+    "path": "/home/asumal/git/cs410/pattern/pattern",
     "name": "pattern",
     "children": [
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/graph",
             "name": "graph",
             "children": [
                 {
@@ -14,18 +16,23 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/db",
             "name": "db"
         },
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/server",
             "name": "server",
             "children": [
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy",
                     "name": "cherrypy",
                     "children": [
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy",
                             "name": "cherrypy",
                             "children": [
                                 {
+                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/wsgiserver",
                                     "name": "wsgiserver",
                                     "children": [
                                         {
@@ -52,6 +59,7 @@
                                     ]
                                 },
                                 {
+                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/process",
                                     "name": "process",
                                     "children": [
                                         {
@@ -85,6 +93,7 @@
                                     ]
                                 },
                                 {
+                                    "path": "/home/asumal/git/cs410/pattern/pattern/server/cherrypy/cherrypy/lib",
                                     "name": "lib",
                                     "children": [
                                         {
@@ -339,20 +348,25 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/server/static",
                     "name": "static"
                 }
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/web",
             "name": "web",
             "children": [
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/cache",
                     "name": "cache"
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/locale",
                     "name": "locale"
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/soup",
                     "name": "soup",
                     "children": [
                         {
@@ -379,12 +393,15 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/imap",
                     "name": "imap"
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf",
                     "name": "pdf",
                     "children": [
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/web/pdf/cmap",
                             "name": "cmap"
                         },
                         {
@@ -523,6 +540,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/docx",
                     "name": "docx",
                     "children": [
                         {
@@ -535,9 +553,11 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/oauth",
                     "name": "oauth"
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/feed",
                     "name": "feed",
                     "children": [
                         {
@@ -557,6 +577,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/web/json",
                     "name": "json",
                     "children": [
                         {
@@ -606,18 +627,23 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/vector",
             "name": "vector",
             "children": [
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm",
                     "name": "svm",
                     "children": [
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvm-3.11",
                             "name": "libsvm-3.11"
                         },
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/liblinear-1.93",
                             "name": "liblinear-1.93"
                         },
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/vector/svm/libsvm-3.17",
                             "name": "libsvm-3.17"
                         },
                         {
@@ -660,9 +686,11 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/pattern/pattern/text",
             "name": "text",
             "children": [
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/de",
                     "name": "de",
                     "children": [
                         {
@@ -682,6 +710,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/es",
                     "name": "es",
                     "children": [
                         {
@@ -701,6 +730,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/it",
                     "name": "it",
                     "children": [
                         {
@@ -720,6 +750,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/fr",
                     "name": "fr",
                     "children": [
                         {
@@ -739,6 +770,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/nl",
                     "name": "nl",
                     "children": [
                         {
@@ -758,15 +790,19 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/en",
                     "name": "en",
                     "children": [
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordlist",
                             "name": "wordlist"
                         },
                         {
+                            "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet",
                             "name": "wordnet",
                             "children": [
                                 {
+                                    "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/pywordnet",
                                     "name": "pywordnet",
                                     "children": [
                                         {
@@ -800,6 +836,7 @@
                                     ]
                                 },
                                 {
+                                    "path": "/home/asumal/git/cs410/pattern/pattern/text/en/wordnet/dict",
                                     "name": "dict"
                                 }
                             ]
@@ -835,6 +872,7 @@
                     ]
                 },
                 {
+                    "path": "/home/asumal/git/cs410/pattern/pattern/text/xx",
                     "name": "xx",
                     "children": [
                         {
