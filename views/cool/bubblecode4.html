@@ -305,11 +305,11 @@ d3.json("plumbum.json", function(data){
     // lets use a hashmap...
 
 
-    console.log(idList2.length);
+   // console.log(idList2.length);
 
     for (var k = 0; k < idList.length; k++){
         // lets select every single one
-        console.log("this is the idlist" + idList[k]);
+        //console.log("this is the idlist" + idList[k]);
         var selection = document.getElementById(idList[k]);
         var selection2 = document.getElementById(idList2[k]);
 
@@ -317,11 +317,6 @@ d3.json("plumbum.json", function(data){
         selection.style.zIndex = "1";
         selection2.style.zIndex = "1";
     }
-
-
-    // try and just place the thing overtop right away...
-
-    scrollMaker(box, d.path, idName);
 });
 
 
@@ -329,8 +324,15 @@ d3.json("plumbum.json", function(data){
 
 function zoom(d) {
 
-    console.log(d.path);
-    console.log(d.name);
+    // have to check if that div tag is showing right now... if it is then we need to delete it before moving anywhere...
+
+    divtagchecker(d);
+
+
+
+
+    //console.log(d.path);
+    //console.log(d.name);
 
     var ddname = d.name;
     var textname;
@@ -445,35 +447,17 @@ function zoom(d) {
     var width = box.width;
     var height = box.height;
 
-    console.log("name: " + ddname);
-    console.log("xcoord: " + xcoord);
-    console.log("ycoord: " + ycoord);
-    console.log("the height" + height);
-    console.log("the witdth " + width);
-
-
-    // basically if the python file reaches this point then we can create the new div tag...
-
     if (d.name.substring(d.name.length-3, d.name.length) == ".py"){
-
-        idName = "d".concat(d.name.substring(0, d.name.length-3));
-        console.log(idName);
-        //scrollMaker(box, d.path, idName);
-
-        // we just call index.html right here...
-        appendScroller(box, d.path, idName);
-
+        appendScroller(box, d.path, ddname);
     }
-
     node = d;
     d3.event.stopPropagation();
 }
 
+
+// this creates the div tag for scroller
 function dynamicDiv(box){
-
-    // because it has transformed the square we need to find the transform mechanism...
-
-   var xcoord =  box.left;  // as long as its in the middle...   // we dont really need the input...
+   var xcoord =  box.left;
    var ycoord = box.top;
     var width = box.width + 300;
     var height = box.height + 300;
@@ -491,7 +475,7 @@ function dynamicDiv(box){
             // we just have to position this better...
         var a = document.getElementById(name);
         a.style.position = "absolute";
-        a.style.left =  "20%" //xcoord;
+        a.style.left =  "25%" //xcoord;
         a.style.top = "10%" //ycoord;
         a.style.overflowY = "auto";
         a.style.border = 1 + "px solid #AAAAAA";
@@ -501,27 +485,20 @@ function dynamicDiv(box){
 }
 
 
-
-
-// send in the new div tag...
-
 function appendScroller(box, path, name){
 
-    name = ".".concat(name);
-    console.log(name);
+    var filename = jsonnamegetter(path);
 
-
-    d3.json("states.json", function (states) {
+    d3.json(filename, function (data) {
 
         dynamicDiv(box);
-
-        var colorScale = d3.scale.category20();
 
         var scrollSVG = d3.select(".newblock").append("svg")
                 .attr("class", "scroll-svg")
                 .attr("id", "othersvg");
 
         document.getElementById("othersvg").style.zIndex = "20";
+        document.getElementById("othersvg").style.width = 1000 + "px";
 
         // putting defs together so they can be filtered properly...
         var defs = scrollSVG.insert("defs", ":first-child");
@@ -569,7 +546,7 @@ function appendScroller(box, path, name){
             rowSelection.append("rect")
                     .attr("rx", 3)
                     .attr("ry", 3)
-                    .attr("width", "1000")
+                    .attr("width", "3000")
                     .attr("height", "24")
                     .attr("fill-opacity", 0.25)
                     .attr("stroke", "#999999")
@@ -581,27 +558,25 @@ function appendScroller(box, path, name){
         var rowUpdate = function(rowSelection) {
             rowSelection.select("rect")
                     .attr("fill", function(d) {
-                        // TODO!!! THIS LINE HERE IS GOING TO SHOW EVERY LINE OF CODE!!!
-
-
-
-                        return colorScale(d.id);
+                        return d.colour;
                     });
 
-            // right here we should put all the text inside...
             rowSelection.select("text")
                     .text(function (d) {
-                        // TODO !!! this part here is going to show the lines of code
-
-
-
-                        return (d.index + 1) + ". " + d.label;
+                        return (d.index) + ". " + d.code;
                     });
         };
 
         var rowExit = function(rowSelection) {
         };
 
+        //----> this finds the row numbers...
+        var Array = [];
+        data.lines.forEach(function(currentData, i) {
+            Array.push(currentData);
+        });
+        var lastOne = Array[Array.length - 1];  // it is correct...
+        var IndexSize = lastOne.index;
 
         // have to place a div tag inside every single bubble...
         var virtualScroller = d3.VirtualScroller()
@@ -610,15 +585,11 @@ function appendScroller(box, path, name){
                 .update(rowUpdate)
                 .exit(rowExit)
                 .svg(scrollSVG)
-                .totalRows(50)
+                .totalRows(IndexSize)
                 .viewport(d3.select(".newblock"));
 
-        // tack on index to each data item for easy to read display
-        states.items.forEach(function(nextState, i) {
-            nextState.index = i;
-        });
 
-        virtualScroller.data(states.items, function(d) { return d.id; });
+        virtualScroller.data(data.lines, function(d) { return d.index; });
 
         chartGroup.call(virtualScroller);
 
@@ -686,15 +657,49 @@ function appendScroller(box, path, name){
 
 
 
+//------------------------>>> BLACKBOX functions to not worry about...
+
+
+// this function given the path provides the json file name...
+function jsonnamegetter(path) {
+console.log(path);
+var allStrings = path.split("/");
+for (var m = 0; m < allStrings.length; m++) {
+    console.log(allStrings[m]);
+
+}
+var directory = allStrings[allStrings.length - 2];
+var pythonfile = allStrings[allStrings.length-1];
+pythonfile = pythonfile.substring(0, pythonfile.length-3);
+
+console.log("the directory: " + directory + "the pythonfile" + pythonfile);
+
+var intermediate = (directory.concat("-")).concat(pythonfile);
+var finalFilename = intermediate.concat(".json");
+
+//console.log("this should be the file name"  +finalFilename ); // this yields directory - pythonfile.py
+
+    return finalFilename;
+}
 
 
 
+// this will delete any the div tag once we zoom out here...
+function divtagchecker(d){
 
+    var doesthisexist = document.getElementById("newblock");
+    //console.log(doesthisexist);
+    if (doesthisexist == null){
+      //  console.log("this should be running");
+        return;
+    }else {
+        console.log("tthe else is running");
+        // else... delete the div tag
+        // grab the parent node then remove the children form the parent node
+        doesthisexist.parentNode.removeChild(doesthisexist);
+    }
 
-
-
-
-
+}
 
 
 
@@ -727,11 +732,11 @@ function unhider(d){
                 telement.style.visibility = "hidden";
             }
 
-            for (var i in d) {
-                if(i == "children"){
-                    for (var t in d[i]){
+            for (var g in d) {
+                if(g == "children"){
+                    for (var t in d[g]){
                         //console.log(d[i][t].name);
-                        var name = d[i][t].name;
+                        var name = d[g][t].name;
                         var textname = "t".concat(name);
                         if(textname.substring(textname.length-3, textname.length) == ".py"){
                             textname = textname.substring(0,textname.length-3);
@@ -750,7 +755,7 @@ function unhider(d){
         if (d.name == i){    // set visible only the things within that scope and set everything else to be invisible...
             var innards = directoryHash[i];
             for(var v = 0; v < innards.length; v++){
-              //  console.log(innards[v]);
+                console.log(innards[v]);
                 var ddname;
                 var textddname;
                 var firstTxt = "t".concat(d.name);
@@ -758,7 +763,10 @@ function unhider(d){
                     ddname = innards[v].substring(0,innards[v].length-3);
                 }else{
                    // console.log(innards[v]);
-                    ddname = innards[v];   // this is the line we need to get back to normal
+                    ddname = innards[v];
+                    // --- > here we have to check if the directories insides are showing if they are then hide...
+
+
                 }
 
                 textddname = "t".concat(ddname);
