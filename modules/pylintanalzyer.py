@@ -62,22 +62,4 @@ def parse_pylint_line(pylint_line):
         return int(line_number), category
 
 if __name__ == '__main__':
-    "Testing functions"
-
-    from sys import argv
-    from config import load_project_properties
-    from filehelper import find_python_files_in_project
-
-    try:
-        script, user, code_base = argv
-    except ValueError:
-        print "Incorrect number of arguments"
-    else:
-        config = load_project_properties()
-
-        file_path = config[user][code_base]
-        files = find_python_files_in_project(file_path + '/plumbum')
-        solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
-        print solution
-        #print files
-        #print get_pylint_analysis(files)
+    pass

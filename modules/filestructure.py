@@ -28,7 +28,8 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base):
                 location = "%s/%s" % (path, file)
                 temp_file_dict = {}
                 temp_file_dict["name"] = file
-                temp_file_dict["path"] = code_base + "/" + fusor.get_name(location, code_base)
+                temp_file_dict["path"] = location
+                temp_file_dict["json"] = code_base + "/" + fusor.get_name(location, code_base)
                 temp_file_dict["size"] = git_analysis[location]["size"]
                 temp_file_dict["colour"] = pylint_analysis[location]["colour"]
                 children.append(temp_file_dict)
@@ -36,14 +37,4 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base):
     return structure
 
 if __name__ == '__main__':
-    import filehelper as FH
-    import authormapper as AM
-    import pylintanalzyer as PY
-
-    path_to_code_base = "/home/asumal/git/cs410/pattern/pattern"
-
-    list_of_files = FH.find_python_files_in_project(path_to_code_base)
-    pylint_analysis = PY.get_pylint_analysis(list_of_files)
-    git_analysis = AM.get_git_analysis(path_to_code_base, list_of_files)
-
-    print json.dumps(create_structure(path_to_code_base, "pattern", pylint_analysis, git_analysis, "pattern"))
+    pass
