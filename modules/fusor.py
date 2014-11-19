@@ -79,7 +79,7 @@ def combine_results(git_results, pylint_results, max_lines):
             component["error"] = pylint_results[line_number]["category"]
         else:
             # There is no pylint error on this line
-            component["colour"] = "black"
+            component["colour"] = "white"
             component["error"] = "none"
 
         # add line component to 'solution' list

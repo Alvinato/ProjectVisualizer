@@ -2,7 +2,7 @@ import subprocess
 
 WARNING = 'No config file found, using default configuration'
 IGNORE_LINE = '*'
-COLOR = {'E':'red', 'R':'blue', 'W':'green'}
+COLOR = {'E':'red', 'R':'blue', 'W':'green', 'N':'white'}
 
 def get_pylint_analysis(code_base):
     """ """
@@ -42,7 +42,11 @@ def parse_pylint_output(pylint_output):
             bubble_colour[category] += 1
             solution[line_number] = {'category':category, 'colour':COLOR[category]}
     print bubble_colour
-    solution["category"] = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
+    max_category = max(bubble_colour.iterkeys(), key=(lambda key: bubble_colour[key]))
+    if (bubble_colour[max_category] == 0):
+       solution["category"] = 'N'
+    else:
+        solution["category"] = max_category
     solution["colour"] = COLOR[solution["category"]]
 
     return solution
@@ -72,7 +76,8 @@ if __name__ == '__main__':
         config = load_project_properties()
 
         file_path = config[user][code_base]
-        files = find_python_files_in_project(file_path + '/plumbum/cli')
-        #solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
-        #print solution
-        print get_pylint_analysis(files)
+        files = find_python_files_in_project(file_path + '/plumbum')
+        solution = pylint_analyzer(file_path + '/plumbum/cli/application.py')
+        print solution
+        #print files
+        #print get_pylint_analysis(files)
