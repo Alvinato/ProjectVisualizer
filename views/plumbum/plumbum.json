@@ -1,7 +1,9 @@
 {
+    "path": "/home/asumal/git/cs410/plumbum/plumbum",
     "name": "plumbum",
     "children": [
         {
+            "path": "/home/asumal/git/cs410/plumbum/plumbum/cli",
             "name": "cli",
             "children": [
                 {
@@ -28,6 +30,7 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/plumbum/plumbum/fs",
             "name": "fs",
             "children": [
                 {
@@ -47,6 +50,7 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/plumbum/plumbum/path",
             "name": "path",
             "children": [
                 {
@@ -80,6 +84,7 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/plumbum/plumbum/machines",
             "name": "machines",
             "children": [
                 {
@@ -127,6 +132,7 @@
             ]
         },
         {
+            "path": "/home/asumal/git/cs410/plumbum/plumbum/commands",
             "name": "commands",
             "children": [
                 {

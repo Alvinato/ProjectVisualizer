@@ -1,6 +1,7 @@
 import os
 import json
 import fusor
+import savejson
 
 def create_structure(path, name, pylint_analysis, git_analysis, code_base):
     """ Given the root directory, this function will return
@@ -8,9 +9,10 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base):
     """
     structure = {}
     root, subdirs, files = next(os.walk(path))
-#    print "root: %s\n subirs: %s\n files: %s\n" % (root, subdirs, files)
+    print "root: %s\n subirs: %s\n files: %s\n" % (root, subdirs, files)
 
     structure.update({"name" : name})
+    structure.update({"path" : path})
 
     # http://stackoverflow.com/a/18435
     files = [module for module in files if module.endswith(".py")]
@@ -29,7 +31,7 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base):
                 temp_file_dict = {}
                 temp_file_dict["name"] = file
                 temp_file_dict["path"] = location
-                temp_file_dict["json"] = code_base + "/" + fusor.get_name(location, code_base)
+                temp_file_dict["json"] = code_base + "/" + savejson.get_name(location, code_base)
                 temp_file_dict["size"] = git_analysis[location]["size"]
                 temp_file_dict["colour"] = pylint_analysis[location]["colour"]
                 children.append(temp_file_dict)
