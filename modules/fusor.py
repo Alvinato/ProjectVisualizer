@@ -69,7 +69,7 @@ def combine_results(git_results, pylint_results, max_lines):
         component = {}
 
         # add GIT METRICS
-        component["line"] = str(line_number)
+        component["index"] = str(line_number)
         component["author"] = git_results[line_number]["author"]
         component["code"] = git_results[line_number]["code"]
 
