@@ -7,6 +7,8 @@ import pylintanalzyer as PY
 import fusor as FR
 import filestructure as FS
 
+import json
+
 def plumbum():
     """ """
     plumbum = "plumbum"
@@ -36,5 +38,6 @@ def get_visualization(name_of_code_base, path_to_code_base):
         SJ.save_file(result, python_file, name_of_code_base)
 
     solution = FS.create_structure(path_to_code_base, name_of_code_base, pylint_analysis, git_analysis, name_of_code_base)
-    print solution
-    return solution
+
+    solution_as_json = json.dumps(solution)
+    return solution_as_json
