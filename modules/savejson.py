@@ -1,6 +1,8 @@
 import re as RE
 import os as OS
 
+import json
+
 SAVE_TO = {"plumbum" : "/home/asumal/web2py/applications/jaat/views/plumbum",
            "pattern" : "/home/asumal/web2py/applications/jaat/views/pattern"}
 
@@ -33,6 +35,11 @@ def multiple_replacer(*key_values):
     replacement_function = lambda match: replace_dict[match.group(0)]
     pattern = RE.compile("|".join([RE.escape(k) for k, v in key_values]), RE.M)
     return lambda string: pattern.sub(replacement_function, string)
+
+def save_code_structure(file_path, code_base_structure):
+    with open(file_path, 'w') as file_:
+        solution = json.dumps(code_base_structure)
+        file_.write(solution)
 
 if __name__ == "__main__":
     pass

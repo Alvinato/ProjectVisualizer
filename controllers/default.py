@@ -12,27 +12,29 @@ import os
 
 def plumbum():
     """ """
-    plumbum_json = "/home/asumal/web2py/applications/jaat/views/plumbum/plumbum.json"
+    plumbum_json = "/home/asumal/web2py/applications/jaat/views/default/plumbum/plumbum.json"
     if (os.path.exists(plumbum_json)):
         with open(plumbum_json) as plumbum_code_structure:
             solution = json.load(plumbum_code_structure)
     else:
         plumbum = "plumbum"
         path_to_plumbum = "/home/asumal/git/cs410/plumbum/plumbum"
-        solution = get_visualization(plumbum, path_to_plumbum)
+        visualization = get_visualization(plumbum, path_to_plumbum)
+        solution = SJ.save_code_structure(plumbum_json, visualization)
 
     return dict(plumbum = solution)
 
 def pattern():
     """ """
-    pattern_json = "/home/asumal/web2py/applications/jaat/views/pattern/pattern.json"
+    pattern_json = "/home/asumal/web2py/applications/jaat/views/default/pattern/pattern.json"
     if (os.path.exists(pattern_json)):
         with open(pattern_json) as pattern_code_structure:
             solution = json.load(pattern_code_structure)
     else:
         pattern = "pattern"
         path_to_pattern = "/home/asumal/git/cs410/pattern/pattern"
-        solution = get_visualization(pattern, path_to_pattern)
+        visualization = get_visualization(pattern, path_to_pattern)
+        solution = SJ.save_code_structure(pattern_json, visualization)
 
     return dict(pattern = solution)
 
@@ -52,6 +54,4 @@ def get_visualization(name_of_code_base, path_to_code_base):
     solution = FS.create_structure(path_to_code_base, name_of_code_base,
                                    pylint_analysis, git_analysis, name_of_code_base)
 
-    solution_as_json = json.dumps(solution)
-    print solution_as_json
-    return solution_as_json
+    return solution

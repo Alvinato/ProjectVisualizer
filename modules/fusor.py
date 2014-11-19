@@ -8,18 +8,15 @@ import os as OS
 
 def fuse_file(path_to_code_base, path_to_file, pylint_results, git_results):
     # initialize 'solution' dictionary and 'lines' list
-    solution, lines = {}, []
+    solution = {}
     solution["path"] = path_to_file
 
     # FUSION
     max_lines = git_results["size"] + 1
     fusion = combine_results(git_results, pylint_results, max_lines)
 
-    # add result to 'lines' list
-    lines.append(fusion)
-
     # add 'lines' list to 'solution' dictionary
-    solution["lines"] = lines
+    solution["lines"] = fusion
 
     # convert 'solution' dictionary into JSON object
     solution = JS.dumps(solution)
