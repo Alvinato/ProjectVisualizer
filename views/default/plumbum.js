@@ -35,7 +35,7 @@ d3.json("plumbum/plumbum.json", function(error, root) {
       .attr("class", function(d) // "node"
             { return d.parent ? d.children ? "node" : "node" : "node"; })
       .style("fill", function(d) { return colorize(d); })
-      .style("fill-opacity", "1")
+      .style("fill-opacity", "0.6")
       .style("visibility", function (d)
                { if(d===root) return "visible";
                 else return d.parent === root ? "visible": "hidden";})
