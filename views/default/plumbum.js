@@ -1,19 +1,12 @@
 var margin = 20,
     diameter = 960;
-//ALVIN CODE
-var firstLayerText = [];
-var jsonobjectstosend = {};
-var Json = new Object;
-
-var idList = [];
-var idList2 = []
-//ALVIN CODE
-
 
 var color = d3.scale.linear()
     .domain([-1, 5])
     .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
     .interpolate(d3.interpolateHcl);
+var hello = new Audio('hello.mp3');
+var look = new Audio ('looking.mp3');
 
 var pack = d3.layout.pack()
     .padding(2)
@@ -23,18 +16,10 @@ var pack = d3.layout.pack()
 var svg = d3.select("body").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
-    //ALVIN CODE
         .attr("id","thesvg")
         .append("svg:g")
         .attr("id","theg")
-    //ALVIN CODE
-    //.append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-
-//ALVIN CODE
-//document.getElementById("thesvg").style.zIndex ="1";
-//document.getElementById("theg").style.zIndex ="1";
-//ALVIn  CODe
 
 //Change the .json to the correct location for any other project.
 d3.json("plumbum/plumbum.json", function(error, root) {
@@ -68,21 +53,6 @@ d3.json("plumbum/plumbum.json", function(error, root) {
       .text(function(d) { return d.name; })
     //Size of text need to resize wont ?
         .style("dy", "0.35em");
-    
-    //ALVIN CODE -----------------------------
-     //for (var k = 0; k < idList.length; k++){
-        // lets select every single one
-        //console.log("this is the idlist" + idList[k]);
-      //  var selection = document.getElementById(idList[k]);
-    //    var selection2 = document.getElementById(idList2[k]);
-
-        // for every selection give it a low z
-        //selection.style.zIndex = "1";
-      //  selection2.style.zIndex = "1";
-    //}
-    
-    
-    //ALVIN CODE -------------------
 
   var node = svg.selectAll("circle,text");
 
@@ -90,18 +60,15 @@ d3.json("plumbum/plumbum.json", function(error, root) {
 
   function zoom(d) {
     var focus0 = focus; focus = d;
+      if(!d.children)
+          look.play();
+      else  hello.play();
+      
       
       //ALvni
           divtagchecker(d);
       
         var box = { left: 0, top: 0, wdith: 0, height: 0 };
-      console.log(d.name);
-   // box = document.getElementById(d.name).getBoundingClientRect();
-
-    var xcoord =  box.left;
-    var ycoord = box.top;
-    var width = box.width;
-    var height = box.height;
 
     if (!d.children){
         console.log(d.json);
@@ -214,10 +181,6 @@ d3.json("plumbum/plumbum.json", function(error, root) {
         document.getElementById("othersvg").style.zIndex = "20";
         document.getElementById("othersvg").style.width = 1000 + "px";
 
-        // putting defs together so they can be filtered properly...
-        var defs = scrollSVG.insert("defs", ":first-child");
-        createFilters(defs);
-
         // chartgroup is set to append onto scroll svg and class is set...
         var chartGroup = scrollSVG.append("g")
                 .attr("class", "chartGroup")
@@ -229,31 +192,6 @@ d3.json("plumbum/plumbum.json", function(error, root) {
         var infoSVG = d3.select(".information").append("svg")
                 .attr("class", "info-svg");
 
-        var braceGroup = infoSVG.append("g")
-                .attr("transform", "translate(0,0)");
-
-        braceGroup.append("path")
-                .attr("class", "brace")
-                .attr("d", makeCurlyBrace(10, 380, 10, 20, 30, 0.55));
-
-        var braceLabelGroup = braceGroup.append("g")
-                .attr("transform", "translate(45, 176)");
-
-        braceLabelGroup.append("text")
-                .attr("class", "infotext")
-                .attr("transform", "translate(0, 0)")
-                .text("50 data items but only ");
-
-        braceLabelGroup.append("text")
-                .attr("class", "infotext")
-                .attr("transform", "translate(-1, 30)")
-                .text("15 dom nodes rendered");
-
-        braceLabelGroup.append("text")
-                .attr("class", "infotext")
-                .attr("transform", "translate(0, 60)")
-                .text("at any given time!");
-
         // these are all the squares that are entering the frame...
         var rowEnter = function(rowSelection) {
             rowSelection.append("rect")
@@ -261,23 +199,22 @@ d3.json("plumbum/plumbum.json", function(error, root) {
                     .attr("ry", 3)
                     .attr("width", "3000")
                     .attr("height", "24")
-                    .attr("fill-opacity", 0.25)
-                    .attr("stroke", "#999999")
-                    .attr("stroke-width", "2px");
+                    .attr("fill-opacity", 0.60)
             rowSelection.append("text")
                     .attr("transform", "translate(10,15)");
         };
-        
         // this is what is updating the index...
+        var max = maxLength(data);
         var rowUpdate = function(rowSelection) {
             rowSelection.select("rect")
                     .attr("fill", function(d) {
-                        return d.colour;
+                        return d.colour == "orange" ? "white": d.colour;
                     });
 
             rowSelection.select("text")
                     .text(function (d) {
-                        return (d.author) +":  " + (d.index) + ". " + d.code;
+                        var txt =  line( max ,d.author, d.index, d.code);
+                        return txt;
                     });
         };
 
@@ -307,96 +244,46 @@ d3.json("plumbum/plumbum.json", function(error, root) {
 
         chartGroup.call(virtualScroller);
 
-        function createFilters(svgDefs) {
-            var filter = svgDefs.append("svg:filter")
-                    .attr("id", "dropShadow1")
-                    .attr("x", "0")
-                    .attr("y", "0")
-                    .attr("width", "200%")
-                    .attr("height", "200%");
-
-            filter.append("svg:feOffset")
-                    .attr("result", "offOut")
-                    .attr("in", "SourceAlpha")
-                    .attr("dx", "1")
-                    .attr("dy", "1");
-
-            filter.append("svg:feColorMatrix")
-                    .attr("result", "matrixOut")
-                    .attr("in", "offOut")
-                    .attr("type", "matrix")
-                    .attr("values", "0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.2 0");
-
-            filter.append("svg:feGaussianBlur")
-                    .attr("result", "blurOut")
-                    .attr("in", "matrixOut")
-                    .attr("stdDeviation", "1");
-
-            filter.append("svg:feBlend")
-                    .attr("in", "SourceGraphic")
-                    .attr("in2", "blurOut")
-                    .attr("mode", "normal");
-        }
-
-        function makeCurlyBrace(x1,y1,x2,y2,w,q)
-        {
-            //Calculate unit vector
-            var dx = x1-x2;
-            var dy = y1-y2;
-            var len = Math.sqrt(dx*dx + dy*dy);
-            dx = dx / len;
-            dy = dy / len;
-
-            //Calculate Control Points of path,
-            var qx1 = x1 + q*w*dy;
-            var qy1 = y1 - q*w*dx;
-            var qx2 = (x1 - .25*len*dx) + (1-q)*w*dy;
-            var qy2 = (y1 - .25*len*dy) - (1-q)*w*dx;
-            var tx1 = (x1 -  .5*len*dx) + w*dy;
-            var ty1 = (y1 -  .5*len*dy) - w*dx;
-            var qx3 = x2 + q*w*dy;
-            var qy3 = y2 - q*w*dx;
-            var qx4 = (x1 - .75*len*dx) + (1-q)*w*dy;
-            var qy4 = (y1 - .75*len*dy) - (1-q)*w*dx;
-
-            return ( "M " +  x1 + " " +  y1 +
-                    " Q " + qx1 + " " + qy1 + " " + qx2 + " " + qy2 +
-                    " T " + tx1 + " " + ty1 +
-                    " M " +  x2 + " " +  y2 +
-                    " Q " + qx3 + " " + qy3 + " " + qx4 + " " + qy4 +
-                    " T " + tx1 + " " + ty1 );
-        }
     });
 }
     
     function dynamicDiv(box){
-   var xcoord =  box.left;
-   var ycoord = box.top;
-    var width = box.width;
-    var height = box.height;
+        var name = "newblock";
 
-    var name = "newblock";
-
-        // ---> inside here create more div tags...
         var iDiv = document.createElement('div');
         iDiv.id = name;
         iDiv.className = name;
         document.getElementsByTagName('body')[0].appendChild(iDiv);
 
-        document.getElementById(name).style.width = 550 + "px"
-        document.getElementById(name).style.height = 550 + "px";
+        document.getElementById(name).style.width = 500 + "px"
+        document.getElementById(name).style.height = 500 + "px";
             // we just have to position this better...
         var a = document.getElementById(name);
         a.style.position = "absolute";
-        a.style.left =  "203px" //xcoord;
-        a.style.top = "203px" //ycoord;
+        a.style.left =  "225px"; //xcoord;
+        a.style.top = "225px"; //ycoord;
         a.style.overflowY = "auto";
         a.style.border = 1 + "px solid #AAAAAA";
         a.style.backgroundColor = "#e8e8e8";
         a.style.overflowX = "auto";
         a.style.zIndex = "20";
 }
-
+    
+    function line(size, author, index, code){
+     var total = author;
+        while(total.length <= size)
+            total = total +  " ";
+        total = total + " : " + index + ": " + code;
+    return total;
+    }
+    
+    function maxLength(d){
+        var max = 0;
+        for(var i = 0; i < d.lines.length ; i++)
+            if( max <= d.lines[i].author.length)
+                max = d.lines[i].author.length;
+        return max;
+    }
     
 });
 
