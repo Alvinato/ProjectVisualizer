@@ -9,9 +9,14 @@ SAVE_TO = {"plumbum" : "/home/asumal/web2py/applications/jaat/views/plumbum",
 PATH_TO = {"plumbum" : "/home/asumal/git/cs410/plumbum/plumbum/",
            "pattern" : "/home/asumal/git/cs410/pattern/pattern/"}
 
-def save_file(result, path_to_file, code_base):
+def save_file(result, path_to_file, path, code_base):
     """ """
-    name = get_name(path_to_file, code_base)
+    directory = OS.getcwd()
+    pattern_json = "%s/views/default/%s" % (directory, code_base)
+    print 'new', pattern_json
+    
+    name = get_name(path_to_file, path, code_base)
+    print 'name', name
     path = SAVE_TO[code_base]
     fullpath = OS.path.join(path, name)
 
@@ -19,9 +24,10 @@ def save_file(result, path_to_file, code_base):
     with open(fullpath, 'w') as saving_to_file:
          saving_to_file.write(result)
 
-def get_name(file_name, code_base):
+def get_name(file_name, path, code_base):
     """ """
-    replacements = (PATH_TO[code_base], ""), ("/", "-"), (".py", ".json")
+    print "GET_NAME PARAM: ",file_name, code_base
+    replacements = (path + "/", ""), ("/", "-"), (".py", ".json")
     name = multiple_replace(file_name, *replacements)
     return name
 
