@@ -12,7 +12,7 @@ def save_file(result, path_to_file, path, code_base):
     name = get_name(path_to_file, path, code_base)
     print 'name', name
     fullpath = OS.path.join(pattern_json, name)
-
+	print "SAVE TO FILE:\n", fullpath
     # save fusion to file
     with open(fullpath, 'w') as saving_to_file:
          saving_to_file.write(result)
