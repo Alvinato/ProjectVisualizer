@@ -5,8 +5,6 @@ var color = d3.scale.linear()
     .domain([-1, 5])
     .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
     .interpolate(d3.interpolateHcl);
-var hello = new Audio('hello.mp3');
-var look = new Audio ('looking.mp3');
 
 var pack = d3.layout.pack()
     .padding(2)
@@ -60,10 +58,6 @@ d3.json("plumbum/plumbum.json", function(error, root) {
 
   function zoom(d) {
     var focus0 = focus; focus = d;
-      if(!d.children)
-          look.play();
-      else  hello.play();
-      
       
       //ALvni
           divtagchecker(d);
