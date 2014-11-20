@@ -4,6 +4,7 @@
 # python
 *.pyc
 *.pyo
+*.py~
 
 # web2py folders to exclude
 errors/

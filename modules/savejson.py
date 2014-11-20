@@ -3,12 +3,6 @@ import os as OS
 
 import json
 
-SAVE_TO = {"plumbum" : "/home/asumal/web2py/applications/jaat/views/plumbum",
-           "pattern" : "/home/asumal/web2py/applications/jaat/views/pattern"}
-
-PATH_TO = {"plumbum" : "/home/asumal/git/cs410/plumbum/plumbum/",
-           "pattern" : "/home/asumal/git/cs410/pattern/pattern/"}
-
 def save_file(result, path_to_file, path, code_base):
     """ """
     directory = OS.getcwd()
@@ -17,8 +11,7 @@ def save_file(result, path_to_file, path, code_base):
     
     name = get_name(path_to_file, path, code_base)
     print 'name', name
-    path = SAVE_TO[code_base]
-    fullpath = OS.path.join(path, name)
+    fullpath = OS.path.join(pattern_json, name)
 
     # save fusion to file
     with open(fullpath, 'w') as saving_to_file:
@@ -26,7 +19,6 @@ def save_file(result, path_to_file, path, code_base):
 
 def get_name(file_name, path, code_base):
     """ """
-    print "GET_NAME PARAM: ",file_name, code_base
     replacements = (path + "/", ""), ("/", "-"), (".py", ".json")
     name = multiple_replace(file_name, *replacements)
     return name

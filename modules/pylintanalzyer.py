@@ -13,7 +13,8 @@ def get_pylint_analysis(code_base):
 
 def pylint_analyzer(path_to_file):
     """ """
-    #print 'COMPUTING: ', path_to_file
+    print 'COMPUTING: ', path_to_file
+ 
     message = ['pylint', '-rn', '--msg-template="{line}:{C}"', path_to_file]
     command = subprocess.Popen(message, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = command.communicate()
