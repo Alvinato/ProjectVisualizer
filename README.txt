@@ -52,11 +52,14 @@ NOTE: We are only analyzing the actual source code, not miscellaneous directorie
 *** TESTING  ***
 ****************
 
+
 Back End
 -------------
 1. Install nose python package (sudo apt-get pip install nose)
 2. Go to ../jaat/modules directory, and type 'nosetests'
 3. Output is displayed on console
+
+NOTE: Some test cases are stored in actual module. Run by running the module as a script.
 
 Unit Tests
 -----------------
