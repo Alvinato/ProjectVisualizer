@@ -61,9 +61,13 @@ Back End
 Unit Tests
 -----------------
 test_filehelper.py
+- tests getting files from code base
 test_gitmetrics.py
+- test getting authors for each line of code
 test_pylintanalyzer.py
+- for each python file, find the errors and create JSON
 test_savejson.py
+- goes through saving JSON file for front end to use
 
 Integration Tests
 -----------------
