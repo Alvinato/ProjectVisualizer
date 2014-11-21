@@ -16,9 +16,15 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base, old_p
 
     # http://stackoverflow.com/a/18435
     files = [module for module in files if module.endswith(".py")]
+	
+	# __init__ is a difficult case, as it is in multiple
+	# directories and has 'no' size. Decided to remove
     files = [module for module in files if (not module.startswith("__init__"))]
 
     if (subdirs or files):
+		# the fusion algorithm: for each path, we look for sub dirs and files.
+		# if sub dirs exist, we call function again on the old path + sub dir
+		# if no subdirs, then we add files to structure
         children = []
         if (subdirs):
             for subdir in subdirs:
@@ -27,6 +33,7 @@ def create_structure(path, name, pylint_analysis, git_analysis, code_base, old_p
 
         if (files):
             for file in files:
+				# add information for front end here. Use all analyzer information
                 location = "%s/%s" % (path, file)
                 temp_file_dict = {}
                 temp_file_dict["name"] = file

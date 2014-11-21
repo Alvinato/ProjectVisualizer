@@ -4,7 +4,8 @@ from filehelper import find_python_files_in_project
 import os
 
 def get_git_analysis(path, files):
-    """ """
+    """ wrapper function that takes full code base and creates
+		structure that gets size of file and author name"""
     solution = {}
     for python_file in files:
         git_results = create_author_mappings_for_file(path, python_file)
@@ -24,24 +25,4 @@ def create_author_mappings_for_file(filepath, filename):
     return file_dict
 
 if __name__ == '__main__':
-    "Testing functions"
-
-    from sys import argv
-    from config import load_project_properties
-    from filehelper import find_python_files_in_project
-
-    try:
-        script, user, code_base = argv
-    except ValueError:
-        print "Incorrect number of arguments"
-    else:
-        config = load_project_properties()
-        #print 'config', config
-
-        file_path = config[user][code_base]
-        file_name = file_path + '/plumbum/cli'
-        files = find_python_files_in_project(file_name)
-        #print files
-        #git_results = create_author_mappings_for_file(file_path, file_name + "/application.py")
-        #print git_results
-        print get_git_analysis(file_path, files)
+    pass

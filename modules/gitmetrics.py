@@ -13,6 +13,9 @@ def get_contributors_for_file(file_path, filename):
     output_array = output.split('\n')
     num_lines = len(output_array)
     line_number = 1
+	
+	# need to iterate in order, and since this analyzer
+	# is garunteed to have ALL lines of code, we use orderedDict()
     line_contributors = OrderedDict()
     while line_number != num_lines:
         line_contributors[line_number] = output_array[line_number - 1]
@@ -22,6 +25,7 @@ def get_contributors_for_file(file_path, filename):
 def get_contributor_for_line(file_path, filename, line_number):
     "Get the email for an author of a specific line of code"
 
+	# heart of custom git script. subprocess call
     contributor = subprocess.check_output(LINE_COMMAND.format(line_number, line_number, filename),
                                           shell=True, cwd=r'{}'.format(file_path))
     return contributor
