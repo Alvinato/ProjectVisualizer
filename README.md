@@ -18,3 +18,31 @@ STEPS TO RUN BACKEND
 
 NOTE: We are only analyzing the actual source code, not miscellaneous directories (examples, test, etc.), so for the B, specify plumbum/plumbum or pattern/pattern
 [e.g. on linux undergrad, full path for me is: /home/v/v0o7/git/plumbum/plumbum or /home/v/v0o7/git/pattern/pattern:
+
+****************
+*** TESTING  ***
+****************
+Visualization
+Manual Testing Layout 
+
+
+	TESTS												EXPECTED										ACTUAL
+-----------------------------------------------------------------------------------------------------------------
+General:
+01	Click on a Bubble									Move further into directory						PASS
+02	Click outside range of bubble						N/A												PASS
+03	Click two bubbles above current directory			Go back to top level							PASS
+04	Switch Focus 										Focus on clicked bubble							PASS
+05	Click a file										Show file										PASS
+06	Scroll through file									See lines of code								PASS
+07	Hover over bubble									Darker Black outline appears					PASS
+08	Name is centre of project
+
+Plumbum:
+09	Colour of fs directory								Blue and Red module colour, Purple colour		PASS
+10	Number of directories visible at start				5 directories, 2 modules						PASS
+
+Pattern:
+11	Colour of Bubble tree.py							green											PASS
+12	Colour of vector directory							light green, mostly green						PASS
+13	Colour of overall project							light green, mostly green						PASS
