@@ -49,7 +49,6 @@ d3.json("plumbum/plumbum.json", function(error, root) {
       .style("fill-opacity", function(d) { return d.parent === root ? 1 :0; })
       .style("display", function(d) { return d.parent === root ? null : "none"; })
       .text(function(d) { return d.name; })
-    //Size of text need to resize wont ?
         .style("dy", "0.35em");
 
   var node = svg.selectAll("circle,text");
@@ -59,7 +58,7 @@ d3.json("plumbum/plumbum.json", function(error, root) {
   function zoom(d) {
     var focus0 = focus; focus = d;
       
-      //ALvni
+            // check if there exists a div tag
           divtagchecker(d);
       
         var box = { left: 0, top: 0, wdith: 0, height: 0 };
@@ -145,18 +144,16 @@ d3.json("plumbum/plumbum.json", function(error, root) {
         return a;
     }
 
-    
+    // check if current div tag exists.
     function divtagchecker(d){
 
     var doesthisexist = document.getElementById("newblock");
     //console.log(doesthisexist);
     if (doesthisexist == null){
-      //  console.log("this should be running");
         return;
     }else {
         console.log("tthe else is running");
-        // else... delete the div tag
-        // grab the parent node then remove the children form the parent node
+        // remove the div tag that currently exists and zoom out
         doesthisexist.parentNode.removeChild(doesthisexist);
         }
 
@@ -164,8 +161,10 @@ d3.json("plumbum/plumbum.json", function(error, root) {
     
     function appendScroller(box, path, name){
 
+        // find the path of the json file according to the path
     d3.json(path, function (data) {
-
+            
+            // create the div tag where everything sits
         dynamicDiv(box);
 
         var scrollSVG = d3.select(".newblock").append("svg")
@@ -202,11 +201,13 @@ d3.json("plumbum/plumbum.json", function(error, root) {
         var rowUpdate = function(rowSelection) {
             rowSelection.select("rect")
                     .attr("fill", function(d) {
+                        // set the color of every rectangle according to json
                         return d.colour == "orange" ? "white": d.colour;
                     });
 
             rowSelection.select("text")
                     .text(function (d) {
+                        // set the text in each line
                         var txt =  line( max ,d.author, d.index, d.code);
                         return txt;
                     });
@@ -215,15 +216,15 @@ d3.json("plumbum/plumbum.json", function(error, root) {
         var rowExit = function(rowSelection) {
         };
 
-        //----> this finds the row numbers...
+        // finds the number of lines in file
         var Array = [];
         data.lines.forEach(function(currentData, i) {
             Array.push(currentData);
         });
-        var lastOne = Array[Array.length - 1];  // it is correct...
+        var lastOne = Array[Array.length - 1];
         var IndexSize = lastOne.index;
 
-        // have to place a div tag inside every single bubble...
+            // initliaze the virtual scroller
         var virtualScroller = d3.VirtualScroller()
                 .rowHeight(30)
                 .enter(rowEnter)
@@ -233,15 +234,16 @@ d3.json("plumbum/plumbum.json", function(error, root) {
                 .totalRows(IndexSize)
                 .viewport(d3.select(".newblock"));
 
-
+            
         virtualScroller.data(data.lines, function(d) { return d.index; });
 
         chartGroup.call(virtualScroller);
 
     });
 }
-    
+    // creates a div tag
     function dynamicDiv(box){
+        // the id and the class
         var name = "newblock";
 
         var iDiv = document.createElement('div');
@@ -251,7 +253,7 @@ d3.json("plumbum/plumbum.json", function(error, root) {
 
         document.getElementById(name).style.width = 500 + "px"
         document.getElementById(name).style.height = 500 + "px";
-            // we just have to position this better...
+        // set attributes of the div tag
         var a = document.getElementById(name);
         a.style.position = "absolute";
         a.style.left =  "225px"; //xcoord;
