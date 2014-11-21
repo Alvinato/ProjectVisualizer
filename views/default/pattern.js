@@ -59,13 +59,12 @@ d3.json("pattern/pattern.json", function(error, root) {
   function zoom(d) {
     var focus0 = focus; focus = d;
       
-      //ALvni
           divtagchecker(d);
       
         var box = { left: 0, top: 0, wdith: 0, height: 0 };
 
     if (!d.children){
-        console.log(d.json);
+        //console.log(d.json);
         appendScroller(box, d.json, d.name);
     }
 
@@ -145,29 +144,30 @@ d3.json("pattern/pattern.json", function(error, root) {
         return a;
     }
 
-    
+    // this checks if scoller tag is on screen
     function divtagchecker(d){
 
     var doesthisexist = document.getElementById("newblock");
-    //console.log(doesthisexist);
+	
     if (doesthisexist == null){
-      //  console.log("this should be running");
-        return;
+    	// keep zooming if no tag
+	    return;
     }else {
         console.log("tthe else is running");
-        // else... delete the div tag
-        // grab the parent node then remove the children form the parent node
+		// delete the current div tag
         doesthisexist.parentNode.removeChild(doesthisexist);
         }
 
     }
     
+	// this will render the scroller 
     function appendScroller(box, path, name){
 
+		// go through json file named after the path
     d3.json(path, function (data) {
-
+		// create the div tag which it sits.
         dynamicDiv(box);
-
+		
         var scrollSVG = d3.select(".newblock").append("svg")
                 .attr("class", "scroll-svg")
                 .attr("id", "othersvg");
@@ -197,11 +197,13 @@ d3.json("pattern/pattern.json", function(error, root) {
             rowSelection.append("text")
                     .attr("transform", "translate(10,15)");
         };
-        // this is what is updating the index...
+		
         var max = maxLength(data);
         var rowUpdate = function(rowSelection) {
+			// creates the rectangle for the row
             rowSelection.select("rect")
                     .attr("fill", function(d) {
+						// sets the color of each line
                         return d.colour == "orange" ? "white": d.colour;
                     });
 
@@ -215,15 +217,15 @@ d3.json("pattern/pattern.json", function(error, root) {
         var rowExit = function(rowSelection) {
         };
 
-        //----> this finds the row numbers...
+        //----> this finds how many rows there are
         var Array = [];
         data.lines.forEach(function(currentData, i) {
             Array.push(currentData);
         });
-        var lastOne = Array[Array.length - 1];  // it is correct...
+        var lastOne = Array[Array.length - 1];  
         var IndexSize = lastOne.index;
 
-        // have to place a div tag inside every single bubble...
+        // initialize the virtual Scoller.js class
         var virtualScroller = d3.VirtualScroller()
                 .rowHeight(30)
                 .enter(rowEnter)
@@ -241,9 +243,11 @@ d3.json("pattern/pattern.json", function(error, root) {
     });
 }
     
+	// create the div tag
     function dynamicDiv(box){
+		// the id and class of the div tag.
         var name = "newblock";
-
+		
         var iDiv = document.createElement('div');
         iDiv.id = name;
         iDiv.className = name;
@@ -251,7 +255,8 @@ d3.json("pattern/pattern.json", function(error, root) {
 
         document.getElementById(name).style.width = 500 + "px"
         document.getElementById(name).style.height = 500 + "px";
-            // we just have to position this better...
+        
+		// set attributes of div tag.
         var a = document.getElementById(name);
         a.style.position = "absolute";
         a.style.left =  "225px"; //xcoord;
