@@ -9,7 +9,9 @@ We are Team JAAT
 Requirements
 ------------
 1. Must have FireFox 33+
-2. Run code on MAC OSX and Ubuntu 14.04 (NOT WINDOWS)
+2. Run code on MAC OS X and Ubuntu 14.04 
+	a. Code dependant on UNIX commands, so no Windows. 
+	b. Unable to test on Undergrad account as I was unable to install pylint
 3. Have Python 2 (2.7.6+)
 4. Steps assume that python package manager (pip) is installed
 
@@ -34,7 +36,7 @@ Visualization
 2. go to directory ../jaat/views/default/
 3. open plumbum.html or pattern.html
 
-Backend
+Back-end
 -------------
 1. clone 410 project JAAT - https://v0o7@stash.ugrad.cs.ubc.ca:8443/scm/cs_410/jaat.git
 2. clone codebase pattern - https://github.com/clips/pattern.git
@@ -58,9 +60,18 @@ Back End
 
 Unit Tests
 -----------------
+test_filehelper.py
+test_gitmetrics.py
+test_pylintanalyzer.py
+test_savejson.py
 
 Integration Tests
 -----------------
+test_fusor.py
+- tests overall fusion algorithm
+
+test_authormapper.py
+- tests grabbing results from gitmetrics.py and filehelper.py
 
 Visualization
 --------------
